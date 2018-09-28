@@ -1,0 +1,212 @@
+{% load static %}
+{% load bootstrap3 %}
+
+
+<li class="nav-header">
+    <div class="dropdown profile-element"> <span>
+        <img alt="image" class="img-circle" src="{% static 'img/profile_small.jpg' %}" />
+         </span>
+        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+        <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ user.nombres }} {{ user.primer_apellido }} {{ user.estudiante.estado_d10 }}</strong>
+         </span> <span class="text-muted text-xs block">({{ user.rol }}) <b class="caret"></b></span> </span> </a>
+        <ul class="dropdown-menu animated fadeInRight m-t-xs">
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="contacts.html">Contacts</a></li>
+            <li><a href="mailbox.html">Mailbox</a></li>
+            <li class="divider"></li>
+            <li><a href="login.html">Logout</a></li>
+        </ul>
+    </div>
+    <div class="logo-element">
+        IN+
+    </div>
+</li>
+
+{% if user.rol == 'Estudiante' %}
+<li {% if registrar_formato_d10 %} class="active" {% endif %}>
+    <a href="/monitorias/registrar-d10"><i class="fa fa-address-card"></i> <span class="nav-label">
+        {%  if user.estudiante.estado_d10 == 'No registrado' %}
+            Registrar D10
+        {% else %}
+            Actualizar D10
+        {% endif %}
+    </span></a>
+</li>
+<li {% if listar_ofertas %} class="active" {% endif %}>
+    <a href="/monitorias/ofertas/listar"><i class="fa fa-briefcase"></i> <span class="nav-label">Ofertas de monitorias</span></a>
+</li>
+<li {% if listar_aplicaciones %} class="active" {% endif %}>
+    <a href="/monitorias/aplicaciones/listar/"><i class="fa fa-tasks"></i> <span class="nav-label">Mis aplicaciones</span></a>
+</li>
+{% endif %}
+
+{% if user.rol == 'Operario' %}
+<li {% if registrar_oferta %} class="active" {% endif %}>
+    <a href="/monitorias/ofertas/registrar"><i class="fa fa-plus-square"></i> <span class="nav-label">Registrar oferta de monitoria</span></a>
+</li>
+<li {% if listar_ofertas %} class="active" {% endif %}>
+    <a href="/monitorias/ofertas/listar"><i class="fa fa-list"></i> <span class="nav-label">Mis ofertas de monitorias</span></a>
+</li>
+{% endif %}
+
+{% if user.rol == 'Administrador' %}
+<li {% if gestion_monitorias %} class="active" {% endif %}>
+    <a href="#"><i class="fa fa-briefcase"></i> <span class="nav-label">Monitorias</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li {% if gestion_oferta %} class="active" {% endif %}>
+            <a href="#">Ofertas<span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+                <li {% if registrar_oferta %} class="active" {% endif %}>
+                    <a href="/monitorias/ofertas/registrar">Registrar</a>
+                </li>
+                <li {% if listar_ofertas %} class="active" {% endif %}>
+                    <a href="/monitorias/ofertas/listar">Listar</a>
+                </li>
+            </ul>
+        </li>
+        <li {% if gestion_aplicacion %} class="active" {% endif %}>
+            <a href="#">Aplicaciones<span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+                <li {% if registrar_aplicacion %} class="active" {% endif %}>
+                    <a href="/monitorias/aplicaciones/registrar">Registrar</a>
+                </li>
+                <li {% if listar_aplicaciones %} class="active" {% endif %}>
+                    <a href="/monitorias/aplicaciones/listar">Listar</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</li>
+{% endif %}
+
+{% if user.rol != 'Estudiante' %}
+<li {% if gestion_usuarios %} class="active" {% endif %}>
+    <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Usuarios</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li {% if gestion_estudiantes %} class="active" {% endif %}>
+            <a href="#">Estudiantes<span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+                <li {% if registrar_estudiante %} class="active" {% endif %}>
+                    <a href="/usuarios/estudiantes/registrar">Registrar</a>
+                </li>
+                <li {% if listar_estudiantes %} class="active" {% endif %}>
+                    <a href="/usuarios/estudiantes/listar">Listar</a>
+                </li>
+            </ul>
+        </li>
+        <li {% if gestion_directores %} class="active" {% endif %}>
+            <a href="#" id="damian">Directores<span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+                <li {% if registrar_director %} class="active" {% endif %}>
+                    <a href="/usuarios/directores/registrar">Registrar</a>
+                </li>
+                <li {% if listar_directores %} class="active" {% endif %}>
+                    <a href="/usuarios/directores/listar">Listar</a>
+                </li>
+            </ul>
+        </li>
+        <li {% if gestion_operarios %} class="active" {% endif %}>
+            <a href="#" id="damian">Operarios<span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+                <li {% if registrar_operario %} class="active" {% endif %}>
+                    <a href="/usuarios/operarios/registrar">Registrar</a>
+                </li>
+                <li {% if listar_operarios %} class="active" {% endif %}>
+                    <a href="/usuarios/operarios/listar">Listar</a>
+                </li>
+            </ul>
+        </li>
+        <li {% if gestion_administradores %} class="active" {% endif %}>
+            <a href="#">Administradores<span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+                <li {% if registrar_administrador %} class="active" {% endif %}>
+                    <a href="/usuarios/administradores/registrar">Registrar</a>
+                </li>
+                <li {% if listar_administradores %} class="active" {% endif %}>
+                    <a href="/usuarios/administradores/listar">Listar</a>
+                </li>
+
+            </ul>
+        </li>
+    </ul>
+</li>
+{% endif %}
+
+{% if user.rol == 'Administrador' or user.rol == 'Director' %}
+<li {% if gestion_universidad %} class="active" {% endif %}>
+    <a href="#"><i class="fa fa-institution"></i> <span class="nav-label">Universidad</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li {% if gestion_facultades %} class="active" {% endif %}>
+            <a href="#" id="damian">Facultades <span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+                <li {% if registrar_facultad %} class="active" {% endif %}>
+                    <a href="/facultades/registrar">Registrar</a>
+                </li>
+                <li {% if listar_facultades %} class="active" {% endif %}>
+                    <a href="/facultades/listar">Listar</a>
+                </li>
+            </ul>
+        </li>
+        <li {% if gestion_unidades %} class="active" {% endif %}>
+            <a href="#" id="damian"> Unidades Academicas <span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+                <li {% if registrar_unidad %} class="active" {% endif %}>
+                    <a href="/unidades/registrar">Registrar</a>
+                </li>
+                <li {% if listar_unidades %} class="active" {% endif %}>
+                    <a href="/unidades/listar">Listar</a>
+                </li>
+            </ul>
+        </li>
+        <li {% if gestion_dependencias %} class="active" {% endif %}>
+            <a href="#" id="damian"> Dependencias <span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+                <li {% if registrar_dependencia %} class="active" {% endif %}>
+                    <a href="/dependencias/registrar">Registrar</a>
+                </li>
+                <li {% if listar_dependencias %} class="active" {% endif %}>
+                    <a href="/dependencias/listar">Listar</a>
+                </li>
+            </ul>
+        </li>
+        <li {% if gestion_programas %} class="active" {% endif %}>
+            <a href="#" id="damian"> Programas Academicos <span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+                <li {% if registrar_programa %} class="active" {% endif %}>
+                    <a href="/programas/registrar">Registrar</a>
+                </li>
+                <li {% if listar_programas %} class="active" {% endif %}>
+                    <a href="/programas/listar">Listar</a>
+                </li>
+            </ul>
+        </li>
+        <!--li>
+            <a href="#" id="damian"> <i class="fa fa-calendar"></i>Periodos <span class="fa arrow"></span></a>
+            <ul class="nav nav-third-level">
+                <li>
+                    <a href="#">Registrar</a>
+                </li>
+                <li>
+                    <a href="#">Listar</a>
+                </li>
+            </ul>
+        </li-->
+    </ul>
+</li>
+{% endif %}
+
+{% if user.rol == 'Administrador' or user.rol == 'Director' %}
+<li>
+    <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reportes</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li><a href="graph_flot.html">Flot Charts</a></li>
+        <li><a href="graph_morris.html">Morris.js Charts</a></li>
+        <li><a href="graph_rickshaw.html">Rickshaw Charts</a></li>
+        <li><a href="graph_chartjs.html">Chart.js</a></li>
+        <li><a href="graph_chartist.html">Chartist</a></li>
+        <li><a href="c3.html">c3 charts</a></li>
+        <li><a href="graph_peity.html">Peity Charts</a></li>
+        <li><a href="graph_sparkline.html">Sparkline Charts</a></li>
+    </ul>
+</li>
+{% endif %}

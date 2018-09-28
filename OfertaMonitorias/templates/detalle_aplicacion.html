@@ -1,0 +1,39 @@
+{% load bootstrap3 %}
+{% load static %}
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content animated fadeIn">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <i class="fa fa-pencil-square modal-icon"></i>
+            <h4 class="modal-title">Detalle de aplicacion</h4>
+        </div>
+        <div class="modal-body" style="display: flex;">
+            <div style="flex-basis: 0;flex-grow: 1;">
+                <h2><strong>Oferta</strong></h2>
+                <p><strong>Sede:</strong> {{ object.oferta.sede }}</p>
+                <p> <strong>Tipo de monitoria:</strong> {{ object.oferta.tipo_monitoria }}</p>
+                <p> <strong>Plazo para aplicar:</strong> {{ object.oferta.plazo_solicitudes}}</p>
+                <p> <strong>Perfil requerido:</strong> {{ object.oferta.perfil_requerido }}</p>
+                <p><strong>Criterios de seleccion:</strong> {{ object.oferta.criterios_seleccion }}</p>
+                <p><strong>Periodo duracion de la monitoria:</strong> {{ object.oferta.periodo_duracion }}</p>
+                <p><strong>Horario de trabajo:</strong> {{ object.oferta.horario_ejecucion }}</p>
+                <p><strong>Horas semanales:</strong> {{ object.oferta.horas_semanales }}</p>
+                <p><strong>Fecha de seleccion:</strong> {{ object.oferta.fecha_seleccion }}</p>
+                <p><strong>Fecha de adjudicacion de la monitoria:</strong> {{ object.oferta.fecha_adjudicacion }}</p>
+                <p><strong>Contacto:</strong> {{ object.oferta.operario_registra.nombreCompleto }} <strong>Telefono:</strong> {{ object.oferta.operario_registra.telefono }}</p>
+            </div>
+            <div style="flex-basis: 0;flex-grow: 1;">
+                <h2><strong>Aplicacion</strong></h2>
+                {% if user.rol == 'Administrador' %}
+                <p> <strong>Estudiante que aplica:</strong> {{ object.estudiante.nombreCompleto }}</p>
+                {% endif %}
+                <p> <strong>Fecha en que aplicó:</strong> {{ object.fecha_modificacion }}</p>
+                <p><strong>Estado de la aplicacion:</strong> {{ object.estado }}</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-primary" data-dismiss="modal">Volver</a>
+        </div>
+    </div>
+</div>

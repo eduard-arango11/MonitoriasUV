@@ -1,0 +1,38 @@
+{% load bootstrap3 %}
+{% load static %}
+
+
+
+<div class="modal-dialog modal-lg">
+    <div class="modal-content animated fadeIn">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <i class="fa fa-briefcase modal-icon"></i>
+            <h4 class="modal-title">Detalle de la oferta</h4>
+        </div>
+        <div class="modal-body" style="display: flex;">
+            <div>
+                <p><strong>Sede:</strong> {{ object.sede }}</p>
+                <p> <strong>Tipo de monitoria:</strong> {{ object.tipo_monitoria }}</p>
+                <p> <strong>Plazo para aplicar:</strong> {{ object.plazo_solicitudes}}</p>
+                <p> <strong>Perfil requerido:</strong> {{ object.perfil_requerido }}</p>
+                <p><strong>Criterios de seleccion:</strong> {{ object.criterios_seleccion }}</p>
+            </div>
+            <div>
+                <p><strong>Periodo duracion de la monitoria:</strong> {{ object.periodo_duracion }}</p>
+                <p><strong>Horario de trabajo:</strong> {{ object.horario_ejecucion }}</p>
+                <p><strong>Horas semanales:</strong> {{ object.horas_semanales }}</p>
+                <p><strong>Fecha de seleccion:</strong> {{ object.fecha_seleccion }}</p>
+                <p><strong>Fecha de adjudicacion de la monitoria:</strong> {{ object.fecha_adjudicacion }}</p>
+                <p><strong>Contacto:</strong> {{ object.operario_registra.nombreCompleto }} </p>
+                <p> <strong>Telefono:</strong> {{ object.operario_registra.telefono }}</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-primary" data-dismiss="modal">Volver</a>
+            {%  if user.rol == 'Operario' %}
+                <a id="registrar-d10" href="" class="btn btn-primary">Ver aplicaciones</a>
+            {% endif %}
+        </div>
+    </div>
+</div>

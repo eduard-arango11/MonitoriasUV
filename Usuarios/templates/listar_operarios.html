@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+
+{% block titulo %}
+	Listar Operarios
+{% endblock %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Listado de Operarios Registrados</h5>
+            </div>
+            <div class="ibox-content">
+                {% if object_list.count >= 10 %}
+                <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                       placeholder="Buscar en la tabla">
+                {% endif %}
+
+                <table class="footable table table-stripped" data-page-size="15" data-filter=#filter>
+                    <thead>
+                    <tr>
+                        <th>Nombre Completo</th>
+                        <th>Numero de Documento</th>
+                        <th>E-mail</th>
+                        <th>Cargo</th>
+                        <th>Dependencia</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for operario in object_list %}
+						<tr >
+                            <td> {{ operario.nombres }} {{ operario.primer_apellido }} {{ operario.segundo_apellido }} </td>
+                            <td> {{ operario.numero_documento }} </td>
+                            <td> {{ operario.email }} </td>
+                            <td> {{ operario.cargo }} </td>
+                            <td> {{ operario.dependencia }} </td>
+                            <td> <a href="{% url 'editar_operario' operario.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a> </td>
+						</tr>
+					{% endfor %}                              
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
+
+{% block plugins %}
+    <!-- FooTable -->
+    <script src="{% static 'js/plugins/footable/footable.all.min.js' %}"></script>
+
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+            $('.footable').footable();
+        });
+    </script>
+    
+{% endblock plugins %}

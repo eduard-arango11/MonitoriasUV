@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+
+{% block titulo %}
+	Listar Aplicaciones
+{% endblock %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Listado de Aplicaciones</h5>
+            </div>
+            <div class="ibox-content">
+                {% if object_list.count >= 10 %}
+                <input type="text" class="form-control input-sm m-b-xs" id="filter"
+                       placeholder="Buscar en la tabla">
+                {% endif %}
+
+                <table class="footable table table-hover" data-page-size="15" data-filter=#filter>
+                    <thead>
+                    <tr>
+                        <th>Perfil de monitoria</th>
+                        {% if user.rol == 'Administrador' %}
+                            <th>Estudiante</th>
+                        {% endif %}
+                        <th>Fecha de aplicacion</th>
+                        <th>Estado de la aplicacion</th>
+                        <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for aplicacion in object_list %}
+						<tr >
+                            <td> {{ aplicacion.oferta }}</td>
+                            {% if user.rol == 'Administrador' %}
+                                <td> {{ aplicacion.estudiante.nombreCompleto }} </td>
+                            {% endif %}
+                            <td> {{ aplicacion.fecha_modificacion }} </td>
+                            <td> {{ aplicacion.estado }} </td>
+                            <td>
+                                <a onclick="return abrir_modal('{% url 'detalle_aplicacion' aplicacion.id %}')" class="btn btn-info">
+                                    <i class="fa fa-eye"></i> Detalle
+                                </a>
+                            </td>
+						</tr>
+					{% endfor %}                              
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="5">
+                            <ul class="pagination pull-right"></ul>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </div>
+            <!--div class="modal inmodal" id="myModal3" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content animated fadeIn">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title">Detalle de aplicacion</h4>
+                        </div>
+                        <div class="modal-body">
+                            <p></p>
+                        </div>
+                        <div class="modal-footer">
+                            <a class="btn btn-white" data-dismiss="modal">Volver</a>
+                        </div>
+                    </div>
+                </div>
+            </div-->
+            <div class="modal inmodal" id="modal-detalle" tabindex="-1" role="dialog" aria-hidden="true"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
+
+{% block plugins %}
+    <!-- FooTable -->
+    <script src="{% static 'js/plugins/footable/footable.all.min.js' %}"></script>
+
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+            $('.footable').footable();
+        });
+        function abrir_modal(url)
+        {
+            $('#modal-detalle').load(url, function()
+            {
+                    $(this).modal('show');
+            });
+            return false;
+        }
+    </script>
+    
+{% endblock plugins %}
