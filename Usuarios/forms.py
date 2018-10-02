@@ -10,7 +10,7 @@ class IniciarSesionForm(AuthenticationForm):
 class Formulario_registrar_estudiante(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         model = Estudiante
-        fields = ('nombres','primer_apellido','segundo_apellido','email','password1', 'password2','codigo','tipo_documento','numero_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','programa_academico','estado_d10')
+        fields = ('nombres','primer_apellido','segundo_apellido','email','password1', 'password2','codigo','tipo_documento','numero_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','programa_academico')
         widgets = {
             'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
         }
@@ -18,7 +18,7 @@ class Formulario_registrar_estudiante(UserCreationForm):
 class Formulario_modificar_estudiante(forms.ModelForm):
     class Meta:
         model = Estudiante
-        fields = ('nombres','primer_apellido','segundo_apellido','email','codigo','tipo_documento','numero_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','programa_academico','estado_d10')
+        fields = ('nombres','primer_apellido','segundo_apellido','email','codigo','tipo_documento','numero_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','programa_academico')
         widgets = {
             'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
         }
