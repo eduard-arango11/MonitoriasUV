@@ -71,7 +71,7 @@ class DatosCapacitacionD10(models.Model):
     nombre_establecimiento = models.CharField(max_length=50,verbose_name="Nombre del establecimiento",blank=True)
     nombre_curso = models.CharField(max_length=50,verbose_name="Nombre del curso",blank=True)
     duracion_cruso = models.CharField(max_length=4,verbose_name="Duracion del curso (horas)",blank=True)
-    fecha_finalizacion_curso = models.DateField()
+    fecha_finalizacion_curso = models.DateField(null=True, blank=True)
 
 class D10(models.Model):
     estado = models.CharField(max_length=10, verbose_name="Estado", choices=ESTADOS, default='Activo')
