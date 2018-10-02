@@ -5,7 +5,7 @@ from .forms import *
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import *
-from Usuarios.models import Estudiante
+from Usuarios.models import *
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, redirect
@@ -53,6 +53,14 @@ class ListarOfertas(ListView):
     model = OfertaMonitoria
     template_name = "listar_ofertas.html"
 
+    def get_queryset(self):
+        queryset = super(ListarOfertas, self).get_queryset()
+
+        if self.request.user.rol == 'Operario':
+            operario = get_object_or_404(Operario, pk=self.request.user.id)
+            queryset = queryset.filter(operario_registra=operario,estado='Activo')
+
+        return queryset
 
     def get_context_data(self, **kwargs):
         if self.request.user.rol == 'Estudiante':
@@ -190,3 +198,20 @@ def RegistrarD10(request):
         'form_datos_capacitacion': form_datos_capacitacion,
         'registrar_formato_d10': True,
     })
+
+
+class listarSolitudesAprobacionD10(ListView):
+    model = D10
+    template_name = "listar_solicitudes_d10.html"
+
+    def get_queryset(self):
+        queryset = super(listarSolitudesAprobacionD10, self).get_queryset()
+        director = get_object_or_404(Director, pk=self.request.user.id)
+        queryset = queryset.filter(estado_aprobacion='En Revision',estudiante__programa_academico__id=director.programa_academico.id)
+
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        context = super(listarSolitudesAprobacionD10, self).get_context_data(**kwargs)
+        context['listar_solicitudes_d10'] = True
+        return context

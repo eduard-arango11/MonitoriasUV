@@ -15,4 +15,5 @@ urlpatterns = [
     path('cancelar-apliacion/<int:id_oferta>/', cancelar_aplicacion, name="cancelar_aplicacion"),
 
     path('registrar-d10/', RegistrarD10, name='registrar_d10'),
+    path('listar-solicitudes-d10/', listarSolitudesAprobacionD10.as_view(), name='listar_solicitudes_d10'),
 ]

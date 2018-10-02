@@ -5,6 +5,7 @@ from Usuarios.models import Estudiante, Operario
 TIPO_DE_MONITORIAS = (('Docencia','Docencia'),('Investigacion','Investigacion'),('Administrativa','Administrativa'),('Especial','Especial'))
 SEDES = (('Melendez','Melendez'),('San Fernando','San Fernando'))
 ESTADOS = (('Activo','Activo'),('Inactivo','Inactivo'))
+ESTADOS_APROBACION = (('En Revision','En Revision'),('Aprobado','Aprobado'),('No Aprobado','No Aprobado'))
 TIPOS_ESTADO_CIVIL = (('Soltero','Soltero'),('Casado','Casado'),('Union Libre','Union Libre'),('Otro','Otro'))
 TIPO_POSICION_FAMILIAR = (('Hijo(a)','Hijo(a)'),('Independiente','Independiente'),('Cabeza de familia','Cabeza de familia'),('Esposo(a)','Esposo(a)'))
 
@@ -74,6 +75,7 @@ class DatosCapacitacionD10(models.Model):
 
 class D10(models.Model):
     estado = models.CharField(max_length=10, verbose_name="Estado", choices=ESTADOS, default='Activo')
+    estado_aprobacion = models.CharField(max_length=20, verbose_name="Estado Aprobacion", choices=ESTADOS_APROBACION, default='En Revision')
     datos_basicos = models.OneToOneField(DatosBasicosD10, on_delete=models.CASCADE)
     datos_educacion = models.OneToOneField(DatosEducacionD10, on_delete=models.CASCADE)
     datos_capacitacion = models.OneToOneField(DatosCapacitacionD10, on_delete=models.CASCADE)

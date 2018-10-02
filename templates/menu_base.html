@@ -49,6 +49,12 @@
 </li>
 {% endif %}
 
+{% if user.rol == 'Director' %}
+    <li {% if listar_solicitudes_d10 %} class="active" {% endif %}>
+        <a href="/monitorias/listar-solicitudes-d10"><i class="fa fa-list"></i> <span class="nav-label">Solicitudes Aprobacion D10</span></a>
+    </li>
+{% endif %}
+
 {% if user.rol == 'Administrador' %}
 <li {% if gestion_monitorias %} class="active" {% endif %}>
     <a href="#"><i class="fa fa-briefcase"></i> <span class="nav-label">Monitorias</span><span class="fa arrow"></span></a>
