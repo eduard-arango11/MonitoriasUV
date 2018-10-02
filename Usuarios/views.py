@@ -38,6 +38,12 @@ class RegistrarEstudiante(SuccessMessageMixin, CreateView):
 class ListarEstudiantes (ListView):
 	model = Estudiante
 	template_name = "listar_estudiantes.html"
+
+	def get_queryset(self):
+		queryset = super(ListarEstudiantes, self).get_queryset()
+		queryset = queryset.order_by('-date_joined')
+
+		return queryset
 	
 	def get_context_data(self, **kwargs):
 		context = super(ListarEstudiantes, self).get_context_data(**kwargs)
