@@ -18,42 +18,6 @@
             <div class="ibox-title">
                 <h5>Listado de Estudiantes Registrados</h5>
             </div>
-        {% comment %}
-            <div class="ibox-content">
-                <input type="text" class="form-control input-sm m-b-xs" id="filter"
-                       placeholder="Buscar en la tabla">
-
-                <table class="footable table table-stripped" data-page-size="5" data-filter=#filter>
-                    <thead>
-                    <tr>
-                        <th>Nombre Completo</th>
-                        <th>Codigo</th>
-                        <th>E-mail</th>
-                        <th>Programa Academico</th>
-                        <th></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    {% for estudiante in object_list %}
-						<tr >
-                            <td> {{ estudiante.nombres }} {{ estudiante.primer_apellido }} {{ estudiante.segundo_apellido }} </td>
-                            <td> {{ estudiante.codigo }} </td>
-                            <td> {{ estudiante.email }} </td>
-                            <td> {{ estudiante.programa_academico }} </td>
-                            <td> <a href="{% url 'editar_estudiante' estudiante.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a> </td>
-						</tr>
-					{% endfor %}                              
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="5">
-                            <ul class="pagination pull-right"></ul>
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>
-            </div>
-            {% endcomment %}
         <div class="ibox-content">
 
                         <div class="table-responsive">
@@ -64,6 +28,7 @@
                             <th>Codigo</th>
                             <th>E-mail</th>
                             <th>Programa Academico</th>
+                            <th>Estado D10</th>
                             <th>Opciones</th>
                         </tr>
                     </thead>
@@ -74,6 +39,7 @@
                                 <td> {{ estudiante.codigo }} </td>
                                 <td> {{ estudiante.email }} </td>
                                 <td> {{ estudiante.programa_academico }} </td>
+                                <td> {{ estudiante.estado_d10 }} </td>
                                 <td> <a href="{% url 'editar_estudiante' estudiante.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a> </td>
                             </tr>
 					    {% endfor %}
