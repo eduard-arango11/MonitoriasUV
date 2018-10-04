@@ -80,3 +80,5 @@ class D10(models.Model):
     datos_educacion = models.OneToOneField(DatosEducacionD10, on_delete=models.CASCADE)
     datos_capacitacion = models.OneToOneField(DatosCapacitacionD10, on_delete=models.CASCADE)
     estudiante = models.OneToOneField(Estudiante, on_delete=models.CASCADE)
+    promedio_acumulado = models.CharField(max_length=5,verbose_name="Promedio Acumulado del Estudiante",blank=True)
+    fecha_aprobacion = models.DateField(null=True, blank=True)

@@ -15,6 +15,7 @@ from django.contrib import messages
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from monitorias.utilities import *
+from datetime import date
 
 
 class RegistrarOferta(SuccessMessageMixin, CreateView):
@@ -207,7 +208,7 @@ class listarSolitudesAprobacionD10(ListView):
     def get_queryset(self):
         queryset = super(listarSolitudesAprobacionD10, self).get_queryset()
         director = get_object_or_404(Director, pk=self.request.user.id)
-        queryset = queryset.filter(estado_aprobacion='En Revision',estudiante__programa_academico__id=director.programa_academico.id)
+        queryset = queryset.filter(estudiante__programa_academico__id=director.programa_academico.id).order_by('id')
 
         return queryset
 
@@ -215,3 +216,39 @@ class listarSolitudesAprobacionD10(ListView):
         context = super(listarSolitudesAprobacionD10, self).get_context_data(**kwargs)
         context['listar_solicitudes_d10'] = True
         return context
+
+def revisarSolicitudAprobacionD10(request,id_d10):
+    d10 = get_object_or_404(D10, id=id_d10)
+    estudiante = d10.estudiante
+
+    if request.method == 'POST':
+        print("Hola desde POST")
+        form_datos_basicos = Formulario_registrar_d10_datos_basicos(request.POST, instance=d10.datos_basicos)
+        form_datos_educacion = Formulario_registrar_d10_datos_educacion(request.POST, instance=d10.datos_educacion)
+        form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(request.POST, instance=d10.datos_capacitacion)
+        form_datos_aprobacion = Formulario_aprobar_d10(request.POST)
+
+        if form_datos_basicos.is_valid() and form_datos_educacion.is_valid() and form_datos_capacitacion.is_valid() and form_datos_aprobacion.is_valid():
+            d10.promedio_acumulado = form_datos_aprobacion.instance.promedio_acumulado
+            d10.fecha_aprobacion = date.today()
+            d10.estado_aprobacion = form_datos_aprobacion.instance.estado_aprobacion
+            d10.save()
+
+            return redirect('listar_solicitudes_d10')
+        else:
+            messages.error(request, 'Por favor verificar los campos en rojo del formulario')
+
+    else:
+        form_datos_basicos = Formulario_registrar_d10_datos_basicos(instance=d10.datos_basicos)
+        form_datos_educacion = Formulario_registrar_d10_datos_educacion(instance=d10.datos_educacion)
+        form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(instance=d10.datos_capacitacion)
+        form_datos_aprobacion = Formulario_aprobar_d10(instance=d10)
+
+    return render(request, 'detalle_aprobacion_d10.html', {
+        'form_datos_basicos': form_datos_basicos,
+        'form_datos_educacion': form_datos_educacion,
+        'form_datos_capacitacion': form_datos_capacitacion,
+        'form_datos_aprobacion': form_datos_aprobacion,
+        'd10': d10,
+        'listar_solicitudes_d10': True,
+    })

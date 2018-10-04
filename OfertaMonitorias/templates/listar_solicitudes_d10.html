@@ -28,6 +28,7 @@
                         <th>Codigo</th>
                         <th>E-mail</th>
                         <th>Programa Academico</th>
+                        <th>Estado del D10</th>
                         <th>Opciones</th>
                     </tr>
                 </thead>
@@ -38,7 +39,15 @@
                             <td> {{ d10.estudiante.codigo }} </td>
                             <td> {{ d10.estudiante.email }} </td>
                             <td> {{ d10.estudiante.programa_academico }} </td>
-                            <td> <a href="" class="btn btn-success"><i class="fa fa-edit"></i> Revisar D10 </a> </td>
+                            <td> {{ d10.estado_aprobacion }} </td>
+                            <td>
+                                {% if d10.estado_aprobacion == 'En Revision' %}
+                                    <a href="{% url 'revisar_solicitud_aprobacion_d10' d10.id %}" class="btn btn-success"><i class="fa fa-edit"></i> Revisar </a>
+                                {% elif d10.estado_aprobacion == 'Aprobado' %}
+                                    <a href="{% url 'revisar_solicitud_aprobacion_d10' d10.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Modificar Revision </a>
+                                {% endif %}
+
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
@@ -48,6 +57,7 @@
                         <th>Codigo</th>
                         <th>E-mail</th>
                         <th>Programa Academico</th>
+                        <th>Estado del D10</th>
                         <th>Opciones</th>
                     </tr>
                 </tfoot>

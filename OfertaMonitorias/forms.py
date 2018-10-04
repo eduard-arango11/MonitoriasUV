@@ -41,3 +41,8 @@ class Formulario_registrar_d10_datos_capacitacion(forms.ModelForm):
         widgets = {
                 'fecha_finalizacion_curso': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
             }
+
+class Formulario_aprobar_d10(forms.ModelForm):
+    class Meta:
+        model = D10
+        fields = ['promedio_acumulado','estado_aprobacion']
