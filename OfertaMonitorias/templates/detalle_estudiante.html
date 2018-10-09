@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+
+{% block titulo %}
+	Detalle del estudiante
+{% endblock %}
+
+{% block contenido %}
+
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="ibox">
+                <div class="ibox-title">
+            <h5>Detalle del estudiante {{ object.nombreCompleto }}</h5>
+            </div>
+                <div class="ibox-content">
+
+                    <div class="row">
+                        <div class="col-lg-4">
+                            <div class="panel panel-primary">
+                                <div class="panel-heading">
+                                    Informacion Basica
+                                </div>
+                                <div class="panel-body">
+                                    <div class="col-sm-4">
+                                        <div class="text-center">
+                                            <img alt="image" class="img-circle m-t-xs img-responsive" src="{% static 'img/a2.jpg' %}">
+                                            <div class="m-t-xs font-bold">{{ object.programa_academico }} (Semestre: {{ d10.datos_basicos.semestre }})</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <h3><strong>{{ object.nombreCompleto }}</strong></h3>
+                                        <address>
+                                            <strong>{{ object.tipo_documento }}: </strong> {{ object.numero_documento }} de LUGAR DE EXPEDICION<br>
+                                            <strong>Email: </strong> {{ object.email }}<br>
+                                            <strong>Codigo: </strong>{{ object.codigo }}<br>
+                                            <strong>Programa Academico: </strong>{{ object.programa_academico }}<br>
+
+                                            <br><br>
+                                            <i class="fa fa-birthday-cake"></i> {{ object.fecha_nacimiento }} ({{ object.edad }} años)<br>
+                                            {{ d10.datos_basicos.direccion_residencia }} - {{ d10.datos_basicos.barrio }}<br>
+                                            <i class="fa fa-phone"></i> {{ object.numeroTelefonico }} <br>
+                                        </address>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% if d10 %}
+                        <div class="col-lg-8">
+                            <div class="panel panel-info">
+                                <div class="panel-heading">
+                                    D10
+                                </div>
+                                <div class="panel-body">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="panel panel-info">
+                                                <div class="panel-heading">
+                                                    Datos Basicos
+                                                </div>
+                                                <div class="panel-body">
+                                                    <div style="display: flex;">
+                                                        <div style="margin-right: 20px;">
+                                                            <strong>Codigo de estudiante: </strong>{{ object.codigo }}<br>
+                                                            <strong>Nombre(s): </strong>{{ object.nombres }}<br>
+                                                            <strong>Primer apellido: </strong>{{ object.primer_apellido }}<br>
+                                                            <strong>Segundo apellido: </strong>{{ object.segundo_apellido }}<br>
+                                                            <strong>Estado civil: </strong>{{ d10.datos_basicos.estado_civil }}<br>
+                                                            <strong>Personas a cargo: </strong>{{ d10.datos_basicos.numero_de_personas_a_cargo }}<br>
+                                                            <strong>Direccion actual: </strong>{{ d10.datos_basicos.direccion_residencia }}<br>
+                                                            <strong>Estrato: </strong>{{ d10.datos_basicos.estrato }}<br>
+                                                            <strong>Barrio: </strong>{{ d10.datos_basicos.barrio }}<br>
+                                                            <strong>Cuidad: </strong>{{ d10.datos_basicos.ciudad }}, {{ d10.datos_basicos.departamento }}<br>
+                                                        </div>
+                                                        <div>
+                                                            <strong>Acudiente: </strong>{{ d10.datos_basicos.nombre_acudiente }}<br>
+                                                            <strong>Telefono de acudiente: </strong>{{ d10.datos_basicos.telefono_acudiente }}<br>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="panel panel-info">
+                                                <div class="panel-heading">
+                                                    Educacion
+                                                </div>
+                                                <div class="panel-body">
+                                                    <h2>Bachillerato:</h2>
+                                                    <strong>Titulo obtenido: </strong>{{ d10.datos_educacion.titulo_obtenido_bachillerato }}<br>
+                                                    <strong>Año de Finalizacion: </strong>{{ d10.datos_educacion.ano_finalizacion_bachillerato }}<br>
+                                                    <strong>Institucion: </strong>{{ d10.datos_educacion.nombre_colegio_bachillerato }} ({{ d10.datos_educacion.ciudad_colegio_bachillerato }})<br><br>
+
+                                                    {% if d10.datos_educacion.plan_otros_estudios != '' %}
+                                                    <h2>Universitario:</h2>
+                                                    <strong>Plan o titulo: </strong>{{ d10.datos_educacion.plan_otros_estudios}}<br>
+                                                    <strong>Semestres: </strong>{{ d10.datos_educacion.semestres_otros_estudios }}<br>
+                                                    <strong>Año de Finalizacion: </strong>{{ d10.datos_educacion.ano_finalizacion_otros_estudios }}<br>
+                                                    <strong>Establecimiento: </strong>{{ d10.datos_educacion.nombre_establecimiento_otros_estudios }} ({{ d10.datos_educacion.ciudad_establecimiento_otros_estudios }})
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        {% if d10.datos_capacitacion.nombre_curso != '' %}
+                                        <div class="col-lg-6">
+                                            <div class="panel panel-info">
+                                                <div class="panel-heading">
+                                                    Capacitacion
+                                                </div>
+                                                <div class="panel-body">
+                                                    <strong>Establecimiento: </strong>{{ d10.datos_capacitacion.nombre_establecimiento }}<br>
+                                                    <strong>Curso o seminario: </strong>{{ d10.datos_capacitacion.nombre_curso }}<br>
+                                                    <strong>Duracion del curso: </strong>{{ d10.datos_capacitacion.duracion_cruso }}<br>
+                                                    <strong>Fecha de terminacion: </strong>{{ d10.datos_capacitacion.fecha_finalizacion_curso }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% endif %}
+                                        <div class="col-lg-6">
+                                            <div class="panel panel-info">
+                                                <div class="panel-heading">
+                                                    Experiencia Laboral
+                                                </div>
+                                                <div class="panel-body">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock contenido %}

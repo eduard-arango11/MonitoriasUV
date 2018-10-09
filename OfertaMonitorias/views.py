@@ -1,21 +1,30 @@
 from django.db import transaction, IntegrityError
 from django.views.generic import *
-from .models import *
 from .forms import *
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import *
-from Usuarios.models import *
-
-from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404, render, redirect
-from django.urls import reverse
-from django.views import generic
-from django.contrib import messages
+from Usuarios.models import Estudiante, Operario, Director
+from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from monitorias.utilities import *
 from datetime import date
+
+
+class DetalleEstudiante(DetailView):
+    model = Estudiante
+    template_name = 'detalle_estudiante.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DetalleEstudiante, self).get_context_data(**kwargs)
+        context['gestion_usuarios']= True
+        context['gestion_estudiantes'] = True
+        context['listar_estudiantes']= True
+        estudiante = get_object_or_404(Estudiante, pk=self.kwargs['pk'])
+        if D10.objects.all().filter(estudiante=estudiante):
+            d10_estudiante = D10.objects.get(estudiante = estudiante)
+            context['d10'] = d10_estudiante
+        return context
 
 
 class RegistrarOferta(SuccessMessageMixin, CreateView):
