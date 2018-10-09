@@ -1,12 +1,14 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ProgramasAcademicos.models import *
+from datetime import date
 
 TIPOS_DE_IDENTIFICACION = (('CC','Cedula de Ciudadania'),('TI','Tarjeta de Identidad'),('CE','Cedula Extranjera'))
 GENEROS = (('Masculino','Masculino'),('Femenino','Femenino'))
 ROLES = (('Estudiante','Estudiante'),('Director','Director'),('Operario','Operario'),('Administrador','Administrador'))
 ESTADOS = (('Activo','Activo'),('Inactivo','Inactivo'))
 ESTADOS_D10 = (('No registrado','No registrado'),('Registrado','Registrado'))
+
 
 class Usuario(AbstractUser):
     nombres = models.CharField(max_length=300,verbose_name="Nombre(s)")
@@ -26,6 +28,15 @@ class Usuario(AbstractUser):
         if self.segundo_apellido != '':
             nombre_completo= nombre_completo +" "+ self.segundo_apellido
         return nombre_completo
+
+    def numeroTelefonico(self):
+        if len(self.telefono) == 10:
+            return self.telefono[0:3] + " " + self.telefono[3:6] + " " + self.telefono[6:8] + " " + self.telefono[8:10]
+        else:
+            return self.telefono[0:3] + " " + self.telefono[3:5] + " " + self.telefono[5:7]
+
+    def edad(self):
+        return date.today().year - self.fecha_nacimiento.year
 
 class Estudiante(Usuario):
     codigo = models.CharField(max_length=7,verbose_name="Codigo de estudiante", unique=True)
