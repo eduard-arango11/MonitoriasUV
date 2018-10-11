@@ -19,51 +19,49 @@
                 <h5>Listado de solicitudes de aprobacion de D10</h5>
             </div>
             <div class="ibox-content">
+                 <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                        <thead>
+                            <tr>
+                                <th>Nombre del Estudiante</th>
+                                <th>Codigo</th>
+                                <th>E-mail</th>
+                                <th>Programa Academico</th>
+                                <th>Estado del D10</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d10 in object_list %}
+                                <tr >
+                                    <td> {{ d10.estudiante.nombreCompleto }}</td>
+                                    <td> {{ d10.estudiante.codigo }} </td>
+                                    <td> {{ d10.estudiante.email }} </td>
+                                    <td> {{ d10.estudiante.programa_academico }} </td>
+                                    <td> {{ d10.estado_aprobacion }} </td>
+                                    <td>
+                                        {% if d10.estado_aprobacion == 'En Revision' %}
+                                            <a href="{% url 'revisar_solicitud_aprobacion_d10' d10.id %}" class="btn btn-success"><i class="fa fa-edit"></i> Revisar </a>
+                                        {% elif d10.estado_aprobacion == 'Aprobado' %}
+                                            <a href="{% url 'revisar_solicitud_aprobacion_d10' d10.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Modificar Revision </a>
+                                        {% endif %}
 
-                    <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover dataTables-example" >
-                <thead>
-                    <tr>
-                        <th>Nombre del Estudiante</th>
-                        <th>Codigo</th>
-                        <th>E-mail</th>
-                        <th>Programa Academico</th>
-                        <th>Estado del D10</th>
-                        <th>Opciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {% for d10 in object_list %}
-                        <tr >
-                            <td> {{ d10.estudiante.nombreCompleto }}</td>
-                            <td> {{ d10.estudiante.codigo }} </td>
-                            <td> {{ d10.estudiante.email }} </td>
-                            <td> {{ d10.estudiante.programa_academico }} </td>
-                            <td> {{ d10.estado_aprobacion }} </td>
-                            <td>
-                                {% if d10.estado_aprobacion == 'En Revision' %}
-                                    <a href="{% url 'revisar_solicitud_aprobacion_d10' d10.id %}" class="btn btn-success"><i class="fa fa-edit"></i> Revisar </a>
-                                {% elif d10.estado_aprobacion == 'Aprobado' %}
-                                    <a href="{% url 'revisar_solicitud_aprobacion_d10' d10.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Modificar Revision </a>
-                                {% endif %}
-
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Nombre del Estudiante</th>
-                        <th>Codigo</th>
-                        <th>E-mail</th>
-                        <th>Programa Academico</th>
-                        <th>Estado del D10</th>
-                        <th>Opciones</th>
-                    </tr>
-                </tfoot>
-                </table>
-                    </div>
-
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre del Estudiante</th>
+                                <th>Codigo</th>
+                                <th>E-mail</th>
+                                <th>Programa Academico</th>
+                                <th>Estado del D10</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
