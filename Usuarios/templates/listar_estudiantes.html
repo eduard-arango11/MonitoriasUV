@@ -18,49 +18,47 @@
             <div class="ibox-title">
                 <h5>Listado de Estudiantes Registrados</h5>
             </div>
-        <div class="ibox-content">
-
-                        <div class="table-responsive">
+            <div class="ibox-content">
+                <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
-                    <thead>
-                        <tr>
-                            <th>Nombre Completo</th>
-                            <th>Codigo</th>
-                            <th>E-mail</th>
-                            <th>Programa Academico</th>
-                            <th>Estado D10</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for estudiante in object_list %}
-                            <tr >
-                                <td> {{ estudiante.nombres }} {{ estudiante.primer_apellido }} {{ estudiante.segundo_apellido }} </td>
-                                <td> {{ estudiante.codigo }} </td>
-                                <td> {{ estudiante.email }} </td>
-                                <td> {{ estudiante.programa_academico }} </td>
-                                <td> {{ estudiante.estado_d10 }} </td>
-                                <td>
-                                    <a href="{% url 'detalle_estudiante' estudiante.id %}" class="btn btn-info"><i class="fa fa-eye"></i> Detalle </a>
-                                    <a href="{% url 'editar_estudiante' estudiante.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a>
-                                </td>
+                        <thead>
+                            <tr>
+                                <th>Nombre Completo</th>
+                                <th>Codigo</th>
+                                <th>E-mail</th>
+                                <th>Programa Academico</th>
+                                <th>Estado D10</th>
+                                <th>Opciones</th>
                             </tr>
-					    {% endfor %}
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th>Nombre Completo</th>
-                            <th>Codigo</th>
-                            <th>E-mail</th>
-                            <th>Programa Academico</th>
-                            <th>Estado D10</th>
-                            <th>Opciones</th>
-                        </tr>
-                    </tfoot>
+                        </thead>
+                        <tbody>
+                            {% for estudiante in object_list %}
+                                <tr >
+                                    <td> {{ estudiante.nombres }} {{ estudiante.primer_apellido }} {{ estudiante.segundo_apellido }} </td>
+                                    <td> {{ estudiante.codigo }} </td>
+                                    <td> {{ estudiante.email }} </td>
+                                    <td> {{ estudiante.programa_academico }} </td>
+                                    <td> {{ estudiante.estado_d10 }} </td>
+                                    <td>
+                                        <a href="{% url 'detalle_estudiante' estudiante.id %}" class="btn btn-info"><i class="fa fa-eye"></i> Detalle </a>
+                                        <a href="{% url 'editar_estudiante' estudiante.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Nombre Completo</th>
+                                <th>Codigo</th>
+                                <th>E-mail</th>
+                                <th>Programa Academico</th>
+                                <th>Estado D10</th>
+                                <th>Opciones</th>
+                            </tr>
+                        </tfoot>
                     </table>
-                        </div>
-
-                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
