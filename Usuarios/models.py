@@ -16,6 +16,7 @@ class Usuario(AbstractUser):
     segundo_apellido = models.CharField(max_length=100,verbose_name="Segundo apellido")
     tipo_documento = models.CharField(max_length=2,verbose_name="Tipo de documento",choices = TIPOS_DE_IDENTIFICACION)
     numero_documento = models.CharField(max_length=20,verbose_name="Numero de documento", unique=True)
+    lugar_expedicion_documento = models.CharField(max_length=200, verbose_name="Lugar de expedicion")
     telefono = models.CharField(max_length=10,verbose_name="Telefono de contacto")
     genero = models.CharField(max_length=20, verbose_name="Genero", choices=GENEROS)
     lugar_nacimiento = models.CharField(max_length=200, verbose_name="Lugar de nacimiento")

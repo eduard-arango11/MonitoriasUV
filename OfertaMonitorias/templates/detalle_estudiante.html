@@ -27,13 +27,13 @@
                                     <div class="col-sm-4">
                                         <div class="text-center">
                                             <img alt="image" class="img-circle m-t-xs img-responsive" src="{% static 'img/a2.jpg' %}">
-                                            <div class="m-t-xs font-bold">{{ object.programa_academico }} (Semestre: {{ d10.datos_basicos.semestre }})</div>
+                                            <div class="m-t-xs font-bold">{{ object.programa_academico }} {% if object.estado_d10 == 'Registrado' %} (Semestre: {{ d10.datos_basicos.semestre }}) {% endif %} </div>
                                         </div>
                                     </div>
                                     <div class="col-sm-8">
                                         <h3><strong>{{ object.nombreCompleto }}</strong></h3>
                                         <address>
-                                            <strong>{{ object.tipo_documento }}: </strong> {{ object.numero_documento }} de LUGAR DE EXPEDICION<br>
+                                            <strong>{{ object.tipo_documento }}: </strong> {{ object.numero_documento }} de {{ object.lugar_expedicion_documento }}<br>
                                             <strong>Email: </strong> {{ object.email }}<br>
                                             <strong>Codigo: </strong>{{ object.codigo }}<br>
                                             <strong>Programa Academico: </strong>{{ object.programa_academico }}<br>
