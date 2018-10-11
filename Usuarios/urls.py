@@ -10,6 +10,7 @@ urlpatterns = [
     path('directores/registrar/', RegistrarDirector.as_view(), name='registrar_director'),
     path('directores/listar/', ListarDirectores.as_view(), name='listar_directores'),
     path('directores/editar/<int:pk>/', EditarDirector.as_view(), name="editar_director"),
+    path('directores/detalle/<int:pk>/', DetalleDirector.as_view(), name='detalle_director'),
     
     path('operarios/registrar/', RegistrarOperario.as_view(), name='registrar_operario'),
     path('operarios/listar/', ListarOperarios.as_view(), name='listar_operarios'),

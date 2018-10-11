@@ -40,7 +40,12 @@
                             <td> {{ director.email }} </td>
                             <td> {{ director.programa_academico }} </td>
                             {% if user.rol == 'Administrador' %}
-                                <td> <a href="{% url 'editar_director' director.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a> </td>
+                                <td>
+                                    <a onclick="return abrir_modal('{% url 'detalle_director' director.id %}')" class="btn btn-info">
+                                        <i class="fa fa-eye"></i> Detalle
+                                    </a>
+                                    <a href="{% url 'editar_director' director.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a>
+                                </td>
                             {% endif %}
 						</tr>
 					{% endfor %}                              
@@ -54,6 +59,7 @@
                     </tfoot>
                 </table>
             </div>
+            <div class="modal inmodal" id="modal-detalle" tabindex="-1" role="dialog" aria-hidden="true"></div>
         </div>
     </div>
 </div>
@@ -69,6 +75,14 @@
         $(document).ready(function() {
             $('.footable').footable();
         });
+        function abrir_modal(url)
+        {
+            $('#modal-detalle').load(url, function()
+            {
+                    $(this).modal('show');
+            });
+            return false;
+        }
     </script>
     
 {% endblock plugins %}

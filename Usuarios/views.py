@@ -98,6 +98,10 @@ class RegistrarDirector(SuccessMessageMixin, CreateView):
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
 
+class DetalleDirector(DetailView):
+    model = Director
+    template_name = 'detalle_director.html'
+
 class ListarDirectores (ListView):
 	model = Director
 	template_name = "listar_directores.html"
