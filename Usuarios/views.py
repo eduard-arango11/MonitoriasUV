@@ -220,6 +220,10 @@ class RegistrarAdministrador(SuccessMessageMixin, CreateView):
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
 
+class DetalleAdministrador(DetailView):
+    model = Administrador
+    template_name = 'detalle_administrador.html'
+
 class ListarAdministradores (ListView):
 	model = Administrador
 	template_name = "listar_administradores.html"

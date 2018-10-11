@@ -1,0 +1,30 @@
+{% load bootstrap3 %}
+{% load static %}
+
+<div class="modal-dialog">
+    <div class="modal-content animated fadeIn">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" style="text-align: center;">{{ object.nombreCompleto }}</h4>
+        </div>
+        <div class="modal-body" style="display: flex;">
+            <div style="flex-basis: 0;flex-grow: 1;display: flex;flex-direction: column;justify-content: center;align-items: center;margin-right: 30px;">
+                <!--i class="fa fa-file-photo-o modal-icon"></i-->
+                <img alt="image" class="img-circle m-t-xs img-responsive" src="{% static 'img/a4.jpg' %}">
+            </div>
+            <div style="flex-basis: 0;flex-grow: 1;">
+                <p><strong>Nombre(s): </strong>{{ object.nombres }}</p>
+                <p> <strong>Primer apellido: </strong>{{ object.primer_apellido }}</p>
+                <p> <strong>Segundo apellido: </strong>{{ object.segundo_apellido }}</p>
+                <p> <strong>{{ object.tipo_documento }}: </strong> {{ object.numero_documento }} de {{ object.lugar_expedicion_documento }}</p>
+                <p><strong>Fecha de nacimiento: </strong> {{ object.fecha_nacimiento }} ({{ object.lugar_nacimiento }})</p>
+                <p><strong>Edad: </strong> {{ object.edad }}</p>
+                <p><strong>Telefono: </strong> {{ object.telefono }}</p>
+                <p> <strong>Email:</strong> {{ object.email }}</p>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a class="btn btn-primary" data-dismiss="modal">Volver</a>
+        </div>
+    </div>
+</div>

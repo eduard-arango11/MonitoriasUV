@@ -20,4 +20,5 @@ urlpatterns = [
     path('administradores/registrar/', RegistrarAdministrador.as_view(), name='registrar_administrador'),
     path('administradores/listar/', ListarAdministradores.as_view(), name='listar_administradores'),
     path('administradores/editar/<int:pk>/', EditarAdministrador.as_view(), name="editar_administrador"),
+    path('administradores/detalle/<int:pk>/', DetalleAdministrador.as_view(), name='detalle_administrador'),
 ]

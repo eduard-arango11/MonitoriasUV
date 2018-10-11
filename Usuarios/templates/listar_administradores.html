@@ -26,7 +26,7 @@
                         <th>Nombre Completo</th>
                         <th>Numero de Documento</th>
                         <th>E-mail</th>
-                        <th></th>
+                        <th>Opciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -35,7 +35,12 @@
                             <td> {{ administrador.nombres }} {{ administrador.primer_apellido }} {{ administrador.segundo_apellido }} </td>
                             <td> {{ administrador.numero_documento }} </td>
                             <td> {{ administrador.email }} </td>
-                            <td> <a href="{% url 'editar_administrador' administrador.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a> </td>
+                            <td>
+                                <a onclick="return abrir_modal('{% url 'detalle_administrador' administrador.id %}')" class="btn btn-info">
+                                    <i class="fa fa-eye"></i> Detalle
+                                </a>
+                                <a href="{% url 'editar_administrador' administrador.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a>
+                            </td>
 						</tr>
 					{% endfor %}                              
                     </tbody>
@@ -48,6 +53,7 @@
                     </tfoot>
                 </table>
             </div>
+            <div class="modal inmodal" id="modal-detalle" tabindex="-1" role="dialog" aria-hidden="true"></div>
         </div>
     </div>
 </div>
@@ -63,6 +69,15 @@
         $(document).ready(function() {
             $('.footable').footable();
         });
+        function abrir_modal(url)
+        {
+            $('#modal-detalle').load(url, function()
+            {
+                    $(this).modal('show');
+            });
+            return false;
+        }
+    </script
     </script>
     
 {% endblock plugins %}
