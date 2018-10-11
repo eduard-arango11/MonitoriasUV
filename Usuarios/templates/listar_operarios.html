@@ -28,7 +28,7 @@
                         <th>E-mail</th>
                         <th>Cargo</th>
                         <th>Dependencia</th>
-                        <th></th>
+                        <th>Opciones</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,19 +39,25 @@
                             <td> {{ operario.email }} </td>
                             <td> {{ operario.cargo }} </td>
                             <td> {{ operario.dependencia }} </td>
-                            <td> <a href="{% url 'editar_operario' operario.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a> </td>
+                            <td>
+                                <a onclick="return abrir_modal('{% url 'detalle_operario' operario.id %}')" class="btn btn-info">
+                                    <i class="fa fa-eye"></i> Detalle
+                                </a>
+                                <a href="{% url 'editar_operario' operario.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a>
+                            </td>
 						</tr>
 					{% endfor %}                              
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="5">
+                        <td colspan="6">
                             <ul class="pagination pull-right"></ul>
                         </td>
                     </tr>
                     </tfoot>
                 </table>
             </div>
+            <div class="modal inmodal" id="modal-detalle" tabindex="-1" role="dialog" aria-hidden="true"></div>
         </div>
     </div>
 </div>
@@ -67,6 +73,14 @@
         $(document).ready(function() {
             $('.footable').footable();
         });
+        function abrir_modal(url)
+        {
+            $('#modal-detalle').load(url, function()
+            {
+                    $(this).modal('show');
+            });
+            return false;
+        }
     </script>
     
 {% endblock plugins %}

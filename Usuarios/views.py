@@ -159,6 +159,10 @@ class RegistrarOperario(SuccessMessageMixin, CreateView):
 	def dispatch(self, *args, **kwargs):
 		return super().dispatch(*args, **kwargs)
 
+class DetalleOperario(DetailView):
+    model = Operario
+    template_name = 'detalle_operario.html'
+
 class ListarOperarios (ListView):
 	model = Operario
 	template_name = "listar_operarios.html"

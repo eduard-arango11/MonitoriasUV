@@ -15,6 +15,7 @@ urlpatterns = [
     path('operarios/registrar/', RegistrarOperario.as_view(), name='registrar_operario'),
     path('operarios/listar/', ListarOperarios.as_view(), name='listar_operarios'),
     path('operarios/editar/<int:pk>/', EditarOperario.as_view(), name="editar_operario"),
+    path('operarios/detalle/<int:pk>/', DetalleOperario.as_view(), name='detalle_operario'),
 
     path('administradores/registrar/', RegistrarAdministrador.as_view(), name='registrar_administrador'),
     path('administradores/listar/', ListarAdministradores.as_view(), name='listar_administradores'),
