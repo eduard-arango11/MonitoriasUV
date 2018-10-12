@@ -155,6 +155,19 @@ def cancelar_aplicacion(request, id_oferta):
 
     return redirect('listar_ofertas')
 
+def listar_aplicaciones_oferta(request, id_oferta):
+    operario = get_object_or_404(Operario, pk=request.user.id)
+    oferta = get_object_or_404(OfertaMonitoria, pk=id_oferta)
+    aplicaciones = AplicacionOferta.objects.filter(oferta__operario_registra=operario, oferta=oferta)
+
+    return render(request, 'listar_aplicaciones_oferta.html', {
+        'aplicaciones': aplicaciones,
+        'oferta': oferta,
+        'gestion_monitorias': True,
+        'gestion_oferta': True,
+        'listar_ofertas': True,
+    })
+
 def RegistrarD10(request):
     estudiante = get_object_or_404(Estudiante, id=request.user.id)
 

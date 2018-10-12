@@ -5,9 +5,14 @@
     <div class="modal-content animated fadeIn">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <i class="fa fa-pencil-square modal-icon"></i>
+            {% if user.rol == 'Estudiante' %}
+                <i class="fa fa-pencil-square modal-icon"></i>
+            {% else %}
+                <i class="fa fa-user modal-icon"></i>
+            {% endif %}
             <h4 class="modal-title">Detalle de aplicacion</h4>
         </div>
+        {% if user.rol == 'Estudiante' %}
         <div class="modal-body" style="display: flex;">
             <div style="flex-basis: 0;flex-grow: 1;">
                 <h2><strong>Oferta</strong></h2>
@@ -25,13 +30,38 @@
             </div>
             <div style="flex-basis: 0;flex-grow: 1;">
                 <h2><strong>Aplicacion</strong></h2>
-                {% if user.rol == 'Administrador' %}
-                <p> <strong>Estudiante que aplica:</strong> {{ object.estudiante.nombreCompleto }}</p>
-                {% endif %}
-                <p> <strong>Fecha en que aplicó:</strong> {{ object.fecha_modificacion }}</p>
+                <p><strong>Fecha en que aplicó:</strong> {{ object.fecha_modificacion }}</p>
                 <p><strong>Estado de la aplicacion:</strong> {{ object.estado }}</p>
             </div>
         </div>
+        {% else %}
+            <div class="modal-body" style="display: flex;">
+                <div style="flex-basis: 0;flex-grow: 1;">
+                    <h2><strong>Oferta</strong></h2>
+                    <p><strong>Sede:</strong> {{ object.oferta.sede }}</p>
+                    <p> <strong>Tipo de monitoria:</strong> {{ object.oferta.tipo_monitoria }}</p>
+                    <p> <strong>Plazo para aplicar:</strong> {{ object.oferta.plazo_solicitudes}}</p>
+                    <p> <strong>Perfil requerido:</strong> {{ object.oferta.perfil_requerido }}</p>
+                    <p><strong>Criterios de seleccion:</strong> {{ object.oferta.criterios_seleccion }}</p>
+                    <p><strong>Periodo duracion de la monitoria:</strong> {{ object.oferta.periodo_duracion }}</p>
+                    <p><strong>Horario de trabajo:</strong> {{ object.oferta.horario_ejecucion }}</p>
+                    <p><strong>Horas semanales:</strong> {{ object.oferta.horas_semanales }}</p>
+                    <p><strong>Fecha de seleccion:</strong> {{ object.oferta.fecha_seleccion }}</p>
+                    <p><strong>Fecha de adjudicacion de la monitoria:</strong> {{ object.oferta.fecha_adjudicacion }}</p>
+                    <p><strong>Contacto:</strong> {{ object.oferta.operario_registra.nombreCompleto }} <strong>Telefono:</strong> {{ object.oferta.operario_registra.telefono }}</p>
+                </div>
+                <div style="flex-basis: 0;flex-grow: 1;">
+                    <h2><strong>Estudiante</strong></h2>
+                    <p> <strong>Nombre completo: </strong> {{ object.estudiante.nombreCompleto }}</p>
+                    <p> <strong>Email: </strong> {{ object.estudiante.email }}</p>
+                    <p> <strong>Telefono: </strong> {{ object.estudiante.telefono }}</p>
+                    <p> <strong>Programa academico: </strong> {{ object.estudiante.programa_academico.nombre_programa }} ({{ object.estudiante.programa_academico.jornada }})</p>
+                    <p> <strong>Promedio acumulado: </strong> PROMEDIO</p>
+                    <p> <strong>Fecha en que aplicó: </strong> {{ object.fecha_modificacion }}</p>
+                    <p><strong>Estado de la aplicacion: </strong>  {% if object.estado == 'Inactivo' %} <span style="color: red"> {% else %} <span> {% endif %} {{ object.estado }}</span></p>
+                </div>
+            </div>
+        {% endif %}
         <div class="modal-footer">
             <a class="btn btn-primary" data-dismiss="modal">Volver</a>
         </div>

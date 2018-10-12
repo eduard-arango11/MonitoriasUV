@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+
+{% block titulo %}
+	Listar Aplicaciones
+{% endblock %}
+
+{%  block extrahead %}
+    <link href="{% static 'css/plugins/dataTables/datatables.min.css' %}" rel="stylesheet">
+{% endblock extrahead %}
+
+{% block contenido %}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Aplicaciones a la oferta</h5>
+            </div>
+            <div class="ibox-content">
+                <div>
+                    <p> <strong>Perfil requerido:</strong> {{ oferta.perfil_requerido }}</p>
+                    <p> <strong>Tipo de monitoria:</strong> {{ oferta.tipo_monitoria }}</p>
+                    <p> <strong>Criterios de seleccion:</strong> {{ oferta.criterios_seleccion }}</p>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered table-hover dataTables-example" >
+                        <thead>
+                        <tr>
+                            <th>Estudiante</th>
+                            <th>Programa academico</th>
+                            <th>Promedio acumulado</th>
+                            <th>Fecha de aplicacion</th>
+                            <th>Estado de la aplicacion</th>
+                            <th>Opciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for aplicacion in aplicaciones %}
+                            <tr >
+                                <td> {{ aplicacion.estudiante.nombreCompleto }} </td>
+                                <td> {{ aplicacion.estudiante.programa_academico.nombre_programa }} </td>
+                                <td width="100px"></td>
+                                <td width="250px"> {{ aplicacion.fecha_modificacion }} </td>
+                                <td width="150px"> {% if aplicacion.estado == 'Inactivo' %} <span style="color: red"> {% else %} <span> {% endif %} {{ aplicacion.estado }}</span> </td>
+                                <td>
+                                    <a onclick="return abrir_modal('{% url 'detalle_aplicacion' aplicacion.id %}')" class="btn btn-info">
+                                        <i class="fa fa-eye"></i> Detalle
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Estudiante</th>
+                            <th>Programa academico</th>
+                            <th>Promedio acumulado</th>
+                            <th>Fecha de aplicacion</th>
+                            <th>Estado de la aplicacion</th>
+                            <th>Opciones</th>
+                        </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="modal inmodal" id="modal-detalle" tabindex="-1" role="dialog" aria-hidden="true"></div>
+        </div>
+    </div>
+</div>
+
+{% endblock contenido %}
+
+{% block plugins %}
+
+    <script src="{% static 'js/plugins/dataTables/datatables.min.js' %}"></script>
+
+    <!-- FooTable -->
+    <script src="{% static 'js/plugins/footable/footable.all.min.js' %}"></script>
+
+    <!-- Page-Level Scripts -->
+    <script>
+        $(document).ready(function() {
+            $('.footable').footable();
+        });
+        $('.dataTables-example').DataTable({
+            pageLength: 25,
+            responsive: true,
+            dom: '<"html5buttons"B>lTfgitp',
+            order: [],
+            buttons: [
+                { extend: 'copy'},
+                {extend: 'csv'},
+                {extend: 'excel', title: 'ExampleFile'},
+                {extend: 'pdf', title: 'ExampleFile'},
+
+                {extend: 'print',
+                 customize: function (win){
+                        $(win.document.body).addClass('white-bg');
+                        $(win.document.body).css('font-size', '10px');
+
+                        $(win.document.body).find('table')
+                                .addClass('compact')
+                                .css('font-size', 'inherit');
+                }
+                }
+            ]
+
+        });
+        function abrir_modal(url)
+        {
+            $('#modal-detalle').load(url, function()
+            {
+                    $(this).modal('show');
+            });
+            return false;
+        }
+    </script>
+    
+{% endblock plugins %}
