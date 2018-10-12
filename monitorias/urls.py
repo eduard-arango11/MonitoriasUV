@@ -17,11 +17,9 @@ from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth import views
 from Usuarios.forms import IniciarSesionForm
-from OfertaMonitorias.views import DetalleEstudiante
 
 urlpatterns = [
     path('usuarios/', include('Usuarios.urls')),
-    path('usuarios/estudiantes/detalle/<int:pk>/', DetalleEstudiante.as_view(), name="detalle_estudiante"),
     path('facultades/', include('Facultades.urls')),
     path('programas/', include('ProgramasAcademicos.urls')),
     path('dependencias/', include('Dependencias.urls')),

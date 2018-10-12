@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'monitorias.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'monitorias_db_2',
+        'NAME': 'monitorias_db_3',
         'USER': 'eduard',
         'PASSWORD': 'eduard2018',
         'HOST': 'localhost',

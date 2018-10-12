@@ -14,8 +14,4 @@ urlpatterns = [
     path('aplicaciones-oferta/<int:id_oferta>/', listar_aplicaciones_oferta, name='aplicaciones_oferta'),
     path('aplicar-a-oferta/<int:pk>/', AplicarOferta, name="aplicar_oferta"),
     path('cancelar-apliacion/<int:id_oferta>/', cancelar_aplicacion, name="cancelar_aplicacion"),
-
-    path('registrar-d10/', RegistrarD10, name='registrar_d10'),
-    path('listar-solicitudes-d10/', listarSolitudesAprobacionD10.as_view(), name='listar_solicitudes_d10'),
-    path('revisar-solicitud-aprobacion-d10/<int:id_d10>/', revisarSolicitudAprobacionD10, name='revisar_solicitud_aprobacion_d10'),
 ]

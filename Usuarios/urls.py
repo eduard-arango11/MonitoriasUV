@@ -6,6 +6,7 @@ urlpatterns = [
     path('estudiantes/registrar/', RegistrarEstudiante.as_view(), name='registrar_estudiante'),
     path('estudiantes/listar/', ListarEstudiantes.as_view(), name='listar_estudiantes'),
     path('estudiantes/editar/<int:pk>/', EditarEstudiante.as_view(), name="editar_estudiante"),
+    path('estudiantes/detalle/<int:pk>/', DetalleEstudiante.as_view(), name="detalle_estudiante"),
     
     path('directores/registrar/', RegistrarDirector.as_view(), name='registrar_director'),
     path('directores/listar/', ListarDirectores.as_view(), name='listar_directores'),
@@ -21,4 +22,8 @@ urlpatterns = [
     path('administradores/listar/', ListarAdministradores.as_view(), name='listar_administradores'),
     path('administradores/editar/<int:pk>/', EditarAdministrador.as_view(), name="editar_administrador"),
     path('administradores/detalle/<int:pk>/', DetalleAdministrador.as_view(), name='detalle_administrador'),
+
+    path('registrar-d10/', RegistrarD10, name='registrar_d10'),
+    path('listar-solicitudes-d10/', listarSolitudesAprobacionD10.as_view(), name='listar_solicitudes_d10'),
+    path('revisar-solicitud-aprobacion-d10/<int:id_d10>/', revisarSolicitudAprobacionD10, name='revisar_solicitud_aprobacion_d10'),
 ]
