@@ -11,14 +11,14 @@
             <h4 class="modal-title">Detalle de la oferta</h4>
         </div>
         <div class="modal-body" style="display: flex;">
-            <div>
+            <div style="flex-basis: 0;flex-grow: 1;margin-right: 50px;">
                 <p><strong>Sede:</strong> {{ object.sede }}</p>
                 <p> <strong>Tipo de monitoria:</strong> {{ object.tipo_monitoria }}</p>
                 <p> <strong>Plazo para aplicar:</strong> {{ object.plazo_solicitudes}}</p>
                 <p> <strong>Perfil requerido:</strong> {{ object.perfil_requerido }}</p>
                 <p><strong>Criterios de seleccion:</strong> {{ object.criterios_seleccion }}</p>
             </div>
-            <div>
+            <div style="flex-basis: 0;flex-grow: 1;">
                 <p><strong>Periodo duracion de la monitoria:</strong> {{ object.periodo_duracion }}</p>
                 <p><strong>Horario de trabajo:</strong> {{ object.horario_ejecucion }}</p>
                 <p><strong>Horas semanales:</strong> {{ object.horas_semanales }}</p>
