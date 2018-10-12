@@ -139,6 +139,6 @@ AUTH_USER_MODEL = "Usuarios.Usuario"
 
 # LOGIN URLS
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'listar_directores'
+LOGIN_REDIRECT_URL = 'listar_ofertas'
 LOGOUT_URL = 'logout'
-LOGOUT_REDIRECT_URL = 'listar_directores'
+LOGOUT_REDIRECT_URL = 'login'
