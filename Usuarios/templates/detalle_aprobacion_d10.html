@@ -96,12 +96,13 @@
                                         {% bootstrap_field form_datos_aprobacion.estado_aprobacion label_class="control-label col-sm-4" field_class="col-sm-6" %}
                                     </div>
                                 </div>
-                                <div class="col-md-12">
-                                    <button class="btn btn-primary pull-right" type="submit">
-                                        Guardar
-                                    </button>
-                                </div>
                             </div>
+                        </div>
+                        <div style="display: flex;justify-content: space-between;">
+                            <a class="btn btn-primary" href="{% url 'listar_solicitudes_d10' %}">Volver</a>
+                            <button class="btn btn-primary" type="submit">
+                                Guardar
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -130,6 +131,7 @@
                 //stepsOrientation: "vertical"
                 enableAllSteps: true,
                 startIndex: 3,
+                enablePagination: false,
             });
             $( ".datepicker" ).datepicker({
                 changeMonth: true,

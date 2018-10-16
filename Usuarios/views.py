@@ -271,13 +271,16 @@ class EditarAdministrador(SuccessMessageMixin, UpdateView):
 
 def RegistrarD10(request):
     estudiante = get_object_or_404(Estudiante, id=request.user.id)
+    accion = 'Registro'
 
     if request.method == 'POST':
-        if D10.objects.all().filter(estudiante=estudiante):
+        if estudiante.d10:
+            print("D10 Actualizado")
             form_datos_basicos = Formulario_registrar_d10_datos_basicos(request.POST, instance=D10.objects.get(estudiante=estudiante).datos_basicos)
             form_datos_educacion = Formulario_registrar_d10_datos_educacion(request.POST, instance=D10.objects.get(estudiante=estudiante).datos_educacion)
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(request.POST,instance=D10.objects.get(estudiante=estudiante).datos_capacitacion)
         else:
+            print("D10 Registrado")
             form_datos_basicos = Formulario_registrar_d10_datos_basicos(request.POST)
             form_datos_educacion = Formulario_registrar_d10_datos_educacion(request.POST)
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(request.POST)
@@ -286,32 +289,36 @@ def RegistrarD10(request):
         if form_datos_basicos.is_valid() and form_datos_educacion.is_valid() and form_datos_capacitacion.is_valid():
             try:
                 with transaction.atomic():
-                    if D10.objects.all().filter(estudiante=estudiante):
+                    if estudiante.d10:
                         form_datos_educacion.save()
                         form_datos_capacitacion.save()
                         form_datos_basicos.save()
+                        messages.success(request,'Se ha actualizado existosamente su D10')
                     else:
                         obj_datos_basicos = form_datos_basicos.save()
                         obj_datos_educacion = form_datos_educacion.save()
                         obj_datos_capacitacion = form_datos_capacitacion.save()
-                        D10.objects.create(estudiante=estudiante, datos_basicos=obj_datos_basicos,
+                        d10_estudiante = D10.objects.create(datos_basicos=obj_datos_basicos,
                                        datos_educacion=obj_datos_educacion, datos_capacitacion=obj_datos_capacitacion)
+                        estudiante.d10 = d10_estudiante
                         estudiante.estado_d10='Registrado'
                         estudiante.save()
+                        messages.success(request,'Se ha registrado existosamente su D10')
             except IntegrityError:
                 messages.error(request, 'No se pudo guardar el d10')
             return redirect('listar_ofertas')
         else:
             messages.error(request, 'Por favor verificar los campos en rojo del formulario')
     else:
-        if D10.objects.all().filter(estudiante=estudiante):
-            print("else if")
-            d10 = D10.objects.get(estudiante=estudiante)
-            form_datos_basicos = Formulario_registrar_d10_datos_basicos(instance=d10.datos_basicos)
-            form_datos_educacion = Formulario_registrar_d10_datos_educacion(instance=d10.datos_educacion)
-            form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(instance=d10.datos_capacitacion)
+        if estudiante.d10:
+            accion = 'Actualizacion'
+            print("El estudiante tiene D10")
+            form_datos_basicos = Formulario_registrar_d10_datos_basicos(instance=estudiante.d10.datos_basicos)
+            form_datos_educacion = Formulario_registrar_d10_datos_educacion(instance=estudiante.d10.datos_educacion)
+            form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(instance=estudiante.d10.datos_capacitacion)
         else:
-            print("else else")
+            accion = 'Registro'
+            print("El estudiante NO tiene D10")
             form_datos_basicos = Formulario_registrar_d10_datos_basicos()
             form_datos_educacion = Formulario_registrar_d10_datos_educacion()
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion()
@@ -321,6 +328,7 @@ def RegistrarD10(request):
         'form_datos_educacion': form_datos_educacion,
         'form_datos_capacitacion': form_datos_capacitacion,
         'registrar_formato_d10': True,
+        'accion': accion,
     })
 
 

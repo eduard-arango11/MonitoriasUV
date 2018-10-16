@@ -84,13 +84,23 @@
                                         {% bootstrap_field form_datos_capacitacion.fecha_finalizacion_curso label_class="control-label col-sm-4" field_class="col-sm-6" %}
                                     </div>
                                 </div>
+                                {% if accion == 'Registro'%}
                                 <div class="col-md-12">
                                     <button class="btn btn-primary pull-right" type="submit">
-                                        Guardar
+                                        Registrar
                                     </button>
                                 </div>
+                                {% endif %}
                             </div>
                         </div>
+                        {% if accion == 'Actualizacion' %}
+                            <div style="display: flex;justify-content: space-between;">
+                                    <a class="btn btn-primary" href="javascript:history.back()">Volver</a>
+                                    <button class="btn btn-primary" type="submit">
+                                        Guardar
+                                    </button>
+                            </div>
+                        {% endif %}
                     </form>
                 </div>
             </div>
@@ -113,10 +123,19 @@
 
     <script>
         $(document).ready(function(){
+            actulizacion = false;
+            index = 0;
+            paginacion = true;
+            if ("{{ accion }}" == 'Actualizacion'){
+                actulizacion = true;
+                index = 2;
+                paginacion = false;
+            }
             $("#wizard").steps({
                 enableFinishButton: false,
-                //stepsOrientation: "vertical"
-                //enableAllSteps: true,
+                enableAllSteps: actulizacion,
+                startIndex: index,
+                enablePagination: paginacion,
                 labels: {
                     cancel: "Cancelar",
                     finish: "Terminar",
