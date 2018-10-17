@@ -9,6 +9,7 @@
 
 {% block extrahead %}
 <link href="{% static 'css/plugins/datapicker/datepicker3.css' %}" rel="stylesheet">
+<link href="{% static 'css/plugins/chosen/bootstrap-chosen.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block contenido %}
@@ -27,7 +28,24 @@
                                 {% bootstrap_field form.perfil_requerido label_class="control-label col-sm-5" field_class="col-sm-6" %}
                                 {% bootstrap_field form.tipo_monitoria label_class="control-label col-sm-5" field_class="col-sm-6" %}
                                 {% bootstrap_field form.sede label_class="control-label col-sm-5" field_class="col-sm-6" %}
+
                                 {% bootstrap_field form.criterios_seleccion label_class="control-label col-sm-5" field_class="col-sm-6" %}
+
+                                {% comment %}
+                                <div class="form-group">
+                                    <label class="control-label col-sm-5">Criterios de seleccion</label>
+                                    <div class="col-sm-6" name="form.criterios_seleccion">
+                                        <select data-placeholder=" "  class="chosen-select" multiple style="width:350px;" tabindex="4">
+                                            {% for x,y in form.fields.criterios_seleccion.choices %}
+                                                <option value="{{ x }}">{{ y }}</option>
+                                            {% endfor %}
+                                            <!--option value="United States">Entrevista</option>
+                                            <option value="United Kingdom">Promedio acumulado</option>
+                                            <option value="Afghanistan">Disponibilidad de horario</option-->
+                                        </select>
+                                    </div>
+                                </div>
+                                {% endcomment %}
                                 {% bootstrap_field form.periodo_duracion label_class="control-label col-sm-5" field_class="col-sm-6" %}
                                 {% bootstrap_field form.horario_ejecucion label_class="control-label col-sm-5" field_class="col-sm-6" %}
                             </div>
@@ -60,6 +78,8 @@
 {% endblock contenido %}
 
 {% block plugins %}
+    <!-- Chosen -->
+    <script src="{% static 'js/plugins/chosen/chosen.jquery.js' %}"></script>
 
    <!-- Data picker -->
    <script src="{% static 'js/plugins/datapicker/bootstrap-datepicker.js' %}"></script>
@@ -76,6 +96,8 @@
         
             });
         });
+
+        $('.chosen-select').chosen({width: "100%"});
     </script>
     
 {% endblock plugins %}

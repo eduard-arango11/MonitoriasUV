@@ -1,16 +1,20 @@
 from django.db import models
 from Usuarios.models import Estudiante, Operario
 
-
 TIPO_DE_MONITORIAS = (('Docencia','Docencia'),('Investigacion','Investigacion'),('Administrativa','Administrativa'),('Especial','Especial'))
 SEDES = (('Melendez','Melendez'),('San Fernando','San Fernando'))
 ESTADOS = (('Activo','Activo'),('Inactivo','Inactivo'))
+OPCIONES_CRITERIOS = (
+    ('Entrevista','Entrevista'),
+    ('Promedio acumulado','Promedio acumulado'),
+    ('Disponibilidad','Disponibilidad'),
+)
 
 class OfertaMonitoria(models.Model):
     perfil_requerido = models.CharField(max_length=800)
     tipo_monitoria = models.CharField(max_length=20, verbose_name="Tipo de Monitoria", choices=TIPO_DE_MONITORIAS, default='Administrativa')
     sede = models.CharField(max_length=20, verbose_name="Sede", choices=SEDES, default='Melendez')
-    criterios_seleccion = models.CharField(max_length=800)
+    criterios_seleccion = models.CharField(max_length=800,verbose_name="Criterios de seleccion",choices=OPCIONES_CRITERIOS,default='Entrevista')
     periodo_duracion = models.CharField(max_length=200)
     horario_ejecucion = models.CharField(max_length=200)
     horas_semanales = models.PositiveIntegerField(verbose_name="Horas de trabajo semanales")
