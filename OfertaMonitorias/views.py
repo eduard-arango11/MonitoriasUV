@@ -144,6 +144,9 @@ def listar_aplicaciones_oferta(request, id_oferta):
     oferta = get_object_or_404(OfertaMonitoria, pk=id_oferta)
     aplicaciones = AplicacionOferta.objects.filter(oferta__operario_registra=operario, oferta=oferta)
 
+    if oferta.operario_registra.id != operario.id:
+        return render(request, '404.html')
+
     return render(request, 'listar_aplicaciones_oferta.html', {
         'aplicaciones': aplicaciones,
         'oferta': oferta,
