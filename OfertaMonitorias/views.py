@@ -38,6 +38,27 @@ class RegistrarOferta(SuccessMessageMixin, CreateView):
         return super().dispatch(*args, **kwargs)
 
 
+class EditarOferta(SuccessMessageMixin, UpdateView):
+    model = OfertaMonitoria
+    form_class = Formulario_registrar_oferta
+    template_name = "registrar_oferta.html"
+    success_url = reverse_lazy('listar_ofertas')
+    success_message = "La oferta fue modificada exitosamente"
+
+    def get_context_data(self, **kwargs):
+        context = super(EditarOferta, self).get_context_data(**kwargs)
+        context['gestion_monitorias'] = True
+        context['gestion_oferta'] = True
+        context['registrar_oferta'] = True
+        context['creacion'] = False
+        return context
+
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Operario']))
+    @method_decorator(verificar_operario_propietario_de_oferta())
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 class DetalleOferta(DetailView):
     model = OfertaMonitoria
     template_name = 'detalle_oferta.html'
@@ -66,26 +87,6 @@ class ListarOfertas(ListView):
         context['listar_ofertas'] = True
         if self.request.user.rol == 'Estudiante':
             context['aplicaciones_estudiante'] = aplicaciones_estudiante
-        return context
-
-
-class RegistrarAplicacion(SuccessMessageMixin, CreateView):
-    model = AplicacionOferta
-    form_class = Formulario_registrar_aplicacion
-    template_name = "registrar_aplicacion.html"
-    success_url = reverse_lazy('registrar_aplicacion')
-    success_message = "La aplicacion fue registrada exitosamente"
-
-    def form_valid(self, form):
-        self.object = form.save()
-        return super(RegistrarAplicacion, self).form_valid(form)
-
-    def get_context_data(self, **kwargs):
-        context = super(RegistrarAplicacion, self).get_context_data(**kwargs)
-        context['gestion_monitorias'] = True
-        context['gestion_aplicacion'] = True
-        context['registrar_aplicacion'] = True
-        context['creacion'] = True
         return context
 
 class DetalleAplicacion(DetailView):
