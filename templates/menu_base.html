@@ -51,7 +51,10 @@
 
 {% if user.rol == 'Director' %}
     <li {% if listar_solicitudes_d10 %} class="active" {% endif %}>
-        <a href="/usuarios/listar-solicitudes-d10"><i class="fa fa-list"></i> <span class="nav-label">Solicitudes Aprobacion D10</span></a>
+        <a href="/usuarios/listar-solicitudes-d10"><i class="fa fa-file"></i> <span class="nav-label">Solicitudes de aprobacion D10</span></a>
+    </li>
+    <li {% if listar_estudiantes %} class="active" {% endif %}>
+        <a href="/usuarios/estudiantes/listar"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Estudiantes del plan</span></a>
     </li>
 {% endif %}
 
@@ -83,9 +86,6 @@
         </li>
     </ul>
 </li>
-{% endif %}
-
-{% if user.rol != 'Estudiante' %}
 <li {% if gestion_usuarios %} class="active" {% endif %}>
     <a href="#"><i class="fa fa-users"></i> <span class="nav-label">Usuarios</span><span class="fa arrow"></span></a>
     <ul class="nav nav-second-level collapse">
@@ -136,9 +136,6 @@
         </li>
     </ul>
 </li>
-{% endif %}
-
-{% if user.rol == 'Administrador' or user.rol == 'Director' %}
 <li {% if gestion_universidad %} class="active" {% endif %}>
     <a href="#"><i class="fa fa-institution"></i> <span class="nav-label">Universidad</span><span class="fa arrow"></span></a>
     <ul class="nav nav-second-level collapse">
