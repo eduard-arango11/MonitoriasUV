@@ -113,6 +113,10 @@ class ListarAplicaciones(ListView):
         context['listar_aplicaciones'] = True
         return context
 
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Estudiante','Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 def AplicarOferta(request,pk):
     estudiante = get_object_or_404(Estudiante, pk=request.user.id)
