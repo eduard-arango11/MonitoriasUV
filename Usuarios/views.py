@@ -378,10 +378,21 @@ class listarSolitudesAprobacionD10(ListView):
         context['listar_solicitudes_d10'] = True
         return context
 
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Director']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 def revisarSolicitudAprobacionD10(request, id_d10):
     d10 = get_object_or_404(D10, id=id_d10)
     estudiante = d10.estudiante
+
+    if request.user.rol != 'Director':
+        return render(request, '404.html')
+
+    if Director.objects.get(id=request.user.id).programa_academico.id != estudiante.programa_academico.id:
+        return render(request, '404.html')
 
     if request.method == 'POST':
         print("Hola desde POST")
