@@ -310,6 +310,10 @@ class EditarAdministrador(SuccessMessageMixin, UpdateView):
 
 
 def RegistrarD10(request):
+
+    if request.user.rol != 'Estudiante':
+        return render(request, '404.html')
+
     estudiante = get_object_or_404(Estudiante, id=request.user.id)
     accion = 'Registro'
 
