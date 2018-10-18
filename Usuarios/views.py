@@ -163,6 +163,11 @@ class EditarDirector(SuccessMessageMixin, UpdateView):
         context['listar_directores'] = True
         return context
 
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 class RegistrarOperario(SuccessMessageMixin, CreateView):
     model = Operario
@@ -228,6 +233,11 @@ class EditarOperario(SuccessMessageMixin, UpdateView):
         context['listar_operarios'] = True
         return context
 
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 class RegistrarAdministrador(SuccessMessageMixin, CreateView):
     model = Administrador
@@ -292,6 +302,11 @@ class EditarAdministrador(SuccessMessageMixin, UpdateView):
         context['gestion_administradores'] = True
         context['listar_administradores'] = True
         return context
+
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
 def RegistrarD10(request):
