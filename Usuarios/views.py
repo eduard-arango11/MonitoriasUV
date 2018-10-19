@@ -319,7 +319,6 @@ def RegistrarD10(request):
 
     if request.method == 'POST':
         if estudiante.d10:
-            print("D10 Actualizado")
             form_datos_basicos = Formulario_registrar_d10_datos_basicos(request.POST, instance=D10.objects.get(
                 estudiante=estudiante).datos_basicos)
             form_datos_educacion = Formulario_registrar_d10_datos_educacion(request.POST, instance=D10.objects.get(
@@ -328,7 +327,6 @@ def RegistrarD10(request):
                                                                                   instance=D10.objects.get(
                                                                                       estudiante=estudiante).datos_capacitacion)
         else:
-            print("D10 Registrado")
             form_datos_basicos = Formulario_registrar_d10_datos_basicos(request.POST)
             form_datos_educacion = Formulario_registrar_d10_datos_educacion(request.POST)
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(request.POST)
@@ -360,14 +358,12 @@ def RegistrarD10(request):
     else:
         if estudiante.d10:
             accion = 'Actualizacion'
-            print("El estudiante tiene D10")
             form_datos_basicos = Formulario_registrar_d10_datos_basicos(instance=estudiante.d10.datos_basicos)
             form_datos_educacion = Formulario_registrar_d10_datos_educacion(instance=estudiante.d10.datos_educacion)
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(
                 instance=estudiante.d10.datos_capacitacion)
         else:
             accion = 'Registro'
-            print("El estudiante NO tiene D10")
             form_datos_basicos = Formulario_registrar_d10_datos_basicos()
             form_datos_educacion = Formulario_registrar_d10_datos_educacion()
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion()

@@ -29,6 +29,8 @@ class DatosBasicosD10(models.Model):
     perfil_ocupacional = models.CharField(max_length=800,blank=True)
     sistemas_que_maneja = models.CharField(max_length=800,blank=True)
 
+OPCIONES_NIVEL_IDIOMA = (('Muy Bueno','Muy Bueno'),('Bueno','Bueno'),('Regular','Regular'))
+
 class DatosEducacionD10(models.Model):
     titulo_obtenido_bachillerato = models.CharField(max_length=50,verbose_name="Titulo obtenido",blank=True)
     ano_finalizacion_bachillerato = models.CharField(max_length=4,verbose_name="Año de finalizacion bachiller",blank=True)
@@ -39,6 +41,10 @@ class DatosEducacionD10(models.Model):
     ano_finalizacion_otros_estudios = models.CharField(max_length=4,verbose_name="Año de finalizacion",blank=True)
     nombre_establecimiento_otros_estudios = models.CharField(max_length=50,verbose_name="Nombre del establecimiento",blank=True)
     ciudad_establecimiento_otros_estudios = models.CharField(max_length=30,verbose_name="Ciudad",blank=True)
+    idioma_nombre = models.CharField(max_length=30,verbose_name="Idioma",blank=True)
+    idioma_nivel_habla = models.CharField(max_length=20, verbose_name="Habla", choices=OPCIONES_NIVEL_IDIOMA,blank=True)
+    idioma_nivel_escribe = models.CharField(max_length=20, verbose_name="Escribe", choices=OPCIONES_NIVEL_IDIOMA,blank=True)
+    idioma_nivel_lee = models.CharField(max_length=20, verbose_name="Lee", choices=OPCIONES_NIVEL_IDIOMA,blank=True)
 
 class DatosCapacitacionD10(models.Model):
     nombre_establecimiento = models.CharField(max_length=50,verbose_name="Nombre del establecimiento",blank=True)
