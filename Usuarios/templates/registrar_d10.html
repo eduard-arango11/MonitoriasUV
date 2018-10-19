@@ -108,47 +108,74 @@
                                         {% bootstrap_field form_datos_capacitacion.fecha_finalizacion_curso label_class="control-label col-sm-4" field_class="col-sm-6" %}
                                     </div>
                                 </div>
-                                {% if accion == 'Registro'%}
-                                <div class="col-md-12">
-                                    <button class="btn btn-primary pull-right" type="submit">
-                                        Registrar
-                                    </button>
-                                </div>
-                                {% endif %}
                             </div>
 
                             <h1>Experiencia Laboral</h1>
                             <div class="step-content">
                                 <div class="col-md-12">
                                     <div class="col-md-6">
-                                        {% bootstrap_field form_datos_capacitacion.nombre_establecimiento label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_capacitacion.nombre_curso label_class="control-label col-sm-5" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.nombre_empresa label_class="control-label col-sm-5" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.cargo_jefe label_class="control-label col-sm-5" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.funciones_realizadas label_class="control-label col-sm-5" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.logros label_class="control-label col-sm-5" field_class="col-sm-6" %}
                                     </div>
                                     <div class="col-md-6">
-                                        {% bootstrap_field form_datos_capacitacion.duracion_cruso label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_capacitacion.fecha_finalizacion_curso label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.jefe_inmediato label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.cargo_jefe label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.telefono_empresa label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.fecha_inicio label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.fecha_finalizacion label_class="control-label col-sm-4" field_class="col-sm-6" %}
                                     </div>
                                 </div>
-                                {% if accion == 'Registro'%}
-                                <div class="col-md-12">
-                                    <button class="btn btn-primary pull-right" type="submit">
-                                        Registrar
-                                    </button>
-                                </div>
-                                {% endif %}
                             </div>
 
                             <h1>Horario de Disponibilidad</h1>
                             <div class="step-content">
-                                <div class="col-md-12">
-                                    <div class="col-md-6">
-                                        {% bootstrap_field form_datos_capacitacion.nombre_establecimiento label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_capacitacion.nombre_curso label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {% bootstrap_field form_datos_capacitacion.duracion_cruso label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_capacitacion.fecha_finalizacion_curso label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                    </div>
+                                <div class="col-md-10">
+
+                                            <table class="table table-bordered ibox-content">
+                                                <thead>
+                                                <tr><th colspan="7"><div align="center">Horario de Disponibilidad</div></th></tr>
+                                                <tr>
+                                                    <th>Dia</th>
+                                                    <th>De</th>
+                                                    <th>Hasta</th>
+                                                    <th>De</th>
+                                                    <th>Hasta</th>
+                                                    <th>De</th>
+                                                    <th>Hasta</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <tr>
+                                                    <td>Lunes</td>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>2</td>
+                                                    <td>Jacob</td>
+                                                    <td>Thornton</td>
+                                                    <td>@fat</td>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>3</td>
+                                                    <td>Larry</td>
+                                                    <td>the Bird</td>
+                                                    <td>@twitter</td>
+                                                    <td>Mark</td>
+                                                    <td>Otto</td>
+                                                    <td>@mdo</td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
                                 </div>
                                 {% if accion == 'Registro'%}
                                 <div class="col-md-12">

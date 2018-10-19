@@ -99,6 +99,19 @@ class Formulario_registrar_d10_datos_capacitacion(forms.ModelForm):
         }
 
 
+class Formulario_registrar_d10_datos_experiencia_laboral(forms.ModelForm):
+    class Meta:
+        model = DatosExperienciaLaboralD10
+        fields = '__all__'
+
+        widgets = {
+            'fecha_inicio': forms.DateInput(attrs={'class': 'datepicker', 'autocomplete': 'off'}),
+            'fecha_finalizacion': forms.DateInput(attrs={'class': 'datepicker', 'autocomplete': 'off'}),
+            'funciones_realizadas': forms.Textarea(),
+            'logros': forms.Textarea(),
+        }
+
+
 class Formulario_aprobar_d10(forms.ModelForm):
     class Meta:
         model = D10

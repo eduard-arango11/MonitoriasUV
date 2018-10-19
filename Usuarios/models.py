@@ -52,12 +52,25 @@ class DatosCapacitacionD10(models.Model):
     duracion_cruso = models.CharField(max_length=4,verbose_name="Duracion del curso (horas)",blank=True)
     fecha_finalizacion_curso = models.DateField(null=True, blank=True)
 
+class DatosExperienciaLaboralD10(models.Model):
+    nombre_empresa = models.CharField(max_length=100,verbose_name="Nombre del establecimiento",blank=True)
+    cargo = models.CharField(max_length=80,verbose_name="Cargo desempeñado",blank=True)
+    funciones_realizadas = models.CharField(max_length=800,verbose_name="Funciones realizadas",blank=True)
+    logros = models.CharField(max_length=800,verbose_name="Logros",blank=True)
+    jefe_inmediato = models.CharField(max_length=200,verbose_name="Nombre del jefe inmediato",blank=True)
+    cargo_jefe = models.CharField(max_length=80,verbose_name="Cargo del jefe inmediato",blank=True)
+    telefono_empresa = models.CharField(max_length=10,verbose_name="Telefono de la empresa",blank=True)
+    fecha_inicio = models.DateField(null=True, blank=True)
+    fecha_finalizacion = models.DateField(null=True, blank=True)
+
+
 class D10(models.Model):
     estado = models.CharField(max_length=10, verbose_name="Estado", choices=ESTADOS, default='Activo')
     estado_aprobacion = models.CharField(max_length=20, verbose_name="Estado Aprobacion", choices=ESTADOS_APROBACION, default='En Revision')
     datos_basicos = models.OneToOneField(DatosBasicosD10, on_delete=models.CASCADE)
     datos_educacion = models.OneToOneField(DatosEducacionD10, on_delete=models.CASCADE)
     datos_capacitacion = models.OneToOneField(DatosCapacitacionD10, on_delete=models.CASCADE)
+    datos_experiencia_laboral = models.OneToOneField(DatosExperienciaLaboralD10, on_delete=models.CASCADE)
     promedio_acumulado = models.CharField(max_length=5,verbose_name="Promedio Acumulado del Estudiante",blank=True)
     fecha_aprobacion = models.DateField(null=True, blank=True)
 

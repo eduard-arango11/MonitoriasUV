@@ -326,26 +326,33 @@ def RegistrarD10(request):
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(request.POST,
                                                                                   instance=D10.objects.get(
                                                                                       estudiante=estudiante).datos_capacitacion)
+            form_datos_experiencia_laboral = Formulario_registrar_d10_datos_experiencia_laboral(request.POST,
+                                                                                  instance=D10.objects.get(
+                                                                                      estudiante=estudiante).datos_experiencia_laboral)
         else:
             form_datos_basicos = Formulario_registrar_d10_datos_basicos(request.POST)
             form_datos_educacion = Formulario_registrar_d10_datos_educacion(request.POST)
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(request.POST)
+            form_datos_experiencia_laboral = Formulario_registrar_d10_datos_experiencia_laboral(request.POST)
 
-        if form_datos_basicos.is_valid() and form_datos_educacion.is_valid() and form_datos_capacitacion.is_valid():
+        if form_datos_basicos.is_valid() and form_datos_educacion.is_valid() and form_datos_capacitacion.is_valid() and form_datos_experiencia_laboral.is_valid():
             try:
                 with transaction.atomic():
                     if estudiante.d10:
                         form_datos_educacion.save()
                         form_datos_capacitacion.save()
                         form_datos_basicos.save()
+                        form_datos_experiencia_laboral.save()
                         messages.success(request, 'Se ha actualizado existosamente su D10')
                     else:
                         obj_datos_basicos = form_datos_basicos.save()
                         obj_datos_educacion = form_datos_educacion.save()
                         obj_datos_capacitacion = form_datos_capacitacion.save()
+                        obj_datos_experiencia_laboral = form_datos_experiencia_laboral.save()
                         d10_estudiante = D10.objects.create(datos_basicos=obj_datos_basicos,
                                                             datos_educacion=obj_datos_educacion,
-                                                            datos_capacitacion=obj_datos_capacitacion)
+                                                            datos_capacitacion=obj_datos_capacitacion,
+                                                            datos_experiencia_laboral=obj_datos_experiencia_laboral)
                         estudiante.d10 = d10_estudiante
                         estudiante.estado_d10 = 'Registrado'
                         estudiante.save()
@@ -362,16 +369,20 @@ def RegistrarD10(request):
             form_datos_educacion = Formulario_registrar_d10_datos_educacion(instance=estudiante.d10.datos_educacion)
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(
                 instance=estudiante.d10.datos_capacitacion)
+            form_datos_experiencia_laboral = Formulario_registrar_d10_datos_experiencia_laboral(
+                instance=estudiante.d10.datos_experiencia_laboral)
         else:
             accion = 'Registro'
             form_datos_basicos = Formulario_registrar_d10_datos_basicos()
             form_datos_educacion = Formulario_registrar_d10_datos_educacion()
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion()
+            form_datos_experiencia_laboral = Formulario_registrar_d10_datos_experiencia_laboral()
 
     return render(request, 'registrar_d10.html', {
         'form_datos_basicos': form_datos_basicos,
         'form_datos_educacion': form_datos_educacion,
         'form_datos_capacitacion': form_datos_capacitacion,
+        'form_datos_experiencia_laboral': form_datos_experiencia_laboral,
         'registrar_formato_d10': True,
         'accion': accion,
     })
