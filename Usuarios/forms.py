@@ -112,6 +112,19 @@ class Formulario_registrar_d10_datos_experiencia_laboral(forms.ModelForm):
         }
 
 
+class Formulario_registrar_d10_datos_horario_disponible(forms.ModelForm):
+    class Meta:
+        model = DatosHorarioDisponibleD10
+        fields = '__all__'
+
+
+    def __init__(self, *args, **kwargs):
+        super(Formulario_registrar_d10_datos_horario_disponible, self).__init__(*args, **kwargs)
+        for field in self.fields:
+            self.fields[field].widget.attrs['class'] = 'clockpicker'
+            self.fields[field].widget.attrs['placeholder'] = ' '
+
+
 class Formulario_aprobar_d10(forms.ModelForm):
     class Meta:
         model = D10

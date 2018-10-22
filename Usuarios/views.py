@@ -329,13 +329,19 @@ def RegistrarD10(request):
             form_datos_experiencia_laboral = Formulario_registrar_d10_datos_experiencia_laboral(request.POST,
                                                                                   instance=D10.objects.get(
                                                                                       estudiante=estudiante).datos_experiencia_laboral)
+
+            form_datos_horario_disponible = Formulario_registrar_d10_datos_horario_disponible(request.POST,
+                                                                                                instance=D10.objects.get(
+                                                                                                    estudiante=estudiante).datos_horario_disponible)
+
         else:
             form_datos_basicos = Formulario_registrar_d10_datos_basicos(request.POST)
             form_datos_educacion = Formulario_registrar_d10_datos_educacion(request.POST)
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(request.POST)
             form_datos_experiencia_laboral = Formulario_registrar_d10_datos_experiencia_laboral(request.POST)
+            form_datos_horario_disponible = Formulario_registrar_d10_datos_horario_disponible(request.POST)
 
-        if form_datos_basicos.is_valid() and form_datos_educacion.is_valid() and form_datos_capacitacion.is_valid() and form_datos_experiencia_laboral.is_valid():
+        if form_datos_basicos.is_valid() and form_datos_educacion.is_valid() and form_datos_capacitacion.is_valid() and form_datos_experiencia_laboral.is_valid() and form_datos_horario_disponible.is_valid():
             try:
                 with transaction.atomic():
                     if estudiante.d10:
@@ -343,23 +349,28 @@ def RegistrarD10(request):
                         form_datos_capacitacion.save()
                         form_datos_basicos.save()
                         form_datos_experiencia_laboral.save()
+                        form_datos_horario_disponible.save()
                         messages.success(request, 'Se ha actualizado existosamente su D10')
                     else:
                         obj_datos_basicos = form_datos_basicos.save()
                         obj_datos_educacion = form_datos_educacion.save()
                         obj_datos_capacitacion = form_datos_capacitacion.save()
                         obj_datos_experiencia_laboral = form_datos_experiencia_laboral.save()
+                        obj_datos_horario_disponible = form_datos_horario_disponible.save()
                         d10_estudiante = D10.objects.create(datos_basicos=obj_datos_basicos,
                                                             datos_educacion=obj_datos_educacion,
                                                             datos_capacitacion=obj_datos_capacitacion,
-                                                            datos_experiencia_laboral=obj_datos_experiencia_laboral)
+                                                            datos_experiencia_laboral=obj_datos_experiencia_laboral,
+                                                            datos_horario_disponible=obj_datos_horario_disponible)
                         estudiante.d10 = d10_estudiante
                         estudiante.estado_d10 = 'Registrado'
                         estudiante.save()
                         messages.success(request, 'Se ha registrado existosamente su D10')
+
+                return redirect('listar_ofertas')
             except IntegrityError:
                 messages.error(request, 'No se pudo guardar el d10')
-            return redirect('listar_ofertas')
+            #return redirect('listar_ofertas')
         else:
             messages.error(request, 'Por favor verificar los campos en rojo del formulario')
     else:
@@ -371,18 +382,22 @@ def RegistrarD10(request):
                 instance=estudiante.d10.datos_capacitacion)
             form_datos_experiencia_laboral = Formulario_registrar_d10_datos_experiencia_laboral(
                 instance=estudiante.d10.datos_experiencia_laboral)
+            form_datos_horario_disponible = Formulario_registrar_d10_datos_horario_disponible(
+                instance=estudiante.d10.datos_horario_disponible)
         else:
             accion = 'Registro'
             form_datos_basicos = Formulario_registrar_d10_datos_basicos()
             form_datos_educacion = Formulario_registrar_d10_datos_educacion()
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion()
             form_datos_experiencia_laboral = Formulario_registrar_d10_datos_experiencia_laboral()
+            form_datos_horario_disponible = Formulario_registrar_d10_datos_horario_disponible()
 
     return render(request, 'registrar_d10.html', {
         'form_datos_basicos': form_datos_basicos,
         'form_datos_educacion': form_datos_educacion,
         'form_datos_capacitacion': form_datos_capacitacion,
         'form_datos_experiencia_laboral': form_datos_experiencia_laboral,
+        'form_datos_horario_disponible': form_datos_horario_disponible,
         'registrar_formato_d10': True,
         'accion': accion,
     })
@@ -426,9 +441,11 @@ def revisarSolicitudAprobacionD10(request, id_d10):
         form_datos_educacion = Formulario_registrar_d10_datos_educacion(request.POST, instance=d10.datos_educacion)
         form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(request.POST,
                                                                               instance=d10.datos_capacitacion)
+        form_datos_experiencia_laboral = Formulario_registrar_d10_datos_experiencia_laboral(request.POST, instance=d10.datos_experiencia_laboral)
+        form_datos_horario_disponible = Formulario_registrar_d10_datos_horario_disponible(request.POST, instance=d10.datos_horario_disponible)
         form_datos_aprobacion = Formulario_aprobar_d10(request.POST)
 
-        if form_datos_basicos.is_valid() and form_datos_educacion.is_valid() and form_datos_capacitacion.is_valid() and form_datos_aprobacion.is_valid():
+        if form_datos_basicos.is_valid() and form_datos_educacion.is_valid() and form_datos_capacitacion.is_valid() and form_datos_aprobacion.is_valid() and form_datos_experiencia_laboral.is_valid() and form_datos_horario_disponible.is_valid():
             d10.promedio_acumulado = form_datos_aprobacion.instance.promedio_acumulado
             d10.fecha_aprobacion = date.today()
             d10.estado_aprobacion = form_datos_aprobacion.instance.estado_aprobacion
@@ -442,12 +459,16 @@ def revisarSolicitudAprobacionD10(request, id_d10):
         form_datos_basicos = Formulario_registrar_d10_datos_basicos(instance=d10.datos_basicos)
         form_datos_educacion = Formulario_registrar_d10_datos_educacion(instance=d10.datos_educacion)
         form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(instance=d10.datos_capacitacion)
+        form_datos_experiencia_laboral = Formulario_registrar_d10_datos_experiencia_laboral(instance=d10.datos_experiencia_laboral)
+        form_datos_horario_disponible = Formulario_registrar_d10_datos_horario_disponible(instance=d10.datos_horario_disponible)
         form_datos_aprobacion = Formulario_aprobar_d10(instance=d10)
 
     return render(request, 'detalle_aprobacion_d10.html', {
         'form_datos_basicos': form_datos_basicos,
         'form_datos_educacion': form_datos_educacion,
         'form_datos_capacitacion': form_datos_capacitacion,
+        'form_datos_experiencia_laboral': form_datos_experiencia_laboral,
+        'form_datos_horario_disponible': form_datos_horario_disponible,
         'form_datos_aprobacion': form_datos_aprobacion,
         'd10': d10,
         'listar_solicitudes_d10': True,

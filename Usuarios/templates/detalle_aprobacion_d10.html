@@ -13,6 +13,21 @@
 <link href="{% static 'css/plugins/iCheck/custom.css' %}" rel="stylesheet">
 {% endblock %}
 
+{% block extrastyle %}
+    <style>
+        .wizard > .steps > ul > li
+        {
+            width: 16.666%;
+        }
+
+        td .form-group{
+            margin-bottom: 0px !important;
+        }
+
+
+    </style>
+{% endblock %}
+
 {% block contenido %}
 <div>
         <div class="col-lg-12">
@@ -86,6 +101,117 @@
                                 </div>
                             </div>
 
+                            <h1>Experiencia Laboral</h1>
+                            <div class="step-content">
+                                <div class="col-md-12">
+                                    <div class="col-md-6">
+                                        {% bootstrap_field form_datos_experiencia_laboral.nombre_empresa label_class="control-label col-sm-5" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.cargo_jefe label_class="control-label col-sm-5" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.funciones_realizadas label_class="control-label col-sm-5" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.logros label_class="control-label col-sm-5" field_class="col-sm-6" %}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {% bootstrap_field form_datos_experiencia_laboral.jefe_inmediato label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.cargo_jefe label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.telefono_empresa label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.fecha_inicio label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                        {% bootstrap_field form_datos_experiencia_laboral.fecha_finalizacion label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h1>Horario de Disponibilidad</h1>
+                            <div class="step-content">
+                                <div class="col-md-10">
+                                    <table class="table table-bordered ibox-content">
+                                        <thead>
+                                        <tr><th colspan="7"><div align="center">Horario de Disponibilidad</div></th></tr>
+                                        <tr>
+                                            <th>Dia</th>
+                                            <th>De</th>
+                                            <th>Hasta</th>
+                                            <th>De</th>
+                                            <th>Hasta</th>
+                                            <th>De</th>
+                                            <th>Hasta</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>Lunes</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.lunes_inicio_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.lunes_fin_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.lunes_inicio_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.lunes_fin_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.lunes_inicio_3 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.lunes_fin_3 field_class="col-sm-12" layout='inline' %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Martes</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.martes_inicio_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.martes_fin_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.martes_inicio_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.martes_fin_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.martes_inicio_3 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.martes_fin_3 field_class="col-sm-12" layout='inline' %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Miercoles</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.miercoles_inicio_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.miercoles_fin_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.miercoles_inicio_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.miercoles_fin_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.miercoles_inicio_3 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.miercoles_fin_3 field_class="col-sm-12" layout='inline' %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Jueves</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.jueves_inicio_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.jueves_fin_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.jueves_inicio_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.jueves_fin_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.jueves_inicio_3 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.jueves_fin_3 field_class="col-sm-12" layout='inline' %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Viernes</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.viernes_inicio_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.viernes_fin_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.viernes_inicio_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.viernes_fin_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.viernes_inicio_3 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.viernes_fin_3 field_class="col-sm-12" layout='inline' %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Sabado</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.sabado_inicio_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.sabado_fin_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.sabado_inicio_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.sabado_fin_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.sabado_inicio_3 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.sabado_fin_3 field_class="col-sm-12" layout='inline' %}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Domingo</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.domingo_inicio_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.domingo_fin_1 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.domingo_inicio_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.domingo_fin_2 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.domingo_inicio_3 field_class="col-sm-12" layout='inline' %}</td>
+                                            <td>{% bootstrap_field form_datos_horario_disponible.domingo_fin_3 field_class="col-sm-12" layout='inline' %}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                {% if accion == 'Registro'%}
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary pull-right" type="submit">
+                                        Registrar
+                                    </button>
+                                </div>
+                                {% endif %}
+                            </div>
+
                             <h1>Aprobacion Director</h1>
                             <div class="step-content">
                                 <div class="col-md-12">
@@ -130,7 +256,7 @@
                 enableFinishButton: false,
                 //stepsOrientation: "vertical"
                 enableAllSteps: true,
-                startIndex: 3,
+                startIndex: 5,
                 enablePagination: false,
             });
             $( ".datepicker" ).datepicker({
@@ -142,6 +268,12 @@
                 // You can put more options here.
 
             });
+            $('.clockpicker').clockpicker({
+                autoclose: true,
+                twelvehour: true
+            });
+
+            $('form').attr('autocomplete','off');
        });
     </script>
 

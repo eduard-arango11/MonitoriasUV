@@ -21,7 +21,6 @@
                 </div>
                 <div class="ibox-content">
                     <form method="post" class="form-horizontal"> {% csrf_token %}
-                        
                         <div class="row">
                             <div class="col-md-6">
                                 {% bootstrap_field form.nombres label_class="control-label col-sm-5" field_class="col-sm-6" %}
@@ -79,7 +78,7 @@
             autoclose: true,
             format: "dd/mm/yyyy",
             // You can put more options here.
-        
+
             });
         });
     </script>
