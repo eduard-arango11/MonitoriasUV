@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'Dependencias',
     'UnidadesAcademicas',
     'OfertaMonitorias',
+    'Reportes',
 ]
 
 MIDDLEWARE = [

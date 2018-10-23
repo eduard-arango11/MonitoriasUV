@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+
+{% block titulo %}
+		Reporte de Estudiantes
+{% endblock titulo %}
+
+
+{% block extrahead %}
+    <link href="{% static 'css/plugins/c3/c3.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block contenido %}
+    <div class="wrapper wrapper-content animated fadeInRight">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Reporte de estudiantes registrados por programa academico</h5>
+            </div>
+            <div class="ibox-content">
+                <div>
+                    <canvas id="barChart" height="140"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--div class="wrapper wrapper-content animated fadeInRight">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Pie </h5>
+
+                </div>
+                <div class="ibox-content">
+                    <div>
+                        <div id="stocked"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div-->
+
+    <script>
+        var etiquetas = [];
+    </script>
+
+    {% for i in label %}
+    <script>
+        etiquetas.push("{{i}}");
+    </script>
+    {% endfor %}
+
+{% endblock contenido %}
+
+
+{% block plugins %}
+
+    <!-- ChartJS-->
+    <script src="{% static 'js/plugins/chartJs/Chart.min.js' %}"></script>
+
+    {% comment %}
+    <!-- d3 and c3 charts -->
+    <script src="{% static 'js/plugins/d3/d3.min.js' %}"></script>
+    <script src="{% static 'js/plugins/c3/c3.min.js' %}"></script>
+    {% endcomment %}
+
+    <script>
+
+        {% comment %}
+        $(document).ready(function () {
+            console.log( "{{hombres}}" );
+            c3.generate({
+                bindto: '#stocked',
+                data:{
+                    columns: [
+                        ['data1', 30,200,100,400,150,250],
+                        ['data2', 50,20,10,40,15,25]
+                    ],
+                    colors:{
+                        data1: '#1ab394',
+                        data2: '#BABABA'
+                    },
+                    type: 'bar',
+                    groups: [
+                        ['data1', 'data2']
+                    ]
+                },
+                axis: {
+                    x:{
+                        type: 'category',
+                        categories: etiquetas
+                    }
+                }
+            });
+
+        });
+        {% endcomment %}
+
+        $(function () {
+            {% comment %}
+            var barData = {
+                labels: etiquetas,
+                datasets: [
+                    {
+                        label: "Hombres",
+                        backgroundColor: 'rgba(26,179,148,0.5)',
+                        borderColor: "rgba(26,179,148,0.7)",
+                        pointBackgroundColor: "rgba(26,179,148,1)",
+                        pointBorderColor: "#fff",
+                        data: {{hombres}}
+                    },{
+                        label: "Mujeres",
+                        backgroundColor: 'rgba(220, 220, 220, 0.5)',
+                        pointBorderColor: "#fff",
+                        data: {{mujeres}}
+                    }
+                ]
+            };
+
+            var lineOptions = {
+                responsive: true
+            };
+
+            var ctx = document.getElementById("lineChart").getContext("2d");
+            new Chart(ctx, {type: 'line', data: barData, options:lineOptions});
+            {% endcomment %}
+
+
+            var barData = {
+                labels: etiquetas,
+                datasets: [
+                    {
+                        label: "Hombres",
+                        backgroundColor: 'rgba(220, 220, 220, 0.5)',
+                        pointBorderColor: "#fff",
+                        stack: 'Stack 0',
+                        data: {{ hombres }}
+                    },
+                    {
+                        label: "Mujeres",
+                        backgroundColor: 'rgba(26,179,148,0.5)',
+                        borderColor: "rgba(26,179,148,0.7)",
+                        pointBackgroundColor: "rgba(26,179,148,1)",
+                        pointBorderColor: "#fff",
+                        stack: 'Stack 0',
+                        data: {{ mujeres }}
+                    }
+                ]
+            };
+
+            var barOptions = {
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
+                }
+            };
+
+
+            var ctx2 = document.getElementById("barChart").getContext("2d");
+            new Chart(ctx2, {
+                type: 'bar',
+                data: barData,
+                options:barOptions});
+
+
+        });
+
+    </script>
+
+{% endblock plugins %}
