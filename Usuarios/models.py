@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from ProgramasAcademicos.models import *
+from Dependencias.models import Dependencia
 from datetime import date
 
 TIPOS_DE_IDENTIFICACION = (('CC','Cedula de Ciudadania'),('TI','Tarjeta de Identidad'),('CE','Cedula Extranjera'))
@@ -160,7 +161,7 @@ class Director(Usuario):
 
 class Operario(Usuario):
     cargo = models.CharField(max_length=100, verbose_name="Cargo")
-    dependencia = models.CharField(max_length=100, verbose_name="Dependencia")
+    dependencia = models.ForeignKey(Dependencia, on_delete=models.CASCADE)
 
 class Administrador(Usuario):
     pass
