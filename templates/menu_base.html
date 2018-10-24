@@ -200,6 +200,17 @@
 
 {% if user.rol == 'Administrador' or user.rol == 'Director' %}
 <li {% if reportes %} class="active" {% endif %}>
-    <a href="/reportes/estudiantes-registrados"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reportes</span></a>
+    <a href="#"><i class="fa fa-bar-chart-o"></i> <span class="nav-label">Reportes</span><span class="fa arrow"></span></a>
+    <ul class="nav nav-second-level collapse">
+        <li {% if reporte_estudiantes_registrados %} class="active" {% endif %}>
+            <a href="/reportes/estudiantes-registrados">Estudiantes Registrados</a>
+        </li>
+        <li {% if reporte_monitorias_ofertadas %} class="active" {% endif %}>
+            <a href="/reportes/ofertas-registradas">Monitorias Ofertadas</a>
+        </li>
+        <li>
+            <a href="graph_rickshaw.html">Aplicaciones a Monitorias</a>
+        </li>
+    </ul>
 </li>
 {% endif %}

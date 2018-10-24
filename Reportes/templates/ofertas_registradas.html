@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% load static %}
+
+
+{% block titulo %}
+		Reporte de Ofertas
+{% endblock titulo %}
+
+
+{% block extrahead %}
+    <link href="{% static 'css/plugins/c3/c3.min.css' %}" rel="stylesheet">
+{% endblock %}
+
+
+{% block contenido %}
+    <div class="wrapper wrapper-content animated fadeInRight col-lg-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>Reporte de ofertas por tipo de monitoria</h5>
+            </div>
+            <div class="ibox-content">
+                <div>
+                    <canvas id="chart" height="140"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock contenido %}
+
+
+{% block plugins %}
+
+    <!-- ChartJS-->
+    <script src="{% static 'js/plugins/chartJs/Chart.min.js' %}"></script>
+
+    <script>
+        $(function () {
+
+            var config = {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: {{ ofertas }},
+                        backgroundColor: [
+                            'rgba(26,179,148,0.8)',
+                            'rgba(220, 178, 26, 1)',
+                            'rgba(220, 26, 26, 0.8)',
+                            'rgba(26,150,220,0.5)',
+                        ]
+                    }],
+                    labels: {{ etiquetas|safe }}
+                },
+                options: {
+                    responsive: true,
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Ofertas vs Tipos de Monitorias'
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
+                }
+            };
+
+            var ctx = document.getElementById("chart").getContext("2d");
+            new Chart(ctx, config);
+
+        });
+
+    </script>
+
+{% endblock plugins %}
