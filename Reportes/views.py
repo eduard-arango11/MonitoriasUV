@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from Usuarios.models import *
 from ProgramasAcademicos.models import ProgramaAcademico
 from OfertaMonitorias.models import OfertaMonitoria
+from Dependencias.models import Dependencia
 
 class EstudiantesRegistrados(TemplateView):
     template_name = 'estudiantes_registrados.html'
@@ -36,6 +37,8 @@ class OfertasRegistradas(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(OfertasRegistradas, self).get_context_data(**kwargs)
+
+        ############### REPORTE DE TIPOS DE MONITORIAS ###################
         tipos_de_monitoria = ['Administrativa','Docencia','Investigacion','Especial']
         ofertas = []
         etiquetas = []
@@ -45,6 +48,27 @@ class OfertasRegistradas(TemplateView):
             ofertas.append(cantidad_de_monitorias_de_este_tipo)
         context['etiquetas'] = etiquetas
         context['ofertas'] = ofertas
+
+        ############### REPORTE DE MONITORIAS POR DEPENDENCIAS ###################
+        dependencias = Dependencia.objects.all()
+        ofertas_monitoria = OfertaMonitoria.objects.all()
+        etiquetas_dependencias = []
+        administrativa = []
+        docencia = []
+        investigacion = []
+        especial = []
+        for dependencia in dependencias:
+            etiquetas_dependencias.append(dependencia.nombre)
+            administrativa.append(OfertaMonitoria.objects.filter(operario_registra__dependencia=dependencia, estado='Activo',tipo_monitoria='Administrativa').count())
+            docencia.append(OfertaMonitoria.objects.filter(operario_registra__dependencia=dependencia, estado='Activo',tipo_monitoria='Docencia').count())
+            investigacion.append(OfertaMonitoria.objects.filter(operario_registra__dependencia=dependencia, estado='Activo',tipo_monitoria='Investigacion').count())
+            especial.append(OfertaMonitoria.objects.filter(operario_registra__dependencia=dependencia, estado='Activo',tipo_monitoria='Especial').count())
+
+        context['etiquetas_dependencias'] = etiquetas_dependencias
+        context['administrativa'] = administrativa
+        context['docencia'] = docencia
+        context['investigacion'] = investigacion
+        context['especial'] = especial
         context['reportes'] = True
         context['reporte_monitorias_ofertadas'] = True
         return context

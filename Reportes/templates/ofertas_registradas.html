@@ -14,14 +14,17 @@
 
 
 {% block contenido %}
-    <div class="wrapper wrapper-content animated fadeInRight col-lg-6">
+    <div class="wrapper wrapper-content animated fadeInRight">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
-                <h5>Reporte de ofertas por tipo de monitoria</h5>
+                <h5>Ofertas por tipo de monitoria</h5>
             </div>
-            <div class="ibox-content">
-                <div>
+            <div class="ibox-content" style="display: flex;justify-content: space-between">
+                <div class="col-lg-6">
                     <canvas id="chart" height="140"></canvas>
+                </div>
+                <div class="col-lg-6">
+                    <canvas id="chart2" height="200"></canvas>
                 </div>
             </div>
         </div>
@@ -59,7 +62,7 @@
                     },
                     title: {
                         display: true,
-                        text: 'Ofertas vs Tipos de Monitorias'
+                        text: 'Cantidad de Ofertas por Tipo de Monitoria'
                     },
                     animation: {
                         animateScale: true,
@@ -70,6 +73,67 @@
 
             var ctx = document.getElementById("chart").getContext("2d");
             new Chart(ctx, config);
+
+            var config2 = {
+                type: 'bar',
+                data: {
+                    datasets: [
+                        {
+                            label: "Administrativa",
+                            backgroundColor: 'rgba(26,179,148,0.8)',
+                            pointBorderColor: "#fff",
+                            stack: 'Stack 0',
+                            data: {{ administrativa }}
+                        },
+                        {
+                            label: "Docencia",
+                            backgroundColor: 'rgba(220, 178, 26, 1)',
+                            pointBackgroundColor: "rgba(26,179,148,1)",
+                            pointBorderColor: "#fff",
+                            stack: 'Stack 0',
+                            data: {{ docencia }}
+                        },
+                        {
+                            label: "Investigacion",
+                            backgroundColor: 'rgba(220, 26, 26, 0.8)',
+                            pointBackgroundColor: "rgba(26,179,148,1)",
+                            pointBorderColor: "#fff",
+                            stack: 'Stack 0',
+                            data: {{ investigacion }}
+                        },
+                        {
+                            label: "Especial",
+                            backgroundColor: 'rgba(26,150,220,0.5)',
+                            pointBackgroundColor: "rgba(26,179,148,1)",
+                            pointBorderColor: "#fff",
+                            stack: 'Stack 0',
+                            data: {{ especial }}
+                        }
+                    ],
+                    labels: {{ etiquetas_dependencias|safe }}
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        xAxes: [{
+                            stacked: true,
+                        }],
+                        yAxes: [{
+                            stacked: true
+                        }]
+                    },
+                    legend: {
+                        position: 'top',
+                    },
+                    title: {
+                        display: true,
+                        text: 'Ofertas de monitoria por dependencias'
+                    },
+                }
+            };
+
+            var ctx2 = document.getElementById("chart2").getContext("2d");
+            new Chart(ctx2, config2);
 
         });
 
