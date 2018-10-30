@@ -26,7 +26,10 @@
                                 <div class="panel-body">
                                     <div class="col-sm-4">
                                         <div class="text-center">
+                                            {% comment %}
                                             <img alt="image" class="img-circle m-t-xs img-responsive" src="{% static 'img/a2.jpg' %}">
+                                            {% endcomment %}
+                                            <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ object.d10.datos_basicos.foto.url }}">
                                             <div class="m-t-xs font-bold">{{ object.programa_academico }} {% if object.estado_d10 == 'Registrado' %} (Semestre: {{ object.d10.datos_basicos.semestre }}) {% endif %} </div>
                                         </div>
                                     </div>

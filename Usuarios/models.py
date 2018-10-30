@@ -29,6 +29,7 @@ class DatosBasicosD10(models.Model):
     telefono_acudiente = models.CharField(max_length=10,verbose_name="Telefono de persona que le de informacion",blank=True)
     perfil_ocupacional = models.CharField(max_length=800,blank=True)
     sistemas_que_maneja = models.CharField(max_length=800,blank=True)
+    foto = models.ImageField(upload_to='fotos/')
 
 OPCIONES_NIVEL_IDIOMA = (('Muy Bueno','Muy Bueno'),('Bueno','Bueno'),('Regular','Regular'))
 

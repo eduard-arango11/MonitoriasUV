@@ -319,7 +319,7 @@ def RegistrarD10(request):
 
     if request.method == 'POST':
         if estudiante.d10:
-            form_datos_basicos = Formulario_registrar_d10_datos_basicos(request.POST, instance=D10.objects.get(
+            form_datos_basicos = Formulario_registrar_d10_datos_basicos(request.POST, request.FILES, instance=D10.objects.get(
                 estudiante=estudiante).datos_basicos)
             form_datos_educacion = Formulario_registrar_d10_datos_educacion(request.POST, instance=D10.objects.get(
                 estudiante=estudiante).datos_educacion)
@@ -335,7 +335,7 @@ def RegistrarD10(request):
                                                                                                     estudiante=estudiante).datos_horario_disponible)
 
         else:
-            form_datos_basicos = Formulario_registrar_d10_datos_basicos(request.POST)
+            form_datos_basicos = Formulario_registrar_d10_datos_basicos(request.POST, request.FILES)
             form_datos_educacion = Formulario_registrar_d10_datos_educacion(request.POST)
             form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(request.POST)
             form_datos_experiencia_laboral = Formulario_registrar_d10_datos_experiencia_laboral(request.POST)

@@ -44,12 +44,14 @@
                     <p>
                         This example show how to use Steps with jQuery Validation plugin.
                     </p>
-                    <form method="post" class="form-horizontal"> {% csrf_token %}
+                    <form method="post" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
                         <div id="wizard">
                             <h1>Datos Basicos</h1>
                             <div class="step-content">
                                 <div class="col-md-12">
                                     <div class="col-md-6">
+                                        <img alt="image" class="img-circle m-t-xs img-responsive" style="margin-left: 280px;" src="{{ form_datos_basicos.instance.foto.url }}">
+                                        {% bootstrap_field form_datos_basicos.foto label_class="control-label col-sm-5" field_class="col-sm-6" %}
                                         {% bootstrap_field form_datos_basicos.semestre label_class="control-label col-sm-5" field_class="col-sm-6" %}
                                         {% bootstrap_field form_datos_basicos.estado_civil label_class="control-label col-sm-5" field_class="col-sm-6" %}
                                         {% bootstrap_field form_datos_basicos.numero_de_personas_a_cargo label_class="control-label col-sm-5" field_class="col-sm-6" %}

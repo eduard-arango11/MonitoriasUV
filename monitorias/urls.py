@@ -17,6 +17,8 @@ from django.contrib import admin
 from django.urls import include, path
 from django.contrib.auth import views
 from Usuarios.forms import IniciarSesionForm
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('usuarios/', include('Usuarios.urls')),
@@ -30,3 +32,5 @@ urlpatterns = [
     path('login/', views.login, {'template_name': 'login.html', 'authentication_form': IniciarSesionForm}, name='login'),
     path('logout/', views.logout, name='logout'),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
