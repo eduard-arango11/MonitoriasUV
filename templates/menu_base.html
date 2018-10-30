@@ -3,19 +3,16 @@
 
 
 <li class="nav-header">
-    <div class="dropdown profile-element"> <span>
-        <img alt="image" class="img-circle" src="{% static 'img/profile_small.jpg' %}" />
-         </span>
-        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-        <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{ user.nombres }} {{ user.primer_apellido }} </strong>
-         </span> <span class="text-muted text-xs block">({{ user.rol }}) <b class="caret"></b></span> </span> </a>
-        <ul class="dropdown-menu animated fadeInRight m-t-xs">
-            <li><a href="profile.html">Profile</a></li>
-            <li><a href="contacts.html">Contacts</a></li>
-            <li><a href="mailbox.html">Mailbox</a></li>
-            <li class="divider"></li>
-            <li><a href="login.html">Logout</a></li>
-        </ul>
+    <div class="dropdown profile-element">
+        <div style="width: 50px;">
+            {%  if user.estudiante.estado_d10 == 'Registrado' %}
+                <img alt="image" class="img-circle" style="width: 100%;" src="{{ user.estudiante.d10.datos_basicos.foto.url }}" />
+            {% else %}
+                <img alt="image" class="img-circle" style="width: 100%;" src="/media/fotos/usuario.jpg" />
+            {% endif %}
+        </div>
+        <span class="clear" style="color: #DFE4ED;"> <span class="block m-t-xs"> <strong class="font-bold">{{ user.nombres }} {{ user.primer_apellido }} </strong>
+         </span> <span class="text-muted text-xs block">({{ user.rol }})</span> </span>
     </div>
     <div class="logo-element">
         IN+
