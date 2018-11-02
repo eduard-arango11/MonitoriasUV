@@ -4,11 +4,11 @@ from .models import *
 class Formulario_registrar_oferta(forms.ModelForm):
     class Meta:
         model = OfertaMonitoria
-        fields = ['perfil_requerido', 'tipo_monitoria', 'sede', 'criterios_seleccion','periodo_duracion','horario_ejecucion','horas_semanales','plazo_solicitudes','fecha_seleccion','fecha_adjudicacion','estado']
+        fields = ['descripcion_oferta','perfil_requerido', 'tipo_monitoria', 'sede', 'criterios_seleccion','periodo_duracion','horario_ejecucion','horas_semanales','plazo_solicitudes','fecha_seleccion','fecha_adjudicacion','estado']
         widgets = {
-            'perfil_requerido' : forms.Textarea(),
+            'descripcion_oferta': forms.Textarea(attrs={'rows':3, 'cols':15}),
+            'perfil_requerido' : forms.Textarea(attrs={'rows':4, 'cols':15}),
             'plazo_solicitudes': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
             'fecha_seleccion': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
             'fecha_adjudicacion': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
-            # 'criterios_seleccion': forms.DateInput(attrs={'class': 'chosen-select', 'multiple data-placeholder':'holaa'}),
         }

@@ -14,12 +14,13 @@
         </div>
         {% if user.rol == 'Estudiante' %}
         <div class="modal-body" style="display: flex;">
-            <div style="flex-basis: 0;flex-grow: 1;">
+            <div style="flex-basis: 0;flex-grow: 1;margin-right: 50px;">
                 <h2><strong>Oferta</strong></h2>
                 <p><strong>Sede:</strong> {{ object.oferta.sede }}</p>
                 <p> <strong>Tipo de monitoria:</strong> {{ object.oferta.tipo_monitoria }}</p>
+                <p align="justify"> <strong>Descripcion de la oferta:</strong> {{ object.oferta.descripcion_oferta }}</p>
                 <p> <strong>Plazo para aplicar:</strong> {{ object.oferta.plazo_solicitudes}}</p>
-                <p> <strong>Perfil requerido:</strong> {{ object.oferta.perfil_requerido }}</p>
+                <p align="justify"> <strong>Perfil requerido:</strong> {{ object.oferta.perfil_requerido }}</p>
                 <p><strong>Criterios de seleccion:</strong> {{ object.oferta.criterios_seleccion }}</p>
                 <p><strong>Periodo duracion de la monitoria:</strong> {{ object.oferta.periodo_duracion }}</p>
                 <p><strong>Horario de trabajo:</strong> {{ object.oferta.horario_ejecucion }}</p>
@@ -40,8 +41,9 @@
                     <h2><strong>Oferta</strong></h2>
                     <p><strong>Sede:</strong> {{ object.oferta.sede }}</p>
                     <p> <strong>Tipo de monitoria:</strong> {{ object.oferta.tipo_monitoria }}</p>
+                    <p align="justify"> <strong>Descripcion de la oferta:</strong> {{ object.oferta.descripcion_oferta }}</p>
                     <p> <strong>Plazo para aplicar:</strong> {{ object.oferta.plazo_solicitudes}}</p>
-                    <p> <strong>Perfil requerido:</strong> {{ object.oferta.perfil_requerido }}</p>
+                    <p align="justify"> <strong>Perfil requerido:</strong> {{ object.oferta.perfil_requerido }}</p>
                     <p><strong>Criterios de seleccion:</strong> {{ object.oferta.criterios_seleccion }}</p>
                     <p><strong>Periodo duracion de la monitoria:</strong> {{ object.oferta.periodo_duracion }}</p>
                     <p><strong>Horario de trabajo:</strong> {{ object.oferta.horario_ejecucion }}</p>

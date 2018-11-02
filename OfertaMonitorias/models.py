@@ -4,6 +4,7 @@ from Usuarios.models import Estudiante, Operario
 TIPO_DE_MONITORIAS = (('Docencia','Docencia'),('Investigacion','Investigacion'),('Administrativa','Administrativa'),('Especial','Especial'))
 SEDES = (('Melendez','Melendez'),('San Fernando','San Fernando'))
 ESTADOS = (('Activo','Activo'),('Inactivo','Inactivo'))
+ESTADOS_APLICACION = (('Activo','Activo'),('Inactivo','Inactivo'),('D10 en revision','D10 en revision'))
 OPCIONES_CRITERIOS = (
     ('Entrevista','Entrevista'),
     ('Promedio acumulado','Promedio acumulado'),
@@ -11,6 +12,7 @@ OPCIONES_CRITERIOS = (
 )
 
 class OfertaMonitoria(models.Model):
+    descripcion_oferta = models.CharField(max_length=800)
     perfil_requerido = models.CharField(max_length=800)
     tipo_monitoria = models.CharField(max_length=20, verbose_name="Tipo de Monitoria", choices=TIPO_DE_MONITORIAS, default='Administrativa')
     sede = models.CharField(max_length=20, verbose_name="Sede", choices=SEDES, default='Melendez')
@@ -33,7 +35,7 @@ class AplicacionOferta(models.Model):
     oferta = models.ForeignKey(OfertaMonitoria, on_delete=models.CASCADE)
     estudiante = models.ForeignKey(Estudiante,on_delete=models.CASCADE)
     fecha_modificacion = models.DateTimeField(auto_now=True)
-    estado = models.CharField(max_length=10, verbose_name="Estado", choices=ESTADOS, default='Activo')
+    estado = models.CharField(max_length=30, verbose_name="Estado", choices=ESTADOS_APLICACION, default='Activo')
 
     def __str__(self):
         return self.oferta

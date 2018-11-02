@@ -16,14 +16,23 @@
     <div class="col-lg-12">
         <div class="ibox float-e-margins">
             <div class="ibox-title">
+                <h5>Informacion de la oferta</h5>
+            </div>
+            <div class="ibox-content">
+                <p> <strong>Descripcion de la oferta:</strong> {{ oferta.descripcion_oferta }}</p>
+                <p> <strong>Perfil requerido:</strong> {{ oferta.perfil_requerido }}</p>
+                <p> <strong>Tipo de monitoria:</strong> {{ oferta.tipo_monitoria }}</p>
+                <p> <strong>Criterios de seleccion:</strong> {{ oferta.criterios_seleccion }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
                 <h5>Aplicaciones a la oferta</h5>
             </div>
             <div class="ibox-content">
-                <div>
-                    <p> <strong>Perfil requerido:</strong> {{ oferta.perfil_requerido }}</p>
-                    <p> <strong>Tipo de monitoria:</strong> {{ oferta.tipo_monitoria }}</p>
-                    <p> <strong>Criterios de seleccion:</strong> {{ oferta.criterios_seleccion }}</p>
-                </div>
+
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                         <thead>
@@ -41,7 +50,7 @@
                             <tr >
                                 <td> {{ aplicacion.estudiante.nombreCompleto }} </td>
                                 <td> {{ aplicacion.estudiante.programa_academico.nombre_programa }} </td>
-                                <td width="100px"></td>
+                                <td width="100px"> {{ aplicacion.estudiante.d10.promedio_acumulado }} </td>
                                 <td width="250px"> {{ aplicacion.fecha_modificacion }} </td>
                                 <td width="150px"> {% if aplicacion.estado == 'Inactivo' %} <span style="color: red"> {% else %} <span> {% endif %} {{ aplicacion.estado }}</span> </td>
                                 <td>

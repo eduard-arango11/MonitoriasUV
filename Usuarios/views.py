@@ -10,6 +10,7 @@ from monitorias.utilities import *
 from django.shortcuts import get_object_or_404, render
 from datetime import date
 from django.db import transaction, IntegrityError
+from OfertaMonitorias.models import AplicacionOferta
 
 
 class RegistrarEstudiante(SuccessMessageMixin, CreateView):
@@ -436,7 +437,6 @@ def revisarSolicitudAprobacionD10(request, id_d10):
         return render(request, '404.html')
 
     if request.method == 'POST':
-        print("Hola desde POST")
         form_datos_basicos = Formulario_registrar_d10_datos_basicos(request.POST, instance=d10.datos_basicos)
         form_datos_educacion = Formulario_registrar_d10_datos_educacion(request.POST, instance=d10.datos_educacion)
         form_datos_capacitacion = Formulario_registrar_d10_datos_capacitacion(request.POST,
@@ -450,6 +450,10 @@ def revisarSolicitudAprobacionD10(request, id_d10):
             d10.fecha_aprobacion = date.today()
             d10.estado_aprobacion = form_datos_aprobacion.instance.estado_aprobacion
             d10.save()
+            if d10.estado_aprobacion == 'Aprobado':
+                for aplicacion in AplicacionOferta.objects.filter(estudiante=estudiante, estado='D10 en revision'):
+                    aplicacion.estado = 'Activo'
+                    aplicacion.save()
 
             return redirect('listar_solicitudes_d10')
         else:

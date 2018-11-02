@@ -102,7 +102,10 @@ class ListarAplicaciones(ListView):
 
         if self.request.user.rol == 'Estudiante':
             estudiante = get_object_or_404(Estudiante, pk=self.request.user.id)
-            queryset = queryset.filter(estudiante=estudiante,estado='Activo')
+            if estudiante.estado_d10 == 'Registrado' and estudiante.d10.estado_aprobacion == 'En Revision':
+                queryset = queryset.filter(estudiante=estudiante, estado='D10 en revision')
+            else:
+                queryset = queryset.filter(estudiante=estudiante, estado='Activo')
 
         return queryset
 
@@ -123,11 +126,21 @@ def AplicarOferta(request,pk):
     oferta = get_object_or_404(OfertaMonitoria, pk=pk)
     try:
         aplicacion = AplicacionOferta.objects.get(oferta=oferta, estudiante=estudiante)
-        aplicacion.estado = 'Activo'
-        aplicacion.save()
+        if estudiante.d10.estado_aprobacion == 'En Revision':
+            aplicacion.estado = 'D10 en revision'
+            aplicacion.save()
+            messages.warning(request,'Aplicacion exitosa: Cuando tu director de programa apruebe tu D10 la aplicacion a la oferta se completara automaticamente')
+        elif estudiante.d10.estado_aprobacion == 'Aprobado':
+            aplicacion.estado = 'Activo'
+            aplicacion.save()
+            messages.success(request, 'Has aplicado a la oferta exitosamente')
     except AplicacionOferta.DoesNotExist:
-        AplicacionOferta.objects.create(estudiante=estudiante, oferta=oferta)
-    messages.success(request, 'Has aplicado a la oferta exitosamente')
+        if estudiante.d10.estado_aprobacion == 'En Revision':
+            AplicacionOferta.objects.create(estudiante=estudiante, oferta=oferta, estado='D10 en revision')
+            messages.warning(request, 'Aplicacion exitosa: Cuando tu director de programa apruebe tu D10 la aplicacion a la oferta se completara automaticamente')
+        elif estudiante.d10.estado_aprobacion == 'Aprobado':
+            AplicacionOferta.objects.create(estudiante=estudiante, oferta=oferta)
+            messages.success(request, 'Has aplicado a la oferta exitosamente')
 
     return redirect('listar_ofertas')
 
@@ -146,7 +159,7 @@ def cancelar_aplicacion(request, id_oferta):
 def listar_aplicaciones_oferta(request, id_oferta):
     operario = get_object_or_404(Operario, pk=request.user.id)
     oferta = get_object_or_404(OfertaMonitoria, pk=id_oferta)
-    aplicaciones = AplicacionOferta.objects.filter(oferta__operario_registra=operario, oferta=oferta)
+    aplicaciones = AplicacionOferta.objects.filter(oferta__operario_registra=operario, oferta=oferta, estado='Activo')
 
     if oferta.operario_registra.id != operario.id:
         return render(request, '404.html')

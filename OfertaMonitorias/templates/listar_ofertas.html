@@ -23,6 +23,7 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                         <thead>
                         <tr>
+                            <th>Descripcion de la oferta</th>
                             <th>Perfil requerido</th>
                             <th>Horas semanales</th>
                             <th>Plazo maximo de solicitudes</th>
@@ -32,7 +33,8 @@
                         <tbody>
                         {% for oferta in object_list %}
                             <tr>
-                                <td> {{ oferta.perfil_requerido }}</td>
+                                <td width="500px"> {{ oferta.descripcion_oferta }}</td>
+                                <td width="500px"> {{ oferta.perfil_requerido }}</td>
                                 <td> {{ oferta.horas_semanales }} </td>
                                 <td> {{ oferta.plazo_solicitudes }} </td>
 
