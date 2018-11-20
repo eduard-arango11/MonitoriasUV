@@ -27,6 +27,9 @@
                             <th>Perfil requerido</th>
                             <th>Horas semanales</th>
                             <th>Plazo maximo de solicitudes</th>
+                            {% if user.rol == 'Operario' %}
+                                <th>Estado</th>
+                            {% endif %}
                             <th>Opciones</th>
                         </tr>
                         </thead>
@@ -37,7 +40,9 @@
                                 <td width="500px"> {{ oferta.perfil_requerido }}</td>
                                 <td> {{ oferta.horas_semanales }} </td>
                                 <td> {% if oferta.plazo_solicitudes.isoformat < time %} <span style="color: red"> {% else %} <span> {% endif %} {{ oferta.plazo_solicitudes }} </span>  </td>
-
+                                {% if user.rol == 'Operario' %}
+                                    <td>{% if oferta.estado == 'Inactivo' %} <span style="color: red"> {% else %} <span> {% endif %} {{ oferta.estado }}</span> </td>
+                                {% endif %}
                                 <td>
                                     <a onclick="return abrir_modal('{% url 'detalle_oferta' oferta.id %}')" class="btn btn-info">
                                         <i class="fa fa-eye"></i> Detalle
@@ -73,6 +78,9 @@
                             <th>Perfil requerido</th>
                             <th>Horas semanales</th>
                             <th>Plazo maximo de solicitudes</th>
+                            {% if user.rol == 'Operario' %}
+                                <th>Estado</th>
+                            {% endif %}
                             <th>Opciones</th>
                         </tr>
                         </tfoot>
