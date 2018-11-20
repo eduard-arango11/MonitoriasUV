@@ -1,5 +1,6 @@
 from django.db import models
 from Usuarios.models import Estudiante, Operario
+from datetime import datetime
 
 TIPO_DE_MONITORIAS = (('Docencia','Docencia'),('Investigacion','Investigacion'),('Administrativa','Administrativa'),('Especial','Especial'))
 SEDES = (('Melendez','Melendez'),('San Fernando','San Fernando'))
@@ -27,6 +28,9 @@ class OfertaMonitoria(models.Model):
     estado = models.CharField(max_length=10, verbose_name="Estado", choices=ESTADOS, default='Activo')
     operario_registra = models.ForeignKey(Operario,on_delete=models.CASCADE)
 
+    @staticmethod
+    def obtenerOfertasActivas():
+        return OfertaMonitoria.objects.filter(estado='Activo',plazo_solicitudes__gte=datetime.now().date().isoformat())
 
     def __str__(self):
         return self.perfil_requerido

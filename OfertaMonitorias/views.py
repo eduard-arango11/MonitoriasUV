@@ -71,9 +71,12 @@ class ListarOfertas(ListView):
 
         if self.request.user.rol == 'Operario':
             operario = get_object_or_404(Operario, pk=self.request.user.id)
-            queryset = queryset.filter(operario_registra=operario,estado='Activo')
+            queryset = queryset.filter(operario_registra=operario)
 
-        return queryset
+        if self.request.user.rol == 'Estudiante':
+            queryset = OfertaMonitoria.obtenerOfertasActivas()
+
+        return queryset.order_by('-id')
 
     def get_context_data(self, **kwargs):
         if self.request.user.rol == 'Estudiante':
