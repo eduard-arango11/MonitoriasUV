@@ -23,6 +23,7 @@
                     <table class="table table-striped table-bordered table-hover dataTables-example" >
                         <thead>
                         <tr>
+                            <th>Descripcion de la oferta</th>
                             <th>Perfil de monitoria</th>
                             {% if user.rol == 'Administrador' %}
                                 <th>Estudiante</th>
@@ -35,7 +36,8 @@
                         <tbody>
                         {% for aplicacion in object_list %}
                             <tr >
-                                <td> {{ aplicacion.oferta }}</td>
+                                <td width="500px"> {{ aplicacion.oferta.descripcion_oferta }} </td>
+                                <td width="500px"> {{ aplicacion.oferta.perfil_requerido }}</td>
                                 {% if user.rol == 'Administrador' %}
                                     <td> {{ aplicacion.estudiante.nombreCompleto }} </td>
                                 {% endif %}
@@ -51,6 +53,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
+                            <th>Descripcion de la oferta</th>
                             <th>Perfil de monitoria</th>
                             {% if user.rol == 'Administrador' %}
                                 <th>Estudiante</th>
