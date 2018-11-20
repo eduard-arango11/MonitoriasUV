@@ -7,8 +7,7 @@ from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from monitorias.utilities import *
-from datetime import date
-
+from datetime import datetime
 
 class RegistrarOferta(SuccessMessageMixin, CreateView):
     model = OfertaMonitoria
@@ -85,6 +84,7 @@ class ListarOfertas(ListView):
         context['gestion_monitorias'] = True
         context['gestion_oferta'] = True
         context['listar_ofertas'] = True
+        context['time'] = datetime.now().date().isoformat()
         if self.request.user.rol == 'Estudiante':
             context['aplicaciones_estudiante'] = aplicaciones_estudiante
         return context

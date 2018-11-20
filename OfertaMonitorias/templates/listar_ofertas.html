@@ -36,7 +36,7 @@
                                 <td width="500px"> {{ oferta.descripcion_oferta }}</td>
                                 <td width="500px"> {{ oferta.perfil_requerido }}</td>
                                 <td> {{ oferta.horas_semanales }} </td>
-                                <td> {{ oferta.plazo_solicitudes }} </td>
+                                <td> {% if oferta.plazo_solicitudes.isoformat < time %} <span style="color: red"> {% else %} <span> {% endif %} {{ oferta.plazo_solicitudes }} </span>  </td>
 
                                 <td>
                                     <a onclick="return abrir_modal('{% url 'detalle_oferta' oferta.id %}')" class="btn btn-info">
@@ -69,6 +69,7 @@
                         </tbody>
                         <tfoot>
                         <tr>
+                            <th>Descripcion de la oferta</th>
                             <th>Perfil requerido</th>
                             <th>Horas semanales</th>
                             <th>Plazo maximo de solicitudes</th>
