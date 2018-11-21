@@ -3,6 +3,10 @@ from UnidadesAcademicas.models import Unidad
 from .forms import *
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from monitorias.utilities import *
+
 
 class RegistrarUnidad(SuccessMessageMixin, CreateView):
     model = Unidad
@@ -22,6 +26,11 @@ class RegistrarUnidad(SuccessMessageMixin, CreateView):
         context['registrar_unidad']= True
         return context
 
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 class ListarUnidades(ListView):
     model = Unidad
     template_name = "listar_unidades.html"
@@ -32,6 +41,11 @@ class ListarUnidades(ListView):
         context['gestion_unidades'] = True
         context['listar_unidades']= True
         return context
+
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 class EditarUnidad(SuccessMessageMixin, UpdateView):
     model = Unidad
@@ -46,3 +60,8 @@ class EditarUnidad(SuccessMessageMixin, UpdateView):
         context['gestion_unidades'] = True
         context['listar_unidades']= True
         return context
+
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)

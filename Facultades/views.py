@@ -3,6 +3,10 @@ from Facultades.models import Facultad
 from .forms import *
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from monitorias.utilities import *
+
 
 class RegistrarFacultad(SuccessMessageMixin, CreateView):
     model = Facultad
@@ -22,6 +26,11 @@ class RegistrarFacultad(SuccessMessageMixin, CreateView):
         context['registrar_facultad']= True
         return context
 
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 class ListarFacultades(ListView):
     model = Facultad
     template_name = "listar_facultades.html"
@@ -32,6 +41,12 @@ class ListarFacultades(ListView):
         context['gestion_facultades'] = True
         context['listar_facultades']= True
         return context
+
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 class EditarFacultad(SuccessMessageMixin, UpdateView):
     model = Facultad
@@ -46,3 +61,8 @@ class EditarFacultad(SuccessMessageMixin, UpdateView):
         context['gestion_facultades'] = True
         context['listar_facultades']= True
         return context
+
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)

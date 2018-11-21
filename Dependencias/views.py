@@ -3,6 +3,10 @@ from Dependencias.models import Dependencia
 from .forms import *
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from monitorias.utilities import *
+
 
 class RegistrarDependencia(SuccessMessageMixin, CreateView):
     model = Dependencia
@@ -22,6 +26,12 @@ class RegistrarDependencia(SuccessMessageMixin, CreateView):
         context['registrar_dependencia']= True
         return context
 
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+
 class ListarDependencias(ListView):
     model = Dependencia
     template_name = "listar_dependencias.html"
@@ -32,6 +42,11 @@ class ListarDependencias(ListView):
         context['gestion_dependencias'] = True
         context['listar_dependencias']= True
         return context
+
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 class EditarDependencia(SuccessMessageMixin, UpdateView):
     model = Dependencia
@@ -46,3 +61,8 @@ class EditarDependencia(SuccessMessageMixin, UpdateView):
         context['gestion_dependencias'] = True
         context['listar_dependencias']= True
         return context
+
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)

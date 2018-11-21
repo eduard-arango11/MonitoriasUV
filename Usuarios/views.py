@@ -52,6 +52,10 @@ class DetalleEstudiante(DetailView):
         context['listar_estudiantes'] = True
         return context
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 class ListarEstudiantes(ListView):
     model = Estudiante
@@ -132,6 +136,10 @@ class DetalleDirector(DetailView):
     model = Director
     template_name = 'detalle_director.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 class ListarDirectores(ListView):
     model = Director
@@ -201,6 +209,10 @@ class RegistrarOperario(SuccessMessageMixin, CreateView):
 class DetalleOperario(DetailView):
     model = Operario
     template_name = 'detalle_operario.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 
 class ListarOperarios(ListView):
@@ -272,6 +284,10 @@ class DetalleAdministrador(DetailView):
     model = Administrador
     template_name = 'detalle_administrador.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 
 class ListarAdministradores(ListView):
     model = Administrador
@@ -310,6 +326,7 @@ class EditarAdministrador(SuccessMessageMixin, UpdateView):
         return super().dispatch(*args, **kwargs)
 
 
+@login_required
 def RegistrarD10(request):
 
     if request.user.rol != 'Estudiante':
@@ -425,7 +442,7 @@ class listarSolitudesAprobacionD10(ListView):
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
-
+@login_required
 def revisarSolicitudAprobacionD10(request, id_d10):
     d10 = get_object_or_404(D10, id=id_d10)
     estudiante = d10.estudiante

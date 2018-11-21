@@ -3,6 +3,10 @@ from ProgramasAcademicos.models import ProgramaAcademico
 from .forms import *
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
+from monitorias.utilities import *
+
 
 class RegistrarPrograma(SuccessMessageMixin, CreateView):
     model = ProgramaAcademico
@@ -22,6 +26,11 @@ class RegistrarPrograma(SuccessMessageMixin, CreateView):
         context['registrar_programa']= True
         return context
 
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 class ListarProgramas(ListView):
     model = ProgramaAcademico
     template_name = "listar_programas.html"
@@ -32,6 +41,11 @@ class ListarProgramas(ListView):
         context['gestion_programas'] = True
         context['listar_programas']= True
         return context
+
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 class EditarPrograma(SuccessMessageMixin, UpdateView):
     model = ProgramaAcademico
@@ -46,3 +60,8 @@ class EditarPrograma(SuccessMessageMixin, UpdateView):
         context['gestion_programas'] = True
         context['listar_programas']= True
         return context
+
+    @method_decorator(login_required)
+    @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)

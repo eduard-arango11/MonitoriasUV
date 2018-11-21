@@ -62,6 +62,10 @@ class DetalleOferta(DetailView):
     model = OfertaMonitoria
     template_name = 'detalle_oferta.html'
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 class ListarOfertas(ListView):
     model = OfertaMonitoria
     template_name = "listar_ofertas.html"
@@ -92,9 +96,17 @@ class ListarOfertas(ListView):
             context['aplicaciones_estudiante'] = aplicaciones_estudiante
         return context
 
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
 class DetalleAplicacion(DetailView):
     model = AplicacionOferta
     template_name = 'detalle_aplicacion.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
 class ListarAplicaciones(ListView):
     model = AplicacionOferta
@@ -124,6 +136,7 @@ class ListarAplicaciones(ListView):
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
+@login_required
 def AplicarOferta(request,pk):
     estudiante = get_object_or_404(Estudiante, pk=request.user.id)
     oferta = get_object_or_404(OfertaMonitoria, pk=pk)
@@ -147,6 +160,7 @@ def AplicarOferta(request,pk):
 
     return redirect('listar_ofertas')
 
+@login_required
 def cancelar_aplicacion(request, id_oferta):
     estudiante = get_object_or_404(Estudiante, pk=request.user.id)
     oferta = get_object_or_404(OfertaMonitoria, pk=id_oferta)
@@ -159,6 +173,7 @@ def cancelar_aplicacion(request, id_oferta):
 
     return redirect('listar_ofertas')
 
+@login_required
 def listar_aplicaciones_oferta(request, id_oferta):
     operario = get_object_or_404(Operario, pk=request.user.id)
     oferta = get_object_or_404(OfertaMonitoria, pk=id_oferta)
@@ -175,6 +190,7 @@ def listar_aplicaciones_oferta(request, id_oferta):
         'listar_ofertas': True,
     })
 
+@login_required
 def listar_estudiantes_d10(request):
     if request.user.rol != 'Operario':
         return render(request, '404.html')
