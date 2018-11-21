@@ -4,6 +4,7 @@
 
 <li class="nav-header">
     <div class="dropdown profile-element">
+        {% comment %}
         <div style="width: 50px;">
             {%  if user.estudiante.estado_d10 == 'Registrado' %}
                 <img alt="image" class="img-circle" style="width: 100%;" src="{{ user.estudiante.d10.datos_basicos.foto.url }}" />
@@ -11,6 +12,7 @@
                 <img alt="image" class="img-circle" style="width: 100%;" src="/media/fotos/usuario.jpg" />
             {% endif %}
         </div>
+        {% endcomment %}
         <span class="clear" style="color: #DFE4ED;"> <span class="block m-t-xs"> <strong class="font-bold">{{ user.nombres }} {{ user.primer_apellido }} </strong>
          </span> <span class="text-muted text-xs block">({{ user.rol }})</span> </span>
     </div>
@@ -41,8 +43,13 @@
 <li {% if registrar_oferta %} class="active" {% endif %}>
     <a href="/monitorias/ofertas/registrar"><i class="fa fa-plus-square"></i> <span class="nav-label">Registrar oferta de monitoria</span></a>
 </li>
+
 <li {% if listar_ofertas %} class="active" {% endif %}>
     <a href="/monitorias/ofertas/listar"><i class="fa fa-list"></i> <span class="nav-label">Mis ofertas de monitorias</span></a>
+</li>
+
+<li {% if estudiantes_con_d10 %} class="active" {% endif %}>
+    <a href="/monitorias/estudiantes-con-d10"><i class="fa fa-users"></i> <span class="nav-label">Estudiantes con D10</span></a>
 </li>
 {% endif %}
 

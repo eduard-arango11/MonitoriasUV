@@ -174,3 +174,14 @@ def listar_aplicaciones_oferta(request, id_oferta):
         'gestion_oferta': True,
         'listar_ofertas': True,
     })
+
+def listar_estudiantes_d10(request):
+    if request.user.rol != 'Operario':
+        return render(request, '404.html')
+
+    estudiantes = Estudiante.objects.filter(estado_d10='Registrado',estado='Activo',d10__estado_aprobacion='Aprobado').order_by('-d10__promedio_acumulado')
+
+    return render(request, 'listar_estudiantes_con_d10.html', {
+        'object_list': estudiantes,
+        'estudiantes_con_d10': True,
+    })
