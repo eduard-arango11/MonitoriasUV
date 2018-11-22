@@ -122,7 +122,7 @@ class ListarAplicaciones(ListView):
             else:
                 queryset = queryset.filter(estudiante=estudiante, estado='Activo')
 
-        return queryset
+        return queryset.order_by('estado')
 
     def get_context_data(self, **kwargs):
         context = super(ListarAplicaciones, self).get_context_data(**kwargs)
