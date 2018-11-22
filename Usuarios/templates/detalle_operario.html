@@ -7,12 +7,8 @@
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             <h4 class="modal-title" style="text-align: center;">{{ object.nombreCompleto }}</h4>
         </div>
-        <div class="modal-body" style="display: flex;">
-            <div style="flex-basis: 0;flex-grow: 1;display: flex;flex-direction: column;justify-content: center;align-items: center;margin-right: 30px;">
-                <!--i class="fa fa-file-photo-o modal-icon"></i-->
-                <img alt="image" class="img-circle m-t-xs img-responsive" src="{% static 'img/a3.jpg' %}">
-            </div>
-            <div style="flex-basis: 0;flex-grow: 1;">
+        <div class="modal-body">
+            <div>
                 <p><strong>Nombre(s): </strong>{{ object.nombres }}</p>
                 <p> <strong>Primer apellido: </strong>{{ object.primer_apellido }}</p>
                 <p> <strong>Segundo apellido: </strong>{{ object.segundo_apellido }}</p>

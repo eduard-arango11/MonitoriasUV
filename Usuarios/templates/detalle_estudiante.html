@@ -24,27 +24,18 @@
                                     Informacion Basica
                                 </div>
                                 <div class="panel-body">
-                                    <div class="col-sm-4">
-                                        <div class="text-center">
-                                            {% comment %}
-                                            <img alt="image" class="img-circle m-t-xs img-responsive" src="{% static 'img/a2.jpg' %}">
-                                            {% endcomment %}
-                                            <img alt="image" class="img-circle m-t-xs img-responsive" src="{{ object.d10.datos_basicos.foto.url }}">
-                                            <div class="m-t-xs font-bold">{{ object.programa_academico }} {% if object.estado_d10 == 'Registrado' %} (Semestre: {{ object.d10.datos_basicos.semestre }}) {% endif %} </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-12">
                                         <h3><strong>{{ object.nombreCompleto }}</strong></h3>
                                         <address>
+                                            <strong>Codigo de estudiante: </strong>{{ object.codigo }}<br>
+                                            <strong>Programa Academico: </strong>{{ object.programa_academico }} {% if object.d10.datos_basicos.semestre %} ( Semestre: {{ object.d10.datos_basicos.semestre }} ) {% endif %} <br>
                                             <strong>{{ object.tipo_documento }}: </strong> {{ object.numero_documento }} de {{ object.lugar_expedicion_documento }}<br>
                                             <strong>Email: </strong> {{ object.email }}<br>
-                                            <strong>Codigo: </strong>{{ object.codigo }}<br>
-                                            <strong>Programa Academico: </strong>{{ object.programa_academico }}<br>
 
                                             <br><br>
-                                            <i class="fa fa-birthday-cake"></i> {{ object.fecha_nacimiento }} ({{ object.edad }} años)<br>
-                                            {{ object.d10.datos_basicos.direccion_residencia }} - {{ object.d10.datos_basicos.barrio }}<br>
-                                            <i class="fa fa-phone"></i> {{ object.numeroTelefonico }} <br>
+                                            <strong>Fecha de nacimiento: </strong>{{ object.fecha_nacimiento }} ({{ object.edad }} años)<br>
+                                            <strong>Direccion: </strong>{{ object.d10.datos_basicos.direccion_residencia }} - {{ object.d10.datos_basicos.barrio }}<br>
+                                            <strong>Telefono: </strong> {{ object.numeroTelefonico }} <br>
                                         </address>
                                     </div>
                                     <div class="clearfix"></div>
@@ -65,7 +56,7 @@
                                                 <div class="panel-heading" align="center">
                                                     Datos Basicos
                                                 </div>
-                                                <div class="panel-body" align="center">
+                                                <div class="panel-body">
                                                     <div style="display: flex;">
                                                         <div style="margin-right: 20px;">
                                                             <strong>Codigo de estudiante: </strong>{{ object.codigo }}<br>
