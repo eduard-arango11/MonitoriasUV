@@ -3,6 +3,7 @@ from django.views.generic import TemplateView
 from Usuarios.models import *
 from ProgramasAcademicos.models import ProgramaAcademico
 from OfertaMonitorias.models import OfertaMonitoria
+from OfertaMonitorias.models import AplicacionOferta
 from Dependencias.models import Dependencia
 
 class EstudiantesRegistrados(TemplateView):
@@ -71,4 +72,33 @@ class OfertasRegistradas(TemplateView):
         context['especial'] = especial
         context['reportes'] = True
         context['reporte_monitorias_ofertadas'] = True
+        return context
+
+class AplicacionesMonitorias(TemplateView):
+    template_name = 'aplicaciones_monitorias.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AplicacionesMonitorias, self).get_context_data(**kwargs)
+
+        tipos_de_monitoria = ['Administrativa', 'Docencia', 'Investigacion', 'Especial']
+        ofertas = []
+        for tipo in tipos_de_monitoria:
+            cantidad_de_ofertas_de_este_tipo = OfertaMonitoria.objects.filter(tipo_monitoria=tipo,
+                                                                                  estado='Activo').count()
+            ofertas.append(cantidad_de_ofertas_de_este_tipo)
+
+        context['ofertas'] = ofertas
+
+        aplicaciones = []
+        etiquetas = []
+        for tipo in tipos_de_monitoria:
+            etiquetas.append(tipo)
+            cantidad_de_aplicaciones_de_este_tipo = AplicacionOferta.objects.filter(oferta__tipo_monitoria=tipo,
+                                                                                 estado='Activo').count()
+            aplicaciones.append(cantidad_de_aplicaciones_de_este_tipo)
+        context['etiquetas'] = etiquetas
+        context['aplicaciones'] = aplicaciones
+        context['reportes'] = True
+        context['reporte_aplicaciones_monitorias'] = True
+
         return context

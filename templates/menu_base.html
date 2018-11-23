@@ -212,8 +212,8 @@
         <li {% if reporte_monitorias_ofertadas %} class="active" {% endif %}>
             <a href="/reportes/ofertas-registradas">Monitorias Ofertadas</a>
         </li>
-        <li>
-            <a href="graph_rickshaw.html">Aplicaciones a Monitorias</a>
+        <li {% if reporte_aplicaciones_monitorias %} class="active" {% endif %}>
+            <a href="/reportes/aplicaciones-monitorias">Aplicaciones a Monitorias</a>
         </li>
     </ul>
 </li>

@@ -5,4 +5,5 @@ from Reportes.views import *
 urlpatterns = [
     path('estudiantes-registrados/', EstudiantesRegistrados.as_view(), name='estudiantes_registrados'),
     path('ofertas-registradas/', OfertasRegistradas.as_view(), name='ofertas_registradas'),
+    path('aplicaciones-monitorias/', AplicacionesMonitorias.as_view(), name='aplicaciones_monitorias'),
 ]
