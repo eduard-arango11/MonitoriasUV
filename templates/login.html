@@ -9,7 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>INSPINIA | Login</title>
+    <title>Inicio de sesion</title>
 
     <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="{% static 'font-awesome/css/font-awesome.css' %}" rel="stylesheet">
@@ -21,7 +21,7 @@
 
 <body class="gray-bg">
 
-    <div class="middle-box text-center loginscreen animated fadeInDown" style="margin-top: 100px;">
+    <div class="middle-box text-center loginscreen animated fadeInDown" style="margin-top: 50px;">
         <div>
             <div>
 
@@ -30,14 +30,13 @@
             </div>
             <br>
             <h3>Sistema para Gestion de Oferta y Demanda de Monitorias</h3>
-            <p>Inicio de sesion</p>
+            <br>
             <form method="post">
                 {% csrf_token %}
                 {% bootstrap_form form layout='vertical' %}
-                <button type="submit">Login</button>
+                <button type="submit">Iniciar sesion</button>
             </form>
-            <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
-        </div>
+            </div>
     </div>
 
     <!-- Mainly scripts -->
