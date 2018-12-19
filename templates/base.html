@@ -28,14 +28,14 @@
     <link href="{% static 'js/plugins/gritter/jquery.gritter.css' %}" rel="stylesheet">
 
     {% block extrahead %}
-	{% endblock%}
-    
+    {% endblock%}
+
     <link href="{% static 'css/animate.css' %}" rel="stylesheet">
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
     {% block extrastyle %}
     {% endblock %}
-    
+
 </head>
 
 <body>
@@ -48,78 +48,83 @@
             </div>
         </nav>
 
-        <div id="page-wrapper" class="gray-bg dashbard-1">
-        <div class="row border-bottom">
-        <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
-        <div class="navbar-header">
-            <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-        </div>
-            <ul class="nav navbar-top-links navbar-right">
-                {% comment %}
-                <li>
-                    <span class="m-r-sm text-muted welcome-message">Sistema para gestion de oferta y demanda de monitorias.</span>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
-                    </a>
-                </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-alerts">
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i>
+                        </a>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        {% comment %}dashbard-1
                         <li>
-                            <a href="mailbox.html">
-                                <div>
-                                    <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
+                            <span class="m-r-sm text-muted welcome-message">Sistema para gestion de oferta y demanda de
+                                monitorias.</span>
+                        </li>dashbard-1
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-envelope"></i> <span class="label label-warning">16</span>
                             </a>
                         </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a href="profile.html">
-                                <div>
-                                    <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                    <span class="pull-right text-muted small">12 minutes ago</span>
-                                </div>
+                        <li class="dropdown">
+                            <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                                <i class="fa fa-bell"></i> <span class="label label-primary">8</span>
                             </a>
+                            <ul class="dropdown-menu dropdown-alerts">
+                                <li>
+                                    <a href="mailbox.html">
+                                        <div>
+                                            <i class="fa fa-envelope fa-fw"></i> You have 16 messages
+                                            <span class="pull-right text-muted small">4 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="profile.html">
+                                        <div>
+                                            <i class="fa fa-twitter fa-fw"></i> 3 New Followers
+                                            <span class="pull-right text-muted small">12 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <a href="grid_options.html">
+                                        <div>
+                                            <i class="fa fa-upload fa-fw"></i> Server Rebooted
+                                            <span class="pull-right text-muted small">4 minutes ago</span>
+                                        </div>
+                                    </a>
+                                </li>
+                                <li class="divider"></li>
+                                <li>
+                                    <div class="text-center link-block">
+                                        <a href="notifications.html">
+                                            <strong>See All Alerts</strong>
+                                            <i class="fa fa-angle-right"></i>
+                                        </a>
+                                    </div>
+                                </li>
+                            </ul>
                         </li>
-                        <li class="divider"></li>
+                        {% endcomment %}
+
                         <li>
-                            <a href="grid_options.html">
-                                <div>
-                                    <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
+                            <a href="{% url 'logout' %}">
+                                <i class="fa fa-sign-out"></i> Cerrar sesion
                             </a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <div class="text-center link-block">
-                                <a href="notifications.html">
-                                    <strong>See All Alerts</strong>
-                                    <i class="fa fa-angle-right"></i>
-                                </a>
-                            </div>
                         </li>
                     </ul>
-                </li>
-                {% endcomment %}
 
-                <li>
-                    <a href="{% url 'logout' %}">
-                        <i class="fa fa-sign-out"></i> Cerrar sesion
-                    </a>
-                </li>
-            </ul>
-
-        </nav>
-        </div>
-        
-        {% block contenido %}
-        {% endblock contenido %}
+                </nav>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    {% block contenido %}
+                    {% endblock contenido %}
+                </div>
+            </div>
 
         </div>
     </div>
@@ -149,14 +154,14 @@
 
     <!-- jQuery UI -->
     <script src="{% static 'js/plugins/jquery-ui/jquery-ui.min.js' %}"></script>
-    
+
     <!-- Jvectormap -->
     <script src="{% static 'js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js' %}"></script>
     <script src="{% static 'js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js' %}"></script>
 
     <!-- EayPIE -->
     <script src="{% static 'js/plugins/easypiechart/jquery.easypiechart.js' %}"></script>
-    
+
     <!-- GITTER -->
     <script src="{% static 'js/plugins/gritter/jquery.gritter.min.js' %}"></script>
 
@@ -171,30 +176,32 @@
 
     <!-- Toastr -->
     <script src="{% static 'js/plugins/toastr/toastr.min.js' %}"></script>
-    
+
     {% block plugins%}
-	{% endblock %}
-    
+    {% endblock %}
+
     {% if messages %}
-        {% for message in messages %}
-        <script>
-            $(document).ready(function() {
-                setTimeout(function() {
-                    toastr.options = {
-                        closeButton: true,
-                        progressBar: true,
-                        positionClass: "toast-top-center",
-                        showMethod: 'slideDown',
-                        timeOut: 10000
-                    };
-                    toastr['{{ message.tags }}']('{{ message }}');
-                }, 10);});
-        </script>
-        {% endfor %}
+    {% for message in messages %}
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                toastr.options = {
+                    closeButton: true,
+                    progressBar: true,
+                    positionClass: "toast-top-center",
+                    showMethod: 'slideDown',
+                    timeOut: 10000
+                };
+                toastr['{{ message.tags }}']('{{ message }}');
+            }, 10);
+        });
+    </script>
+    {% endfor %}
     {% endif %}
 
-    
-    
-    
+
+
+
 </body>
+
 </html>
