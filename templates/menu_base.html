@@ -6,15 +6,16 @@
     <div class="dropdown profile-element">
         {% comment %}
         <div style="width: 50px;">
-            {%  if user.estudiante.estado_d10 == 'Registrado' %}
-                <img alt="image" class="img-circle" style="width: 100%;" src="{{ user.estudiante.d10.datos_basicos.foto.url }}" />
+            {% if user.estudiante.estado_d10 == 'Registrado' %}
+            <img alt="image" class="img-circle" style="width: 100%;" src="{{ user.estudiante.d10.datos_basicos.foto.url }}" />
             {% else %}
-                <img alt="image" class="img-circle" style="width: 100%;" src="/media/fotos/usuario.jpg" />
+            <img alt="image" class="img-circle" style="width: 100%;" src="/media/fotos/usuario.jpg" />
             {% endif %}
         </div>
         {% endcomment %}
-        <span class="clear" style="color: #DFE4ED;"> <span class="block m-t-xs"> <strong class="font-bold">{{ user.nombres }} {{ user.primer_apellido }} </strong>
-         </span> <span class="text-muted text-xs block">({{ user.rol }})</span> </span>
+        <span class="clear" style="color: #DFE4ED;"> <span class="block m-t-xs"> <strong class="font-bold">
+            {{ user.nombres }} {{ user.primer_apellido }} </strong>
+            </span> <span class="text-muted text-xs block">({{ user.rol }})</span> </span>
     </div>
     <div class="logo-element">
         IN+
@@ -24,12 +25,12 @@
 {% if user.rol == 'Estudiante' %}
 <li {% if registrar_formato_d10 %} class="active" {% endif %}>
     <a href="/usuarios/registrar-d10"><i class="fa fa-address-card"></i> <span class="nav-label">
-        {%  if user.estudiante.estado_d10 == 'No registrado' %}
+            {% if user.estudiante.estado_d10 == 'No registrado' %}
             Registrar D10
-        {% else %}
+            {% else %}
             Actualizar D10
-        {% endif %}
-    </span></a>
+            {% endif %}
+        </span></a>
 </li>
 <li {% if listar_ofertas %} class="active" {% endif %}>
     <a href="/monitorias/ofertas/listar"><i class="fa fa-briefcase"></i> <span class="nav-label">Ofertas de monitorias</span></a>
@@ -41,7 +42,8 @@
 
 {% if user.rol == 'Operario' %}
 <li {% if registrar_oferta %} class="active" {% endif %}>
-    <a href="/monitorias/ofertas/registrar"><i class="fa fa-plus-square"></i> <span class="nav-label">Registrar oferta de monitoria</span></a>
+    <a href="/monitorias/ofertas/registrar"><i class="fa fa-plus-square"></i> <span class="nav-label">Registrar oferta
+            de monitoria</span></a>
 </li>
 
 <li {% if listar_ofertas %} class="active" {% endif %}>
@@ -54,39 +56,25 @@
 {% endif %}
 
 {% if user.rol == 'Director' %}
-    <li {% if listar_solicitudes_d10 %} class="active" {% endif %}>
-        <a href="/usuarios/listar-solicitudes-d10"><i class="fa fa-file"></i> <span class="nav-label">Solicitudes de aprobacion D10</span></a>
-    </li>
-    <li {% if listar_estudiantes %} class="active" {% endif %}>
-        <a href="/usuarios/estudiantes/listar"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Estudiantes del plan</span></a>
-    </li>
+<li {% if listar_solicitudes_d10 %} class="active" {% endif %}>
+    <a href="/usuarios/listar-solicitudes-d10"><i class="fa fa-file"></i> <span class="nav-label">Solicitudes de
+            aprobacion D10</span></a>
+</li>
+<li {% if listar_estudiantes %} class="active" {% endif %}>
+    <a href="/usuarios/estudiantes/listar"><i class="fa fa-graduation-cap"></i> <span class="nav-label">Estudiantes del
+            plan</span></a>
+</li>
 {% endif %}
 
 {% if user.rol == 'Administrador' %}
 <li {% if gestion_monitorias %} class="active" {% endif %}>
     <a href="#"><i class="fa fa-briefcase"></i> <span class="nav-label">Monitorias</span><span class="fa arrow"></span></a>
     <ul class="nav nav-second-level collapse">
-        <li {% if gestion_oferta %} class="active" {% endif %}>
-            <a href="#">Ofertas<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level">
-                <li {% if registrar_oferta %} class="active" {% endif %}>
-                    <a href="/monitorias/ofertas/registrar">Registrar</a>
-                </li>
-                <li {% if listar_ofertas %} class="active" {% endif %}>
-                    <a href="/monitorias/ofertas/listar">Listar</a>
-                </li>
-            </ul>
+        <li {% if listar_ofertas %} class="active" {% endif %}>
+            <a href="/monitorias/ofertas/listar">Listar Ofertas</a>
         </li>
-        <li {% if gestion_aplicacion %} class="active" {% endif %}>
-            <a href="#">Aplicaciones<span class="fa arrow"></span></a>
-            <ul class="nav nav-third-level">
-                <li {% if registrar_aplicacion %} class="active" {% endif %}>
-                    <a href="/monitorias/aplicaciones/registrar">Registrar</a>
-                </li>
-                <li {% if listar_aplicaciones %} class="active" {% endif %}>
-                    <a href="/monitorias/aplicaciones/listar">Listar</a>
-                </li>
-            </ul>
+        <li {% if listar_aplicaciones %} class="active" {% endif %}>
+            <a href="/monitorias/aplicaciones/listar">Listar Aplicaciones</a>
         </li>
     </ul>
 </li>
