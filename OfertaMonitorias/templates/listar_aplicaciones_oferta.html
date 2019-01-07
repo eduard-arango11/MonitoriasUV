@@ -54,9 +54,7 @@
                                 <td width="250px"> {{ aplicacion.fecha_modificacion }} </td>
                                 <td width="150px"> {% if aplicacion.estado == 'Inactivo' %} <span style="color: red"> {% else %} <span> {% endif %} {{ aplicacion.estado }}</span> </td>
                                 <td>
-                                    <a onclick="return abrir_modal('{% url 'detalle_aplicacion' aplicacion.id %}')" class="btn btn-info">
-                                        <i class="fa fa-eye"></i> Detalle
-                                    </a>
+                                    <a href="{% url 'detalle_estudiante' aplicacion.estudiante.id %}" class="btn btn-info"><i class="fa fa-eye"></i> Detalle </a>
                                 </td>
                             </tr>
                         {% endfor %}
