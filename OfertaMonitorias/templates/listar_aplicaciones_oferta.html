@@ -23,6 +23,10 @@
                 <p> <strong>Perfil requerido:</strong> {{ oferta.perfil_requerido }}</p>
                 <p> <strong>Tipo de monitoria:</strong> {{ oferta.tipo_monitoria }}</p>
                 <p> <strong>Criterios de seleccion:</strong> {{ oferta.criterios_seleccion }}</p>
+                <button type="button" class="btn btn-danger terminar_oferta" data-toggle="modal" data-url="{% url 'cancelar_aplicacion' oferta.id %}" data-target="#myModal2">
+                    <i class="fa fa-check"></i> Terminar Oferta
+                </button>
+                <a href="" class="btn btn-success"><i class="fa fa-check"></i> Terminar Oferta </a>
             </div>
         </div>
     </div>
@@ -72,6 +76,31 @@
                     </table>
                 </div>
             </div>
+            <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-sm">
+                    <div class="modal-content animated flipInY">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            <h4 class="modal-title">Terminar oferta</h4>
+                        </div>
+                        <div class="modal-body">
+                            <label for="monitor">Monitor contratado:</label>
+                            <select name="monitor" id="monitor" class="form-control m-b">
+                                {% for aplicacion in aplicaciones %}
+                                    <option value="aplicacion.estudiante.id">{{aplicacion.estudiante.nombreCompleto}}</option>
+                                {% endfor %}
+                            </select>
+                            <label for="comentarios">Comentarios</label>
+                            <textarea name="comentarios" id="comentarios" cols="27" rows="4" class="form-control m-b"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                            <a id="confirmar-terminar" href="" class="btn btn-primary">Terminar</a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="modal inmodal" id="modal-detalle" tabindex="-1" role="dialog" aria-hidden="true"></div>
         </div>
     </div>
@@ -115,6 +144,12 @@
             ]
 
         });
+
+        $('.terminar_oferta').on('click',function () {
+            console.log("url: ",$(this).attr('data-url'));
+            //$('#confirmar-terminar').attr('href', url);
+        })
+
         function abrir_modal(url)
         {
             $('#modal-detalle').load(url, function()

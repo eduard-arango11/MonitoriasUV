@@ -4,8 +4,8 @@ from datetime import datetime
 
 TIPO_DE_MONITORIAS = (('Docencia','Docencia'),('Investigacion','Investigacion'),('Administrativa','Administrativa'),('Especial','Especial'))
 SEDES = (('Melendez','Melendez'),('San Fernando','San Fernando'))
-ESTADOS = (('Activo','Activo'),('Inactivo','Inactivo'))
-ESTADOS_APLICACION = (('Activo','Activo'),('Inactivo','Inactivo'),('D10 en revision','D10 en revision'))
+ESTADOS = (('Activo','Activo'),('Inactivo','Inactivo'),('Terminada','Terminada'))
+ESTADOS_APLICACION = (('Activo','Activo'),('Inactivo','Inactivo'),('D10 en revision','D10 en revision'),('Aprobada','Aprobada'),('Rechazada','Rechazada'))
 OPCIONES_CRITERIOS = (
     ('Entrevista','Entrevista'),
     ('Promedio acumulado','Promedio acumulado'),
