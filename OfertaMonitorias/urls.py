@@ -15,4 +15,5 @@ urlpatterns = [
     path('aplicar-a-oferta/<int:pk>/', AplicarOferta, name="aplicar_oferta"),
     path('cancelar-apliacion/<int:id_oferta>/', cancelar_aplicacion, name="cancelar_aplicacion"),
     path('estudiantes-con-d10/', listar_estudiantes_d10, name='estudiantes_con_d10'),
+    path('terminar_oferta/<int:id_aplicacion>/', terminar_oferta, name="terminar_oferta"),
 ]

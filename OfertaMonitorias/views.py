@@ -177,7 +177,7 @@ def cancelar_aplicacion(request, id_oferta):
 def listar_aplicaciones_oferta(request, id_oferta):
     operario = get_object_or_404(Operario, pk=request.user.id)
     oferta = get_object_or_404(OfertaMonitoria, pk=id_oferta)
-    aplicaciones = AplicacionOferta.objects.filter(oferta__operario_registra=operario, oferta=oferta, estado='Activo')
+    aplicaciones = AplicacionOferta.objects.filter(oferta__operario_registra=operario, oferta=oferta, estado='Activo') | AplicacionOferta.objects.filter(oferta__operario_registra=operario, oferta=oferta, estado='Aprobada') | AplicacionOferta.objects.filter(oferta__operario_registra=operario, oferta=oferta, estado='Rechazada')
 
     if oferta.operario_registra.id != operario.id:
         return render(request, '404.html')
@@ -201,3 +201,21 @@ def listar_estudiantes_d10(request):
         'object_list': estudiantes,
         'estudiantes_con_d10': True,
     })
+
+@login_required
+def terminar_oferta(request, id_aplicacion):
+    aplicacion_para_terminar = get_object_or_404(AplicacionOferta, pk=id_aplicacion) 
+    oferta = get_object_or_404(OfertaMonitoria, pk=aplicacion_para_terminar.oferta.id)
+    oferta.estado = 'Terminada'
+    oferta.save()
+    aplicacion_para_terminar.estado = 'Aprobada'
+    aplicacion_para_terminar.save()
+    otras_aplicaciones = AplicacionOferta.objects.filter(oferta=oferta.id,estado='Activo')
+
+    for aplicacion in otras_aplicaciones:
+        aplicacion.estado = 'Rechazada'
+        aplicacion.save()
+
+    messages.success(request, 'La oferta fue terminada exitosamente')
+
+    return redirect('aplicaciones_oferta', id_oferta=oferta.id)

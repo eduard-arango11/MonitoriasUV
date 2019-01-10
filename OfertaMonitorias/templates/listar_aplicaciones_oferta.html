@@ -23,10 +23,11 @@
                 <p> <strong>Perfil requerido:</strong> {{ oferta.perfil_requerido }}</p>
                 <p> <strong>Tipo de monitoria:</strong> {{ oferta.tipo_monitoria }}</p>
                 <p> <strong>Criterios de seleccion:</strong> {{ oferta.criterios_seleccion }}</p>
-                <button type="button" class="btn btn-danger terminar_oferta" data-toggle="modal" data-url="{% url 'cancelar_aplicacion' oferta.id %}" data-target="#myModal2">
+                {% if oferta.estado != 'Terminada' %}
+                <button type="button" class="btn btn-success terminar_oferta" data-toggle="modal" data-target="#myModal2">
                     <i class="fa fa-check"></i> Terminar Oferta
                 </button>
-                <a href="" class="btn btn-success"><i class="fa fa-check"></i> Terminar Oferta </a>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -87,7 +88,7 @@
                             <label for="monitor">Monitor contratado:</label>
                             <select name="monitor" id="monitor" class="form-control m-b">
                                 {% for aplicacion in aplicaciones %}
-                                    <option value="aplicacion.estudiante.id">{{aplicacion.estudiante.nombreCompleto}}</option>
+                                    <option value="{{aplicacion.id}}">{{aplicacion.estudiante.nombreCompleto}}</option>
                                 {% endfor %}
                             </select>
                             <label for="comentarios">Comentarios</label>
@@ -95,7 +96,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
-                            <a id="confirmar-terminar" href="" class="btn btn-primary">Terminar</a>
+                            <a id="confirmar-terminar" onclick="modificarUrl()" href="" class="btn btn-primary">Terminar</a>
 
                         </div>
                     </div>
@@ -145,10 +146,11 @@
 
         });
 
-        $('.terminar_oferta').on('click',function () {
-            console.log("url: ",$(this).attr('data-url'));
-            //$('#confirmar-terminar').attr('href', url);
-        })
+        function modificarUrl(){
+            var url = '/monitorias/terminar_oferta/' + $('#monitor').val();
+            console.log("url: ", url);
+            $('#confirmar-terminar').attr('href', url);
+        }
 
         function abrir_modal(url)
         {
