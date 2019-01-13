@@ -120,7 +120,7 @@ class ListarAplicaciones(ListView):
             if estudiante.estado_d10 == 'Registrado' and estudiante.d10.estado_aprobacion == 'En Revision':
                 queryset = queryset.filter(estudiante=estudiante, estado='D10 en revision')
             else:
-                queryset = queryset.filter(estudiante=estudiante, estado='Activo')
+                queryset = queryset.filter(estudiante=estudiante).exclude(estado='Inactivo')
 
         return queryset.order_by('estado')
 
