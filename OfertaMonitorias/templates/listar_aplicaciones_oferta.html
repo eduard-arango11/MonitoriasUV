@@ -23,6 +23,7 @@
                 <p> <strong>Perfil requerido:</strong> {{ oferta.perfil_requerido }}</p>
                 <p> <strong>Tipo de monitoria:</strong> {{ oferta.tipo_monitoria }}</p>
                 <p> <strong>Criterios de seleccion:</strong> {{ oferta.criterios_seleccion }}</p>
+                <p> <strong>Estado:</strong> {{ oferta.estado }}</p>
                 {% if oferta.estado != 'Terminada' %}
                 <button type="button" class="btn btn-success terminar_oferta" data-toggle="modal" data-target="#myModal2">
                     <i class="fa fa-check"></i> Terminar Oferta
