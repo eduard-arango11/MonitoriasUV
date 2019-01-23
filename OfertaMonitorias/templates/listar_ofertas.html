@@ -62,9 +62,6 @@
                                             </button>
                                         {% endif %}
                                     {% elif user.rol == 'Operario' %}
-                                        {% if oferta.estado == 'Terminada' and oferta.fecha_adjudicacion.isoformat < time %}
-                                            <a href="{% url 'aplicaciones_oferta' oferta.id %}" class="btn btn-primary"><i class="fa fa-file-text"></i> Evaluar Monitor </a>
-                                        {% endif %}
                                         {% if oferta.estado != 'Terminada' %}
                                             <a href="{% url 'aplicaciones_oferta' oferta.id %}" class="btn btn-primary"><i class="fa fa-file-text"></i> Aplicaciones </a>
                                             <a href="{% url 'editar_oferta' oferta.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a>
