@@ -28,6 +28,23 @@ class EstudiantesRegistrados(TemplateView):
         context['hombres'] = hombres
         context['mujeres'] = mujeres
         context['cupos'] = cupos
+
+        ######### TOTAL DE ESTUDIANTES ########
+
+        total_estudiantes = Estudiante.objects.filter(estado='Activo').count()
+        context['total_estudiantes'] = total_estudiantes
+
+        ######### TOTAL DE ESTUDIANTES CON D10 REGISTRADOS ########
+
+        total_estudiantes_d10_registrado = Estudiante.objects.filter(estado='Activo', estado_d10='Registrado').count()
+        context['total_estudiantes_d10_registrado'] = total_estudiantes_d10_registrado
+
+        ######### TOTAL DE ESTUDIANTES CON D10 REGISTRADOS ########
+
+        total_estudiantes_d10_aprobado = Estudiante.objects.filter(estado='Activo', estado_d10='Registrado', d10__estado_aprobacion='Aprobado').count()
+        context['total_estudiantes_d10_aprobado'] = total_estudiantes_d10_aprobado
+
+
         context['reportes'] = True
         context['reporte_estudiantes_registrados'] = True
         return context
@@ -38,17 +55,6 @@ class OfertasRegistradas(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(OfertasRegistradas, self).get_context_data(**kwargs)
-
-        ############### REPORTE DE TIPOS DE MONITORIAS ###################
-        tipos_de_monitoria = ['Administrativa','Docencia','Investigacion','Especial']
-        ofertas = []
-        etiquetas = []
-        for tipo in tipos_de_monitoria:
-            etiquetas.append(tipo)
-            cantidad_de_monitorias_de_este_tipo = OfertaMonitoria.objects.filter(tipo_monitoria=tipo,estado='Activo').count()
-            ofertas.append(cantidad_de_monitorias_de_este_tipo)
-        context['etiquetas'] = etiquetas
-        context['ofertas'] = ofertas
 
         ############### REPORTE DE MONITORIAS POR DEPENDENCIAS ###################
         dependencias = Dependencia.objects.all()
@@ -70,6 +76,41 @@ class OfertasRegistradas(TemplateView):
         context['docencia'] = docencia
         context['investigacion'] = investigacion
         context['especial'] = especial
+
+        ################## REPORTE DE MONITORIAS POR TIPO DE OFERTA Y POR ESTADO DE LA OFERTA #####
+
+        #programas = ProgramaAcademico.objects.all()
+        #ofertas = OfertaMonitoria.objects.all()
+        tipos_oferta = ['Docencia','Investigacion','Administrativa','Especial']
+        activas = []
+        terminadas = []
+        #label = []
+        #cupos = []
+        for tipo in tipos_oferta:
+            #label.append(tipo)
+            activas_oferta = OfertaMonitoria.objects.filter(tipo_monitoria=tipo,estado='Activo').count()
+            terminadas_oferta = OfertaMonitoria.objects.filter(tipo_monitoria=tipo,estado='Terminada').count()
+            activas.append(activas_oferta)
+            terminadas.append(terminadas_oferta)
+        context['tipos_oferta'] = tipos_oferta
+        context['activas'] = activas
+        context['terminadas'] = terminadas
+
+        ######### TOTAL DE OFERTAS ########
+
+        total_ofertas = OfertaMonitoria.objects.filter(estado='Activo').count() + OfertaMonitoria.objects.filter(estado='Terminada').count()
+        context['total_ofertas'] = total_ofertas
+
+        ######### TOTAL DE OFERTAS EN PROCESO ########
+
+        total_ofertas_en_proceso = OfertaMonitoria.objects.filter(estado='Activo').count()
+        context['total_ofertas_en_proceso'] = total_ofertas_en_proceso
+
+        ######### TOTAL DE OFERTAS TERMINADAS ########
+
+        total_ofertas_terminadas = OfertaMonitoria.objects.filter(estado='Terminada').count()
+        context['total_ofertas_terminadas'] = total_ofertas_terminadas
+
         context['reportes'] = True
         context['reporte_monitorias_ofertadas'] = True
         return context

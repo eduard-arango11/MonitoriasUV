@@ -4,7 +4,7 @@
 
 
 {% block titulo %}
-		Reporte de Estudiantes
+    Reporte de Estudiantes
 {% endblock titulo %}
 
 
@@ -15,13 +15,53 @@
 
 {% block contenido %}
     <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Reporte de estudiantes registrados por programa academico</h5>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">Total</span>
+                        <h5>Estudiantes registrados</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h1 class="no-margins">{{ total_estudiantes }} </h1>
+                                <div class="font-bold text-success">
+                                    <small>En total</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h1 class="no-margins">{{ total_estudiantes_d10_registrado }}</h1>
+                                <div class="font-bold text-navy">
+                                    <small>Con D10 diligenciado</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h1 class="no-margins">{{ total_estudiantes_d10_aprobado }}</h1>
+                                <div class="font-bold text-navy">
+                                    <small>Con D10 aprobado</small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
             </div>
-            <div class="ibox-content">
-                <div>
-                    <canvas id="barChart" height="140"></canvas>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Reporte de estudiantes registrados por programa academico</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <div>
+                            <canvas id="barChart" height="140"></canvas>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -75,7 +115,7 @@
 
 
             var ctx2 = document.getElementById("barChart").getContext("2d");
-            new Chart(ctx2, {type: 'bar', data: barData, options:barOptions});
+            new Chart(ctx2, {type: 'bar', data: barData, options: barOptions});
 
 
         });

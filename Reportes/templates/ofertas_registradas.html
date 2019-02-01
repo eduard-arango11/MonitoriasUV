@@ -4,7 +4,7 @@
 
 
 {% block titulo %}
-		Reporte de Ofertas
+    Reporte de Ofertas
 {% endblock titulo %}
 
 
@@ -14,20 +14,69 @@
 
 
 {% block contenido %}
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Ofertas por tipo de monitoria</h5>
-            </div>
-            <div class="ibox-content" style="display: flex;justify-content: space-between">
-                <div class="col-lg-6">
-                    <canvas id="chart" height="140"></canvas>
-                </div>
-                <div class="col-lg-6">
-                    <canvas id="chart2" height="200"></canvas>
+
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-primary pull-right">Total</span>
+                        <h5>Ofertas de monitoria</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h1 class="no-margins">{{ total_ofertas }}</h1>
+                                <div class="font-bold text-success">
+                                    <small>En total</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h1 class="no-margins">{{ total_ofertas_en_proceso }}</h1>
+                                <div class="font-bold text-navy">
+                                    <small>En proceso</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h1 class="no-margins">{{ total_ofertas_terminadas }}</h1>
+                                <div class="font-bold text-navy">
+                                    <small>Terminadas</small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-success pull-right">Monthly</span>
+                        <h5>Total de ofertas de cada tipo de monitoria</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <canvas id="barChart" height="140"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <span class="label label-success pull-right">Monthly</span>
+                        <h5>Total de ofertas de cada tipo de monitoria</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <canvas id="chart2" height="300"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
 {% endblock contenido %}
@@ -41,38 +90,46 @@
     <script>
         $(function () {
 
-            var config = {
-                type: 'doughnut',
-                data: {
-                    datasets: [{
-                        data: {{ ofertas }},
-                        backgroundColor: [
-                            'rgba(26,179,148,0.8)',
-                            'rgba(220, 178, 26, 1)',
-                            'rgba(220, 26, 26, 0.8)',
-                            'rgba(26,150,220,0.5)',
-                        ]
-                    }],
-                    labels: {{ etiquetas|safe }}
-                },
-                options: {
-                    responsive: true,
-                    legend: {
-                        position: 'top',
+            /* OFERTAS DE MONITORIAS POR TIPO DE OFERTA Y ESTADO DE LA OFERTA*/
+
+            var barData = {
+                labels: {{ tipos_oferta|safe }},
+                datasets: [
+                    {
+                        label: "Terminadas",
+                        backgroundColor: 'rgba(220, 220, 220, 0.5)',
+                        pointBorderColor: "#fff",
+                        stack: 'Stack 0',
+                        data: {{ terminadas }}
                     },
-                    title: {
-                        display: true,
-                        text: 'Cantidad de Ofertas por Tipo de Monitoria'
-                    },
-                    animation: {
-                        animateScale: true,
-                        animateRotate: true
+                    {
+                        label: "En proceso",
+                        backgroundColor: 'rgba(26,179,148,0.5)',
+                        borderColor: "rgba(26,179,148,0.7)",
+                        pointBackgroundColor: "rgba(26,179,148,1)",
+                        pointBorderColor: "#fff",
+                        stack: 'Stack 0',
+                        data: {{ activas }}
                     }
+                ]
+            };
+
+            var barOptions = {
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        stacked: true,
+                    }],
+                    yAxes: [{
+                        stacked: true
+                    }]
                 }
             };
 
-            var ctx = document.getElementById("chart").getContext("2d");
-            new Chart(ctx, config);
+            /* OFERTAS DE MONITORIA POR DEPENDENCIA */
+
+            var ctx2 = document.getElementById("barChart").getContext("2d");
+            new Chart(ctx2, {type: 'bar', data: barData, options: barOptions});
 
             var config2 = {
                 type: 'bar',
@@ -131,7 +188,6 @@
                     },
                 }
             };
-
             var ctx2 = document.getElementById("chart2").getContext("2d");
             new Chart(ctx2, config2);
 
