@@ -38,7 +38,9 @@
                                     <td> {{ estudiante.codigo }} </td>
                                     <td> {{ estudiante.email }} </td>
                                     <td> {{ estudiante.programa_academico }} </td>
-                                    <td> {{ estudiante.estado_d10 }} </td>
+                                    <td>
+                                        {{ estudiante.estado_d10 }} {% if estudiante.estado_d10 == 'Registrado' %} / {{ estudiante.d10.estado_aprobacion }} {% endif %}
+                                    </td>
                                     <td>
                                         <a href="{% url 'detalle_estudiante' estudiante.id %}" class="btn btn-info"><i class="fa fa-eye"></i> Detalle </a>
                                         {% if user.rol == 'Administrador' %}
