@@ -12,7 +12,10 @@ class Formulario_registrar_estudiante(UserCreationForm):
         model = Estudiante
         fields = ('nombres','primer_apellido','segundo_apellido','email','password1', 'password2','codigo','tipo_documento','numero_documento','lugar_expedicion_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','programa_academico')
         widgets = {
-            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
+            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
+            'codigo': forms.NumberInput(),
+            'telefono': forms.NumberInput(),
+            'numero_documento': forms.NumberInput(),
         }
 
 class Formulario_modificar_estudiante(forms.ModelForm):
@@ -20,7 +23,10 @@ class Formulario_modificar_estudiante(forms.ModelForm):
         model = Estudiante
         fields = ('nombres','primer_apellido','segundo_apellido','email','codigo','tipo_documento','numero_documento','lugar_expedicion_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','programa_academico')
         widgets = {
-            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
+            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
+            'codigo': forms.NumberInput(),
+            'telefono': forms.NumberInput(),
+            'numero_documento': forms.NumberInput(),
         }
 
 class Formulario_registrar_director(UserCreationForm):
@@ -28,7 +34,9 @@ class Formulario_registrar_director(UserCreationForm):
         model = Director
         fields = ('nombres','primer_apellido','segundo_apellido','email','password1', 'password2','tipo_documento','lugar_expedicion_documento','numero_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','programa_academico')
         widgets = {
-            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
+            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
+            'telefono': forms.NumberInput(),
+            'numero_documento': forms.NumberInput(),
         }
 
 class Formulario_modificar_director(forms.ModelForm):
@@ -36,7 +44,9 @@ class Formulario_modificar_director(forms.ModelForm):
         model = Director
         fields = ('nombres','primer_apellido','segundo_apellido','email','tipo_documento','numero_documento','lugar_expedicion_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','programa_academico')
         widgets = {
-            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
+            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
+            'telefono': forms.NumberInput(),
+            'numero_documento': forms.NumberInput(),
         }
 
 class Formulario_registrar_operario(UserCreationForm):
@@ -44,7 +54,9 @@ class Formulario_registrar_operario(UserCreationForm):
         model = Operario
         fields = ('nombres','primer_apellido','segundo_apellido','email','password1', 'password2','tipo_documento','numero_documento','lugar_expedicion_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','cargo','dependencia')
         widgets = {
-            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
+            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
+            'telefono': forms.NumberInput(),
+            'numero_documento': forms.NumberInput(),
         }
 
 class Formulario_modificar_operario(forms.ModelForm):
@@ -52,7 +64,9 @@ class Formulario_modificar_operario(forms.ModelForm):
         model = Operario
         fields = ('nombres','primer_apellido','segundo_apellido','email','tipo_documento','numero_documento','lugar_expedicion_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','cargo','dependencia')
         widgets = {
-            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
+            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
+            'telefono': forms.NumberInput(),
+            'numero_documento': forms.NumberInput(),
         }
 
 class Formulario_registrar_administrador(UserCreationForm):
@@ -60,7 +74,9 @@ class Formulario_registrar_administrador(UserCreationForm):
         model = Administrador
         fields = ('nombres','primer_apellido','segundo_apellido','email','password1', 'password2','tipo_documento','numero_documento','lugar_expedicion_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento')
         widgets = {
-            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
+            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
+            'telefono': forms.NumberInput(),
+            'numero_documento': forms.NumberInput(),
         }
 
 class Formulario_modificar_administrador(forms.ModelForm):
@@ -68,7 +84,9 @@ class Formulario_modificar_administrador(forms.ModelForm):
         model = Administrador
         fields = ('nombres','primer_apellido','segundo_apellido','email','tipo_documento','numero_documento','lugar_expedicion_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento')
         widgets = {
-            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
+            'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
+            'telefono': forms.NumberInput(),
+            'numero_documento': forms.NumberInput(),
         }
 
 

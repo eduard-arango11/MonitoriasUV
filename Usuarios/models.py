@@ -132,7 +132,7 @@ class Usuario(AbstractUser):
     telefono = models.CharField(max_length=10,verbose_name="Telefono de contacto")
     genero = models.CharField(max_length=20, verbose_name="Genero", choices=GENEROS)
     lugar_nacimiento = models.CharField(max_length=200, verbose_name="Lugar de nacimiento")
-    fecha_nacimiento = models.DateField()
+    fecha_nacimiento = models.DateField(null=False, blank=False)
     rol = models.CharField(max_length=30, verbose_name="Rol", choices=ROLES)
     estado = models.CharField(max_length=10, verbose_name="Estado", choices=ESTADOS, default='Activo')
 

@@ -8,7 +8,7 @@ class Formulario_registrar_oferta(forms.ModelForm):
         widgets = {
             'descripcion_oferta': forms.Textarea(attrs={'rows':3, 'cols':15}),
             'perfil_requerido' : forms.Textarea(attrs={'rows':4, 'cols':15}),
-            'plazo_solicitudes': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
-            'fecha_seleccion': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
-            'fecha_adjudicacion': forms.DateInput(attrs={'class':'datepicker', 'autocomplete': 'off'}),
+            'plazo_solicitudes': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
+            'fecha_seleccion': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
+            'fecha_adjudicacion': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
         }

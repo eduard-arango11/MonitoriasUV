@@ -4,22 +4,22 @@
 
 
 {% block titulo %}
-	Registrar Estudiantes
+    Registrar Estudiantes
 {% endblock %}
 
 {% block extrahead %}
-<link href="{% static 'css/plugins/datapicker/datepicker3.css' %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/datapicker/datepicker3.css' %}" rel="stylesheet">
 {% endblock %}
 
 {% block contenido %}
-<div>
+    <div>
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
                     <h5>Registrar Estudiante</h5>
                 </div>
                 <div class="ibox-content">
-                    <form method="post" class="form-horizontal"> {% csrf_token %}
+                    <form method="post" class="form-horizontal" autocomplete="off"> {% csrf_token %}
                         <div class="row">
                             <div class="col-md-6">
                                 {% bootstrap_field form.nombres label_class="control-label col-sm-5" field_class="col-sm-6" %}
@@ -29,10 +29,10 @@
                                 {% if creacion %}
                                     {% bootstrap_field form.password1 label_class="control-label col-sm-5" field_class="col-sm-6" %}
                                     {% bootstrap_field form.password2 label_class="control-label col-sm-5" field_class="col-sm-6" %}
-								{% endif %}
+                                {% endif %}
                             </div>
                             <div class="col-md-6">
-                                
+
                                 {% bootstrap_field form.codigo label_class="control-label col-sm-4" field_class="col-sm-6" %}
                                 {% bootstrap_field form.programa_academico label_class="control-label col-sm-4" field_class="col-sm-6" %}
                                 {% bootstrap_field form.tipo_documento label_class="control-label col-sm-4" field_class="col-sm-6" %}
@@ -41,10 +41,10 @@
                                 {% bootstrap_field form.telefono label_class="control-label col-sm-4" field_class="col-sm-6" %}
                                 {% bootstrap_field form.genero label_class="control-label col-sm-4" field_class="col-sm-6" %}
                                 {% bootstrap_field form.lugar_nacimiento label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                {% bootstrap_field form.fecha_nacimiento label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                {% bootstrap_field form.fecha_nacimiento label_class="control-label col-sm-4" field_class="col-sm-6 prueba" %}
                             </div>
                         </div>
-                         
+
                         <div class="form-group">
                             <div class="col-md-6">
                                 <button class="btn btn-white">Cancelar</button>
@@ -61,25 +61,25 @@
                 </div>
             </div>
         </div>
-</div>
+    </div>
 {% endblock contenido %}
 
 {% block plugins %}
-   <!-- Data picker -->
-   <script src="{% static 'js/plugins/datapicker/bootstrap-datepicker.js' %}"></script>
+    <!-- Data picker -->
+    <script src="{% static 'js/plugins/datapicker/bootstrap-datepicker.js' %}"></script>
 
     <script>
-        $(function() {
-            $( ".datepicker" ).datepicker({
-            changeMonth: true,
-            changeYear: true,
-            todayBtn: "linked",
-            autoclose: true,
-            format: "dd/mm/yyyy",
-            // You can put more options here.
+        $(function () {
+            $(".datepicker").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                todayBtn: "linked",
+                autoclose: true,
+                format: "dd/mm/yyyy",
+                // You can put more options here.
 
             });
         });
     </script>
-    
+
 {% endblock plugins %}
