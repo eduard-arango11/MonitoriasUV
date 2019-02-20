@@ -14,19 +14,63 @@
 
 
 {% block contenido %}
-    <div class="wrapper wrapper-content animated fadeInRight">
-        <div class="ibox float-e-margins">
-            <div class="ibox-title">
-                <h5>Reporte de aplicaciones a las ofertas</h5>
-            </div>
-            <div class="ibox-content" style="display: flex;justify-content: space-between">
-                <div class="col-lg-6">
-                    <canvas id="chart" height="200"></canvas>
+    <div class="wrapper wrapper-content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Aplicaciones a ofertas</h5>
+                    </div>
+                    <div class="ibox-content">
+
+                        <div class="row">
+                            <div class="col-md-4">
+                                <h1 class="no-margins">{{ total_aplicaciones }}</h1>
+                                <div class="font-bold text-success">
+                                    <small>En total</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h1 class="no-margins">{{ total_aplicaciones_en_proceso }}</h1>
+                                <div class="font-bold text-navy">
+                                    <small>En proceso</small>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <h1 class="no-margins">{{ total_aplicaciones_terminadas }}</h1>
+                                <div class="font-bold text-navy">
+                                    <small>Aprobadas</small>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
-                <div class="col-lg-6">
-                    <canvas id="chart2" height="140"></canvas>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Total de ofertas de cada tipo de monitoria</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <canvas id="chart"></canvas>
+                    </div>
                 </div>
             </div>
+            <!--div class="col-md-12">
+                <div class="ibox float-e-margins">
+                    <div class="ibox-title">
+                        <h5>Total de ofertas de cada tipo de monitoria</h5>
+                    </div>
+                    <div class="ibox-content">
+                        <canvas id="chart2"></canvas>
+                    </div>
+                </div>
+            </div-->
         </div>
     </div>
 

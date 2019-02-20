@@ -139,7 +139,24 @@ class AplicacionesMonitorias(TemplateView):
             aplicaciones.append(cantidad_de_aplicaciones_de_este_tipo)
         context['etiquetas'] = etiquetas
         context['aplicaciones'] = aplicaciones
+
+        ############## PROMEDIO DE APLICACIONES POR OFERTA #############
+
+        promedio = 0
+        print("promedio: " + str(promedio))
+        for tipo in tipos_de_monitoria:
+            cantidad_de_aplicaciones_de_este_tipo = AplicacionOferta.objects.filter(oferta__tipo_monitoria=tipo,
+                                                                                    estado='Activo').count()
+            print("cantidad_de_aplicaciones_de_este_tipo: " + str(cantidad_de_aplicaciones_de_este_tipo))
+
         context['reportes'] = True
         context['reporte_aplicaciones_monitorias'] = True
+
+        ############## TOTAL DE APLICACIONES ################
+
+        context['total_aplicaciones'] = AplicacionOferta.objects.all().count()
+        context['total_aplicaciones_en_proceso'] = AplicacionOferta.objects.filter(estado='Activo').count()
+        context['total_aplicaciones_terminadas'] = AplicacionOferta.objects.filter(estado='Aprobada').count()
+
 
         return context
