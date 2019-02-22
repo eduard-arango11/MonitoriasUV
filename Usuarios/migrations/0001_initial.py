@@ -13,7 +13,6 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('Dependencias', '0001_initial'),
         ('auth', '0009_alter_user_last_name_max_length'),
         ('ProgramasAcademicos', '0001_initial'),
     ]
