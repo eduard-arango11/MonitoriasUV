@@ -34,6 +34,11 @@ class EstudiantesRegistrados(TemplateView):
         total_estudiantes = Estudiante.objects.filter(estado='Activo').count()
         context['total_estudiantes'] = total_estudiantes
 
+        ######### TOTAL DE ESTUDIANTES SIN D10 ########
+
+        total_estudiantes_sin_d10 = Estudiante.objects.filter(estado='Activo', estado_d10='No registrado').count()
+        context['total_estudiantes_sin_d10'] = total_estudiantes_sin_d10
+
         ######### TOTAL DE ESTUDIANTES CON D10 REGISTRADOS ########
 
         total_estudiantes_d10_registrado = Estudiante.objects.filter(estado='Activo', estado_d10='Registrado').count()
