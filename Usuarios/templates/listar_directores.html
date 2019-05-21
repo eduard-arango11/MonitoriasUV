@@ -43,6 +43,7 @@
                                     </a>
                                     {% if user.rol == 'Administrador' %}
                                         <a href="{% url 'editar_director' director.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a>
+                                        <a onclick="Eliminar('{{director.id}}', '{{director.nombreCompleto}}');" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar </a>
                                     {% endif %}
                                 </td>
                             </tr>
@@ -73,6 +74,8 @@
 
     <!-- FooTable -->
     <script src="{% static 'js/plugins/footable/footable.all.min.js' %}"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Page-Level Scripts -->
     <script>
@@ -110,6 +113,47 @@
                     $(this).modal('show');
             });
             return false;
+        }
+
+        function Eliminar(id, nombre) {
+
+            swal({
+                title: 'Estas seguro que deseas eliminar el director "'+nombre+'"?',
+                text: "Será eliminado permanenetemente.",
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "No, cancelar",
+                        value: null,
+                        visible: true,
+                        className: "",
+                        closeModal: true,
+                    },
+                    confirm: {
+                        text: "Si, eliminar permanentemente!",
+                        value: true,
+                        visible: true,
+                        className: "",
+                        closeModal: true
+                    }
+                },
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/usuarios/directores/eliminar_director/',
+                        data: {
+                          'id': id
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            window.location.replace("/usuarios/directores/listar/");
+                        }
+                    });
+                }
+            });
+
         }
     </script>
     

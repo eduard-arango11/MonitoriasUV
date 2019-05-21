@@ -45,6 +45,7 @@
                                         <a href="{% url 'detalle_estudiante' estudiante.id %}" class="btn btn-info"><i class="fa fa-eye"></i> Detalle </a>
                                         {% if user.rol == 'Administrador' %}
                                             <a href="{% url 'editar_estudiante' estudiante.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a>
+                                            <a onclick="Eliminar('{{estudiante.id}}', '{{estudiante.nombreCompleto}}');" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar </a>
                                         {% endif %}
                                     </td>
                                 </tr>
@@ -76,6 +77,8 @@
     <!-- FooTable -->
     <script src="{% static 'js/plugins/footable/footable.all.min.js' %}"></script>
 
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
     <!-- Page-Level Scripts -->
     <script>
         $(document).ready(function() {
@@ -105,6 +108,47 @@
 
             });
         });
+
+        function Eliminar(id, nombre) {
+
+            swal({
+                title: 'Estas seguro que deseas eliminar el estudiante "'+nombre+'"?',
+                text: "Será eliminado permanenetemente.",
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "No, cancelar",
+                        value: null,
+                        visible: true,
+                        className: "",
+                        closeModal: true,
+                    },
+                    confirm: {
+                        text: "Si, eliminar permanentemente!",
+                        value: true,
+                        visible: true,
+                        className: "",
+                        closeModal: true
+                    }
+                },
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/usuarios/estudiantes/eliminar_estudiante/',
+                        data: {
+                          'id': id
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            window.location.replace("/usuarios/estudiantes/listar/");
+                        }
+                    });
+                }
+            });
+
+        }
     </script>
     
 {% endblock plugins %}

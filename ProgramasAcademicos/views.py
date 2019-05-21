@@ -6,6 +6,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from monitorias.utilities import *
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 
 class RegistrarPrograma(SuccessMessageMixin, CreateView):
@@ -65,3 +67,13 @@ class EditarPrograma(SuccessMessageMixin, UpdateView):
     @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
+
+
+def eliminar_programa(request):
+    id = request.GET.get('id', '')
+    mi_objeto = get_object_or_404(ProgramaAcademico, pk=id)
+    mi_objeto.delete()
+    data = {
+        'eliminacion': True,
+    }
+    return JsonResponse(data)

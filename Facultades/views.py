@@ -6,6 +6,9 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from monitorias.utilities import *
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.contrib import messages
 
 
 class RegistrarFacultad(SuccessMessageMixin, CreateView):
@@ -66,3 +69,14 @@ class EditarFacultad(SuccessMessageMixin, UpdateView):
     @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
+
+
+def eliminar_facultad(request):
+    id = request.GET.get('id', '')
+    mi_objeto = get_object_or_404(Facultad, pk=id)
+    mi_objeto.delete()
+    messages.success(request, 'Facultad eliminada con exito')
+    data = {
+        'eliminacion': True,
+    }
+    return JsonResponse(data)

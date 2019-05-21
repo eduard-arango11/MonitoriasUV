@@ -6,6 +6,8 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 from monitorias.utilities import *
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
 
 
 class RegistrarDependencia(SuccessMessageMixin, CreateView):
@@ -66,3 +68,13 @@ class EditarDependencia(SuccessMessageMixin, UpdateView):
     @method_decorator(verificar_rol(roles_permitidos=['Administrador']))
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
+
+
+def eliminar_dependencia(request):
+    id_dependencia = request.GET.get('id', '')
+    mi_dependencia = get_object_or_404(Dependencia, pk=id_dependencia)
+    mi_dependencia.delete()
+    data = {
+        'eliminacion': True,
+    }
+    return JsonResponse(data)

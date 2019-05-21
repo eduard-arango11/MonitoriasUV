@@ -31,6 +31,7 @@
                         </thead>
                         <tbody>
                         {% for administrador in object_list %}
+
                             <tr >
                                 <td> {{ administrador.nombres }} {{ administrador.primer_apellido }} {{ administrador.segundo_apellido }} </td>
                                 <td> {{ administrador.numero_documento }} </td>
@@ -40,6 +41,9 @@
                                         <i class="fa fa-eye"></i> Detalle
                                     </a>
                                     <a href="{% url 'editar_administrador' administrador.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a>
+                                    {% if administrador.id != user.id %}
+                                    <a onclick="Eliminar('{{administrador.id}}', '{{administrador.nombreCompleto}}');" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar </a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}
@@ -68,6 +72,8 @@
 
     <!-- FooTable -->
     <script src="{% static 'js/plugins/footable/footable.all.min.js' %}"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Page-Level Scripts -->
     <script>
@@ -106,7 +112,47 @@
             });
             return false;
         }
-    </script
+
+        function Eliminar(id, nombre) {
+
+            swal({
+                title: 'Estas seguro que deseas eliminar el administrador "'+nombre+'"?',
+                text: "Será eliminado permanenetemente.",
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "No, cancelar",
+                        value: null,
+                        visible: true,
+                        className: "",
+                        closeModal: true,
+                    },
+                    confirm: {
+                        text: "Si, eliminar permanentemente!",
+                        value: true,
+                        visible: true,
+                        className: "",
+                        closeModal: true
+                    }
+                },
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/usuarios/administradores/eliminar_administrador/',
+                        data: {
+                          'id': id
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            window.location.replace("/usuarios/administradores/listar/");
+                        }
+                    });
+                }
+            });
+
+        }
     </script>
     
 {% endblock plugins %}

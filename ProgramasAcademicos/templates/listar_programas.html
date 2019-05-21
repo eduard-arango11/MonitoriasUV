@@ -39,7 +39,10 @@
                                 <td> {{ programa.facultad }} </td>
                                 <td> {{ programa.jornada }} </td>
                                 <td> {{ programa.estado }} </td>
-                                <td> <a href="{% url 'editar_programa' programa.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a> </td>
+                                <td>
+                                    <a href="{% url 'editar_programa' programa.id %}" class="btn btn-warning"><i class="fa fa-edit"></i> Editar </a>
+                                    <a onclick="Eliminar('{{programa.id}}', '{{programa.nombre}}');" class="btn btn-danger"><i class="fa fa-trash"></i> Eliminar </a>
+                                </td>
                             </tr>
                         {% endfor %}
                         </tbody>
@@ -68,6 +71,8 @@
 
     <!-- FooTable -->
     <script src="{% static 'js/plugins/footable/footable.all.min.js' %}"></script>
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     <!-- Page-Level Scripts -->
     <script>
@@ -98,6 +103,47 @@
             ]
 
         });
+
+        function Eliminar(id, nombre) {
+
+            swal({
+                title: 'Estas seguro que deseas eliminar el programa academico "'+nombre+'"?',
+                text: "Será eliminada permanenetemente.",
+                icon: "warning",
+                buttons: {
+                    cancel: {
+                        text: "No, cancelar",
+                        value: null,
+                        visible: true,
+                        className: "",
+                        closeModal: true,
+                    },
+                    confirm: {
+                        text: "Si, eliminar permanentemente!",
+                        value: true,
+                        visible: true,
+                        className: "",
+                        closeModal: true
+                    }
+                },
+                dangerMode: true,
+            })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        url: '/programas/eliminar_programa/',
+                        data: {
+                          'id': id
+                        },
+                        dataType: 'json',
+                        success: function (data) {
+                            window.location.replace("/programas/listar/");
+                        }
+                    });
+                }
+            });
+
+        }
     </script>
     
 {% endblock plugins %}

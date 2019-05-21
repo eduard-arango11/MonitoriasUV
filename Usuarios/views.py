@@ -11,6 +11,9 @@ from django.shortcuts import get_object_or_404, render
 from datetime import date
 from django.db import transaction, IntegrityError
 from OfertaMonitorias.models import AplicacionOferta
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+from django.contrib import messages
 
 
 class RegistrarEstudiante(SuccessMessageMixin, CreateView):
@@ -494,3 +497,47 @@ def revisarSolicitudAprobacionD10(request, id_d10):
         'd10': d10,
         'listar_solicitudes_d10': True,
     })
+
+
+def eliminar_estudiante(request):
+    id = request.GET.get('id', '')
+    mi_objeto = get_object_or_404(Estudiante, pk=id)
+    mi_objeto.delete()
+    messages.success(request, 'Estudiante eliminado con exito')
+    data = {
+        'eliminacion': True,
+    }
+    return JsonResponse(data)
+
+
+def eliminar_operario(request):
+    id = request.GET.get('id', '')
+    mi_objeto = get_object_or_404(Operario, pk=id)
+    mi_objeto.delete()
+    messages.success(request, 'Operario eliminado con exito')
+    data = {
+        'eliminacion': True,
+    }
+    return JsonResponse(data)
+
+
+def eliminar_director(request):
+    id = request.GET.get('id', '')
+    mi_objeto = get_object_or_404(Director, pk=id)
+    mi_objeto.delete()
+    messages.success(request, 'Director eliminado con exito')
+    data = {
+        'eliminacion': True,
+    }
+    return JsonResponse(data)
+
+
+def eliminar_administrador(request):
+    id = request.GET.get('id', '')
+    mi_objeto = get_object_or_404(Administrador, pk=id)
+    mi_objeto.delete()
+    messages.success(request, 'Administrador eliminado con exito')
+    data = {
+        'eliminacion': True,
+    }
+    return JsonResponse(data)
