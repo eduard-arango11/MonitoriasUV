@@ -38,27 +38,66 @@
                     
                 </div>
                 <div class="ibox-content">
-                    <form method="post" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
+                    <form id="form" method="post" class="form-horizontal" enctype="multipart/form-data"> {% csrf_token %}
                         <div id="wizard">
                             <h1>Datos Basicos</h1>
                             <div class="step-content">
                                 <div class="col-md-12">
                                     <div class="col-md-6">
-                                        {% bootstrap_field form_datos_basicos.semestre label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_basicos.estado_civil label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_basicos.numero_de_personas_a_cargo label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_basicos.posicion_familiar label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_basicos.direccion_residencia label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_basicos.estrato label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_basicos.perfil_ocupacional label_class="control-label col-sm-5" field_class="col-sm-6" %}
+                                        <div class="form-group">
+                                            <label>Semestre *</label>
+                                            {{ form_datos_basicos.semestre }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Estado civil *</label>
+                                            {{ form_datos_basicos.estado_civil }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Numero de personas a cargo *</label>
+                                            {{ form_datos_basicos.numero_de_personas_a_cargo }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Posicion familiar *</label>
+                                            {{ form_datos_basicos.posicion_familiar }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Direccion de residencia *</label>
+                                            {{ form_datos_basicos.direccion_residencia }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Estrato *</label>
+                                            {{ form_datos_basicos.estrato }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Perfil ocupacional *</label>
+                                            {{ form_datos_basicos.perfil_ocupacional }}
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        {% bootstrap_field form_datos_basicos.barrio label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_basicos.ciudad label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_basicos.departamento label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_basicos.nombre_acudiente label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_basicos.telefono_acudiente label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_basicos.sistemas_que_maneja label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                    <div class="col-md-6" style="padding-left: 50px;">
+                                        <div class="form-group">
+                                            <label>Barrio *</label>
+                                            {{ form_datos_basicos.barrio }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ciudad *</label>
+                                            {{ form_datos_basicos.ciudad }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Departamento *</label>
+                                            {{ form_datos_basicos.departamento }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nombre de acudiente *</label>
+                                            {{ form_datos_basicos.nombre_acudiente }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Telefono de acudiente *</label>
+                                            {{ form_datos_basicos.telefono_acudiente }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Sistemas que maneja *</label>
+                                            {{ form_datos_basicos.sistemas_que_maneja }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -80,19 +119,46 @@
                                     <div class="col-md-6">
                                         <h2 align="center">Bachillerato</h2>
                                         <br><br>
-                                        {% bootstrap_field form_datos_educacion.titulo_obtenido_bachillerato label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_educacion.ano_finalizacion_bachillerato label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_educacion.nombre_colegio_bachillerato label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_educacion.ciudad_colegio_bachillerato label_class="control-label col-sm-5" field_class="col-sm-6" %}
+                                        <div class="form-group">
+                                            <label>Titulo obtenido *</label>
+                                            {{ form_datos_educacion.titulo_obtenido_bachillerato }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Año de finalizacion bachiller *</label>
+                                            {{ form_datos_educacion.ano_finalizacion_bachillerato }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nombre del establecimiento *</label>
+                                            {{ form_datos_educacion.nombre_colegio_bachillerato }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ciudad *</label>
+                                            {{ form_datos_educacion.ciudad_colegio_bachillerato }}
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-6" style="padding-left: 50px;">
                                         <h2 align="center">Universitarios u otros <small><p>(Si ha estudiado o esta estudiando otra carrera universitaria)</p></small></h2>
                                         <br>
-                                        {% bootstrap_field form_datos_educacion.plan_otros_estudios label_class="control-label col-sm-6" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_educacion.semestres_otros_estudios label_class="control-label col-sm-6" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_educacion.ano_finalizacion_otros_estudios label_class="control-label col-sm-6" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_educacion.nombre_establecimiento_otros_estudios label_class="control-label col-sm-6" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_educacion.ciudad_establecimiento_otros_estudios label_class="control-label col-sm-6" field_class="col-sm-6" %}
+                                        <div class="form-group">
+                                            <label>Plan de estudios o titulo obtenido</label>
+                                            {{ form_datos_educacion.plan_otros_estudios }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Semestres</label>
+                                            {{ form_datos_educacion.semestres_otros_estudios }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Año de finalizacion</label>
+                                            {{ form_datos_educacion.ano_finalizacion_otros_estudios }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nombre del establecimiento</label>
+                                            {{ form_datos_educacion.nombre_establecimiento_otros_estudios }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Ciudad</label>
+                                            {{ form_datos_educacion.ciudad_establecimiento_otros_estudios }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -101,12 +167,24 @@
                             <div class="step-content">
                                 <div class="col-md-12">
                                     <div class="col-md-6">
-                                        {% bootstrap_field form_datos_capacitacion.nombre_establecimiento label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_capacitacion.nombre_curso label_class="control-label col-sm-5" field_class="col-sm-6" %}
+                                        <div class="form-group">
+                                            <label>Nombre del establecimiento</label>
+                                            {{ form_datos_capacitacion.nombre_establecimiento }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Nombre del curso</label>
+                                            {{ form_datos_capacitacion.nombre_curso }}
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        {% bootstrap_field form_datos_capacitacion.duracion_cruso label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_capacitacion.fecha_finalizacion_curso label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                    <div class="col-md-6" style="padding-left: 50px;">
+                                        <div class="form-group">
+                                            <label>Duracion del curso</label>
+                                            {{ form_datos_capacitacion.duracion_cruso }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Fecha de finalizacion</label>
+                                            {{ form_datos_capacitacion.fecha_finalizacion_curso }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -115,17 +193,44 @@
                             <div class="step-content">
                                 <div class="col-md-12">
                                     <div class="col-md-6">
-                                        {% bootstrap_field form_datos_experiencia_laboral.nombre_empresa label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_experiencia_laboral.cargo label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_experiencia_laboral.funciones_realizadas label_class="control-label col-sm-5" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_experiencia_laboral.logros label_class="control-label col-sm-5" field_class="col-sm-6" %}
+                                        <div class="form-group">
+                                            <label>Nombre de la empresa</label>
+                                            {{ form_datos_experiencia_laboral.nombre_empresa }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Cargo desempeñado</label>
+                                            {{ form_datos_experiencia_laboral.cargo }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Funciones realizadas</label>
+                                            {{ form_datos_experiencia_laboral.funciones_realizadas }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Logros</label>
+                                            {{ form_datos_experiencia_laboral.logros }}
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        {% bootstrap_field form_datos_experiencia_laboral.jefe_inmediato label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_experiencia_laboral.cargo_jefe label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_experiencia_laboral.telefono_empresa label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_experiencia_laboral.fecha_inicio label_class="control-label col-sm-4" field_class="col-sm-6" %}
-                                        {% bootstrap_field form_datos_experiencia_laboral.fecha_finalizacion label_class="control-label col-sm-4" field_class="col-sm-6" %}
+                                    <div class="col-md-6" style="padding-left: 50px;">
+                                        <div class="form-group">
+                                            <label>Nombre del jefe inmediato</label>
+                                            {{ form_datos_experiencia_laboral.jefe_inmediato }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Cargo del jefe inmediato</label>
+                                            {{ form_datos_experiencia_laboral.cargo_jefe }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Telefono de la empresa</label>
+                                            {{ form_datos_experiencia_laboral.telefono_empresa }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Fecha de inicio</label>
+                                            {{ form_datos_experiencia_laboral.fecha_inicio }}
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Fecha de finalizacion</label>
+                                            {{ form_datos_experiencia_laboral.fecha_finalizacion }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -254,6 +359,11 @@
 
 
     <script>
+
+        jQuery.extend(jQuery.validator.messages, {
+            required: "Este campo es requerido.",
+        });
+
         $(document).ready(function(){
             actulizacion = false;
             index = 0;
@@ -263,7 +373,10 @@
                 index = 4;
                 paginacion = false;
             }
-            $("#wizard").steps({
+            var form = $("#form");
+            form.children("#wizard").steps({
+                headerTag: "h1",
+                transitionEffect: "slideLeft",
                 enableFinishButton: false,
                 enableAllSteps: actulizacion,
                 startIndex: index,
@@ -274,6 +387,20 @@
                     next: "Siguiente",
                     previous: "Anterior",
                     loading: "Cargando ..."
+                },
+                onStepChanging: function (event, currentIndex, newIndex)
+                {
+                    form.validate().settings.ignore = ":disabled,:hidden";
+                    return form.valid();
+                },
+                onFinishing: function (event, currentIndex)
+                {
+                    form.validate().settings.ignore = ":disabled";
+                    return form.valid();
+                },
+                onFinished: function (event, currentIndex)
+                {
+                    alert("Submitted!");
                 }
             });
             $( ".datepicker" ).datepicker({

@@ -12,3 +12,22 @@ class Formulario_registrar_oferta(forms.ModelForm):
             'fecha_seleccion': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
             'fecha_adjudicacion': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
         }
+
+    def clean(self):
+
+        cleaned_data = super(Formulario_registrar_oferta, self).clean()
+        plazo_solicitudes = cleaned_data.get("plazo_solicitudes")
+        fecha_seleccion = cleaned_data.get("fecha_seleccion")
+        fecha_adjudicacion = cleaned_data.get("fecha_adjudicacion")
+
+        try:
+            if plazo_solicitudes < fecha_seleccion and fecha_seleccion < fecha_adjudicacion:
+                pass
+            elif not plazo_solicitudes < fecha_seleccion:
+                self._errors['fecha_seleccion'] = [
+                    'La fecha de seleccion debe ser posterior al plazo para solicitudes']
+            elif not fecha_seleccion < fecha_adjudicacion:
+                self._errors['fecha_adjudicacion'] = [
+                    'La fecha de adjudicacion debe ser posterior a la fecha de seleccion']
+        except:
+            pass
