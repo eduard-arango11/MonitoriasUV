@@ -119,6 +119,9 @@ class RegistrarDirector(SuccessMessageMixin, CreateView):
         director.username = director.email
         director.rol = "Director"
         self.object = form.save()
+        programa = get_object_or_404(ProgramaAcademico, id=director.programa_academico.id)
+        programa.tiene_director = True
+        programa.save()
         return super(RegistrarDirector, self).form_valid(form)
 
     def get_context_data(self, **kwargs):

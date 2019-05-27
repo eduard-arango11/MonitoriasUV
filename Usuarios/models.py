@@ -158,7 +158,7 @@ class Estudiante(Usuario):
     d10 = models.OneToOneField(D10, on_delete=models.CASCADE, null=True, blank=True)
 
 class Director(Usuario):
-    programa_academico = models.ForeignKey(ProgramaAcademico, on_delete=models.CASCADE)
+    programa_academico = models.OneToOneField(ProgramaAcademico, on_delete=models.CASCADE, limit_choices_to={'estado': 'Activo', 'tiene_director': False})
 
 class Operario(Usuario):
     cargo = models.CharField(max_length=100, verbose_name="Cargo")

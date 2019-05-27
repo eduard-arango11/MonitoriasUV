@@ -10,6 +10,7 @@ class ProgramaAcademico(models.Model):
 	facultad = models.ForeignKey(Facultad, on_delete=models.CASCADE)
 	estado = models.CharField(max_length=10, verbose_name="Estado", choices=ESTADOS, default='Activo')
 	jornada = models.CharField(max_length=20, verbose_name="Jornada", choices=JORNADAS, default='Diurna')
+	tiene_director = models.BooleanField(default=False)
 	
 	def __str__ (self):
 		return self.nombre_programa
