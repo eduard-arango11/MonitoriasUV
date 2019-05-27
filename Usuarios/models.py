@@ -15,6 +15,11 @@ ESTADOS_APROBACION = (('En Revision','En Revision'),('Aprobado','Aprobado'),('No
 TIPOS_ESTADO_CIVIL = (('Soltero','Soltero'),('Casado','Casado'),('Union Libre','Union Libre'),('Otro','Otro'))
 TIPO_POSICION_FAMILIAR = (('Hijo(a)','Hijo(a)'),('Independiente','Independiente'),('Cabeza de familia','Cabeza de familia'),('Esposo(a)','Esposo(a)'))
 
+
+def get_upload_to(instance, filename):
+    return 'upload/fotos/%s' % (filename)
+
+
 class DatosBasicosD10(models.Model):
     semestre = models.CharField(max_length=2,verbose_name="Semestre",blank=True)
     estado_civil = models.CharField(max_length=20, verbose_name="Estado civil", choices=TIPOS_ESTADO_CIVIL, default='Soltero',blank=True)
@@ -29,6 +34,7 @@ class DatosBasicosD10(models.Model):
     telefono_acudiente = models.CharField(max_length=10,verbose_name="Telefono de persona que le de informacion",blank=True)
     perfil_ocupacional = models.CharField(max_length=800,blank=True)
     sistemas_que_maneja = models.CharField(max_length=800,blank=True)
+    foto = models.ImageField(upload_to=get_upload_to, null=True, blank=True)
     #foto = models.ImageField(upload_to='fotos/')
 
 OPCIONES_NIVEL_IDIOMA = (('Muy Bueno','Muy Bueno'),('Bueno','Bueno'),('Regular','Regular'))

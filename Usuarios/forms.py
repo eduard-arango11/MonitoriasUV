@@ -114,7 +114,8 @@ class Formulario_registrar_d10_datos_basicos(forms.ModelForm):
         widgets = {
             'perfil_ocupacional': forms.Textarea(attrs={'rows': '10'}),
             'sistemas_que_maneja': forms.Textarea(attrs={'rows': '10'}),
-            'semestre': forms.DateTimeInput(attrs={'class': 'form-control required'})
+            'semestre': forms.DateTimeInput(attrs={'class': 'form-control required'}),
+            'foto': forms.FileInput()
         }
 
 

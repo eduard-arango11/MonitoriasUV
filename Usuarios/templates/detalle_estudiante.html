@@ -25,6 +25,9 @@
                                 </div>
                                 <div class="panel-body">
                                     <div class="col-sm-12">
+                                        {% if object.d10.datos_basicos.foto %}
+                                            <img alt="image" class="img-circle m-b-sm img-responsive" src="{{ object.d10.datos_basicos.foto.url }}" style="width: 120px;">
+                                        {% endif %}
                                         <h3><strong>{{ object.nombreCompleto }}</strong></h3>
                                         <address>
                                             <strong>Codigo de estudiante: </strong>{{ object.codigo }}<br>
