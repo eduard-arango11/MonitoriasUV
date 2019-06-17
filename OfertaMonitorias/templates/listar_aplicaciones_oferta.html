@@ -88,12 +88,13 @@
                         <div class="modal-body">
                             <label for="monitor">Monitor contratado:</label>
                             <select name="monitor" id="monitor" class="form-control m-b">
+                                <option value="0">Ninguno</option>
                                 {% for aplicacion in aplicaciones %}
                                     <option value="{{aplicacion.id}}">{{aplicacion.estudiante.nombreCompleto}}</option>
                                 {% endfor %}
                             </select>
-                            <label for="comentarios">Comentarios</label>
-                            <textarea name="comentarios" id="comentarios" cols="27" rows="4" class="form-control m-b"></textarea>
+                            <!--label for="comentarios">Comentarios</label>
+                            <textarea name="comentarios" id="comentarios" cols="27" rows="4" class="form-control m-b"></textarea-->
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
@@ -148,7 +149,7 @@
         });
 
         function modificarUrl(){
-            var url = '/monitorias/terminar_oferta/' + $('#monitor').val();
+            var url = '/monitorias/terminar_oferta/' + $('#monitor').val() +"/"+'{{ oferta.id }}';
             console.log("url: ", url);
             $('#confirmar-terminar').attr('href', url);
         }

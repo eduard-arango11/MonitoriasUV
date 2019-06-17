@@ -55,9 +55,9 @@ class DatosEducacionD10(models.Model):
     idioma_nivel_lee = models.CharField(max_length=20, verbose_name="Lee", choices=OPCIONES_NIVEL_IDIOMA,blank=True)
 
 class DatosCapacitacionD10(models.Model):
-    nombre_establecimiento = models.CharField(max_length=50,verbose_name="Nombre del establecimiento",blank=True)
-    nombre_curso = models.CharField(max_length=50,verbose_name="Nombre del curso",blank=True)
-    duracion_cruso = models.CharField(max_length=4,verbose_name="Duracion del curso (horas)",blank=True)
+    nombre_establecimiento = models.CharField(max_length=300,verbose_name="Nombre del establecimiento",blank=True)
+    nombre_curso = models.CharField(max_length=500,verbose_name="Nombre del curso",blank=True)
+    duracion_cruso = models.CharField(max_length=100,verbose_name="Duracion del curso (horas)",blank=True)
     fecha_finalizacion_curso = models.DateField(null=True, blank=True)
 
 class DatosExperienciaLaboralD10(models.Model):
@@ -67,7 +67,7 @@ class DatosExperienciaLaboralD10(models.Model):
     logros = models.CharField(max_length=800,verbose_name="Logros",blank=True)
     jefe_inmediato = models.CharField(max_length=200,verbose_name="Nombre del jefe inmediato",blank=True)
     cargo_jefe = models.CharField(max_length=80,verbose_name="Cargo del jefe inmediato",blank=True)
-    telefono_empresa = models.CharField(max_length=10,verbose_name="Telefono de la empresa",blank=True)
+    telefono_empresa = models.CharField(max_length=100,verbose_name="Telefono de la empresa",blank=True)
     fecha_inicio = models.DateField(null=True, blank=True)
     fecha_finalizacion = models.DateField(null=True, blank=True)
 

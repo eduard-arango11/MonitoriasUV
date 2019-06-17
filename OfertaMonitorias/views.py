@@ -203,18 +203,24 @@ def listar_estudiantes_d10(request):
     })
 
 @login_required
-def terminar_oferta(request, id_aplicacion):
-    aplicacion_para_terminar = get_object_or_404(AplicacionOferta, pk=id_aplicacion) 
-    oferta = get_object_or_404(OfertaMonitoria, pk=aplicacion_para_terminar.oferta.id)
+def terminar_oferta(request, id_aplicacion, id_oferta):
+
+    oferta = get_object_or_404(OfertaMonitoria, pk=id_oferta)
+
     oferta.estado = 'Terminada'
     oferta.save()
-    aplicacion_para_terminar.estado = 'Aprobada'
-    aplicacion_para_terminar.save()
-    otras_aplicaciones = AplicacionOferta.objects.filter(oferta=oferta.id,estado='Activo')
+
+    otras_aplicaciones = AplicacionOferta.objects.filter(oferta=oferta.id)
 
     for aplicacion in otras_aplicaciones:
         aplicacion.estado = 'Rechazada'
         aplicacion.save()
+
+    if id_aplicacion != 0:
+        aplicacion_para_terminar = get_object_or_404(AplicacionOferta, pk=id_aplicacion)
+
+        aplicacion_para_terminar.estado = 'Aprobada'
+        aplicacion_para_terminar.save()
 
     messages.success(request, 'La oferta fue terminada exitosamente')
 

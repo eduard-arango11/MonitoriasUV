@@ -8,17 +8,27 @@ class IniciarSesionForm(AuthenticationForm):
 		password = forms.CharField(label="Contraseña", max_length=30,widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'password'}))
 
 class Formulario_registrar_estudiante(UserCreationForm):
+
+    def __init__(self, *args, **kwargs):
+        super(Formulario_registrar_estudiante, self).__init__(*args, **kwargs)
+        self.fields['programa_academico'].widget.attrs = {'class': 'selectpicker', 'data-live-search': 'true'}
+
     class Meta(UserCreationForm.Meta):
         model = Estudiante
         fields = ('nombres','primer_apellido','segundo_apellido','email','password1', 'password2','codigo','tipo_documento','numero_documento','lugar_expedicion_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','programa_academico')
         widgets = {
             'fecha_nacimiento': forms.DateInput(attrs={'class':'datepicker color_blanco', 'autocomplete': 'off', 'readonly': 'true'}),
-            'codigo': forms.NumberInput(),
+            'codigo': forms.NumberInput(attrs={'max_length': '7', 'min': '1'}),
             'telefono': forms.NumberInput(),
             'numero_documento': forms.NumberInput(),
         }
 
 class Formulario_modificar_estudiante(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(Formulario_modificar_estudiante, self).__init__(*args, **kwargs)
+        self.fields['programa_academico'].widget.attrs = {'class': 'selectpicker', 'data-live-search': 'true'}
+
     class Meta:
         model = Estudiante
         fields = ('nombres','primer_apellido','segundo_apellido','email','codigo','tipo_documento','numero_documento','lugar_expedicion_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','programa_academico')
@@ -30,6 +40,11 @@ class Formulario_modificar_estudiante(forms.ModelForm):
         }
 
 class Formulario_registrar_director(UserCreationForm):
+
+    def __init__(self, *args, **kwargs):
+        super(Formulario_registrar_director, self).__init__(*args, **kwargs)
+        self.fields['programa_academico'].widget.attrs = {'class': 'selectpicker', 'data-live-search': 'true'}
+
     class Meta(UserCreationForm.Meta):
         model = Director
         fields = ('nombres','primer_apellido','segundo_apellido','email','password1', 'password2','tipo_documento','lugar_expedicion_documento','numero_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','programa_academico')
@@ -40,6 +55,11 @@ class Formulario_registrar_director(UserCreationForm):
         }
 
 class Formulario_modificar_director(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(Formulario_modificar_director, self).__init__(*args, **kwargs)
+        self.fields['programa_academico'].widget.attrs = {'class': 'selectpicker', 'data-live-search': 'true'}
+
     class Meta:
         model = Director
         fields = ('nombres','primer_apellido','segundo_apellido','email','tipo_documento','numero_documento','lugar_expedicion_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','programa_academico')
@@ -50,6 +70,11 @@ class Formulario_modificar_director(forms.ModelForm):
         }
 
 class Formulario_registrar_operario(UserCreationForm):
+
+    def __init__(self, *args, **kwargs):
+        super(Formulario_registrar_operario, self).__init__(*args, **kwargs)
+        self.fields['dependencia'].widget.attrs = {'class': 'selectpicker', 'data-live-search': 'true'}
+
     class Meta(UserCreationForm.Meta):
         model = Operario
         fields = ('nombres','primer_apellido','segundo_apellido','email','password1', 'password2','tipo_documento','numero_documento','lugar_expedicion_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','cargo','dependencia')
@@ -60,6 +85,11 @@ class Formulario_registrar_operario(UserCreationForm):
         }
 
 class Formulario_modificar_operario(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super(Formulario_modificar_operario, self).__init__(*args, **kwargs)
+        self.fields['dependencia'].widget.attrs = {'class': 'selectpicker', 'data-live-search': 'true'}
+
     class Meta:
         model = Operario
         fields = ('nombres','primer_apellido','segundo_apellido','email','tipo_documento','numero_documento','lugar_expedicion_documento','telefono','genero','lugar_nacimiento','fecha_nacimiento','cargo','dependencia')

@@ -71,10 +71,10 @@ class OfertasRegistradas(TemplateView):
         especial = []
         for dependencia in dependencias:
             etiquetas_dependencias.append(dependencia.nombre)
-            administrativa.append(OfertaMonitoria.objects.filter(operario_registra__dependencia=dependencia, estado='Activo',tipo_monitoria='Administrativa').count())
-            docencia.append(OfertaMonitoria.objects.filter(operario_registra__dependencia=dependencia, estado='Activo',tipo_monitoria='Docencia').count())
-            investigacion.append(OfertaMonitoria.objects.filter(operario_registra__dependencia=dependencia, estado='Activo',tipo_monitoria='Investigacion').count())
-            especial.append(OfertaMonitoria.objects.filter(operario_registra__dependencia=dependencia, estado='Activo',tipo_monitoria='Especial').count())
+            administrativa.append(OfertaMonitoria.objects.filter(operario_registra__dependencia=dependencia,tipo_monitoria='Administrativa').count())
+            docencia.append(OfertaMonitoria.objects.filter(operario_registra__dependencia=dependencia, tipo_monitoria='Docencia').count())
+            investigacion.append(OfertaMonitoria.objects.filter(operario_registra__dependencia=dependencia, tipo_monitoria='Investigacion').count())
+            especial.append(OfertaMonitoria.objects.filter(operario_registra__dependencia=dependencia, tipo_monitoria='Especial').count())
 
         context['etiquetas_dependencias'] = etiquetas_dependencias
         context['administrativa'] = administrativa
